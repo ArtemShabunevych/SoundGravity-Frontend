@@ -1,73 +1,50 @@
-# React + TypeScript + Vite
+# TPC-Sound-Frontend
+Технології
+Frontend: React, TypeScript, Redux Toolkit, React Router, Axios
+Backend: NestJS, TypeScript
+Database: PostgreSQL
+ORM: Prisma або TypeORM
+Storage: Local Storage → у майбутньому AWS S3 / Cloudflare R2
+Streaming: HTTP Streaming / HLS
+Realtime: Socket.IO / WebSocket
+UI: MUI + Styled Components
+Auth: JWT + Refresh Tokens
+Deploy: Docker + Docker Compose + Nginx
+CI/CD: GitHub Actions
+Основна ідея
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Створити повноцінну музичну платформу, де користувачі можуть:
 
-Currently, two official plugins are available:
+завантажувати треки
+слухати музику
+створювати плейлисти
+лайкати
+підписуватись на авторів
+отримувати рекомендації
+взаємодіяти через коментарі
+стрімити музику без перезавантаження сторінки
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Проєкт має масштабуватись до рівня mini-Spotify / SoundCloud.
 
-## React Compiler
+Архітектура
+Frontend (React)
+Основні модулі
+Authentication
+Home Page
+Search
+Library
+Playlist System
+Upload System
+Player System
+Profile System
+Notification System
+Recommendation System
+Admin Panel
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+├── Redux Toolkit
+├── RTK Query
+├── React Router
+├── MUI
+├── Styled Components
+├── Framer Motion
+└── WaveSurfer.js
