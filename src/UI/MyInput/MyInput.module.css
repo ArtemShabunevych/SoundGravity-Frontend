@@ -1,0 +1,38 @@
+.inputBox{
+    position: relative;
+    margin: 30px 0;
+}
+
+.inputBox input{
+    width: 100%;
+    padding: 13px 50px 13px 20px;
+    background-color: var(--g-ld);
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--gary-white);
+}
+
+.inputBox:focus-within i {
+    color: var(--b-w);
+}
+.inputBox input::placeholder {
+    transition: color 0.3s ease;
+    color: var(--g-lg);
+}
+
+.inputBox input:focus::placeholder {
+    color: var(--b-w);
+}
+
+.inputBox i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--g-lg);
+    transition: all 0.3s ease;
+}
