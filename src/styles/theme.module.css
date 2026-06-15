@@ -1,51 +1,48 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 :root {
-    --main-color: #ac22fb;
-    --logo-font :  "Titan One", sans-serif;
-    --tittle-font :"SN Pro", sans-serif;
-    --main-font : "Nunito", sans-serif;
-    --gary-white: #636363;
-    --white-dark : #ffffff;
-    --input-bg : #f3f3f3;
-    --b-w : #000000;
-    --w-ld : #ffffff;
-    --w-g:#ffffff;
-    --g-ld : #f1f1f1;
-    --p-transperent: #ac22fb;
-    --p-w : #ac22fb;
-    --w-p: #ffffff;
-    --transparent-p : transperent;
-    --g-lg: #606060;
-    --gradient : linear-gradient(90deg, #fdf9d2, #f8d1fd);
-    --shadow : rgba(0, 0, 0, 0.1);
-    --story: #da93ff;
+    --logo-font: "Outfit", monospace;
+    --title-font: "Syne", sans-serif;
+    --main-font: "Lexend Deca", sans-serif;
+    --mono-font: "Lexend Deca", monospace;
+
+    --main-color: #7fa8ff;
+    --bg-deep: #f5f7ff;
+    --white-dark: #ffffff;
+    --text-main: #05060d;
+    --text-muted: #626b93;
+
+    --input-bg: #eef2ff;
+    --b-w: #000000;
+    --w-ld: #ffffff;
+    --g-ld: #f1f4fc;
+    --shadow: rgba(13, 18, 48, 0.08);
+
+    --accent-a: #cfe8ff;
+    --accent-b: #7fa8ff;
+    --gradient: linear-gradient(135deg, #7fa8ff, #caa6ff);
+    --vignette-color: rgba(245, 247, 255, 0.4);
+    --loader-overlay: #ffffff;
 }
 
-
 [data-theme="dark"] {
-    --main-color: #8300cc;
-    --logo-font :  "Titan One", sans-serif;
-    --auth-font : "SN Pro", sans-serif;
-    --main-font : "Nunito", sans-serif;
-    --gary-white: #ffffff;
-    --white-dark : #1b1b1b;
-    --input-bg : #ffffff;
-    --b-w : #ffffff;
-    --w-ld : #252525;
-    --w-g: #636363;
-    --g-ld : #252525;
-    --p-transperent: transperent;
-    --p-w : #ffffff;
-    --w-p: #8300cc;
-    --transparent-p : #8300cc ;
-    --g-lg: #c1c1c1;
-    --gradient : linear-gradient(90deg, #393939, #271f2c);
-    --shadow :rgba(255, 255, 255, 0.1);
-    --story: #9720d5;
+    --main-color: #0d1230;
+    --bg-deep: #05060d;
+    --white-dark: #0d1230;
+    --text-main: #eef1fb;
+    --text-muted: #8a93b8;
+
+    --input-bg: #13193f;
+    --b-w: #ffffff;
+    --w-ld: #0d1230;
+    --g-ld: #0d1230;
+    --shadow: rgba(0, 0, 0, 0.5);
+
+    --accent-a: #ffffff;
+    --accent-b: #bfe1ff;
+    --gradient: linear-gradient(90deg, #05060d, #0d1230);
+    --vignette-color: rgba(5, 6, 13, 0.6);
+    --loader-overlay: #05060d;
 }

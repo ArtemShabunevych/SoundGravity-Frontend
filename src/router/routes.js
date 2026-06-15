@@ -1,19 +1,16 @@
-import MainPage from "../pages/MainPage";
-import CreateStoryPage from "../pages/CreateStoryPage";
-import FanficsPage from "../pages/FanficsPage";
+import MainPage from "../pages/MainPage.tsx";
 import UserPage from "../pages/UserPage";
-import StoryPage from "../pages/StoryPage";
-import LeaderboardPage from "../pages/LeaderboardPage";
+import TrackPage from "../pages/TrackPage.js";
+import PlaylistPage from "../pages/PlaylistPage.js";
 
-export const privatRoutes = [
-    {path: '/track/create', component: CreateTrackPage },
+
+export const privateRoutes = [
     {path: '/tracks', component: TrackPage },
     {path: '/playlists', component: PlaylistPage },
     {path: '/user', component: UserPage },
     { path:'/user/:username', component: UserPage },
     { path:'/track/:id', component: TrackPage },
     { path:'/playlist/:id', component: PlaylistPage },
-    { path:'/leaderboard', component: LeaderboardPage },
 ]
 
 export const publicRoute = [

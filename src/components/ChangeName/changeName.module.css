@@ -1,0 +1,89 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+}
+
+.changeButton {
+    min-width: 190px;
+    padding: 14px 20px;
+    border-radius: 14px;
+    border: 2px solid var(--b-w);
+    background: transparent;
+    color: var(--b-w);
+    font-size: 18px;
+    font-family: var(--main-font);
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.changeButton:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+    background: color-mix(in srgb, var(--b-w) 12%, transparent);
+}
+
+.input {
+    width: 100%;
+    max-width: 220px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid color-mix(in srgb, var(--p-w) 70%, transparent);
+    background: color-mix(in srgb, var(--white-dark) 80%, transparent);
+    color: var(--b-w);
+    font-size: 16px;
+    font-family: var(--main-font);
+    outline: none;
+    box-sizing: border-box;
+}
+
+.input::placeholder {
+    color: color-mix(in srgb, var(--p-w) 65%, transparent);
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.saveButton,
+.cancelButton {
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: var(--main-font);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.saveButton:hover,
+.cancelButton:hover {
+    transform: translateY(-1px);
+}
+
+.saveButton {
+    border: none;
+    background: var(--b-w);
+    color: var(--main-color);
+    box-shadow: 0 6px 16px var(--shadow);
+}
+
+.cancelButton {
+    border: 2px solid var(--b-w);
+    background: transparent;
+    color: var(--b-w);
+}
+
+.error {
+    margin: 0;
+    color: #ffd2d2;
+    font-size: 14px;
+    font-family: var(--main-font);
+    text-align: center;
+}

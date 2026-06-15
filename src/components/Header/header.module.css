@@ -1,0 +1,64 @@
+.mainHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    pointer-events: auto;
+    box-sizing: border-box;
+    background-color: transparent;
+}
+
+.logo {
+    font-family: var(--logo-font), serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-main);
+}
+
+
+.mainNav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.navLink {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.navLink:hover {
+    color: var(--text-main);
+}
+
+.launchBtn {
+    background: var(--main-color);
+    color: var(--g-ld);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: var(--logo-font) serif;
+    box-shadow: 0 4px 14px var(--shadow);
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.launchBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--shadow);
+}

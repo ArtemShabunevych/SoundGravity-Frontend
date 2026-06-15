@@ -6,7 +6,7 @@ export const LanguageProvider = ({ children }) => {
     const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
 
     useEffect(() => {
-        i18n.changeLanguage(lang); // тепер гарантовано існує
+        i18n.changeLanguage(lang);
         localStorage.setItem("lang", lang);
     }, [lang]);
 

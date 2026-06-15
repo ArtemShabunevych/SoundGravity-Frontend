@@ -1,0 +1,228 @@
+.userContent{
+    width: 100%;
+    background: var(--gradient);
+    padding: 70px;
+}
+
+.userBlock {
+    width: min(1180px, 94%);
+    margin: 40px auto;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    border-radius: 36px;
+    background: var(--w-ld);
+    box-shadow: 0 10px 30px var(--shadow);
+    border: 1px solid color-mix(in srgb, var(--g-lg) 25%, transparent);
+}
+
+.leftSide {
+    width: 320px;
+    flex-shrink: 0;
+    padding: 42px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    background: linear-gradient(
+            180deg,
+            color-mix(in srgb, var(--main-color) 82%, #b62cff 18%),
+            var(--main-color)
+    );
+    border-top-right-radius: 110px;
+    border-bottom-right-radius: 110px;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--p-w) 20%, transparent);
+    border: 3px solid color-mix(in srgb, var(--p-w) 85%, transparent);
+    box-shadow: 0 8px 18px var(--shadow);
+}
+
+.changename {
+    min-width: 190px;
+    padding: 14px 20px;
+    border-radius: 14px;
+    border: 2px solid var(--p-w);
+    background: transparent;
+    color: var(--p-w);
+    font-size: 18px;
+    font-family: var(--main-font);
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.changename:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}
+
+.rightSide {
+    flex: 1;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--w-ld);
+}
+
+.name {
+    margin: 0 0 12px 0;
+    font-size: 46px;
+    line-height: 1.1;
+    color: var(--b-w);
+    font-family: var(--tittle-font);
+    font-weight: 800;
+    word-break: break-word;
+}
+
+.countStories,
+.createdAt,
+.description {
+    margin: 0 0 14px 0;
+    font-family: var(--main-font);
+}
+
+.countStories {
+    font-size: 23px;
+    color: var(--b-w);
+    font-weight: 700;
+}
+
+.createdAt {
+    font-size: 20px;
+    color: var(--g-lg);
+    font-weight: 600;
+}
+
+.description {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--g-lg);
+    margin-bottom: 28px;
+}
+
+.storySection {
+    margin-top: 18px;
+}
+
+.sectionTitle {
+    margin: 0 0 16px 0;
+    font-size: 24px;
+    color: var(--b-w);
+    font-family: var(--tittle-font);
+    font-weight: 800;
+}
+
+.storiesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.published,
+.archived {
+    min-height: 150px;
+    padding: 18px 18px 20px;
+    border-radius: 22px;
+    font-family: var(--main-font);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--b-w);
+    box-shadow: 0 6px 18px var(--shadow);
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+    word-break: break-word;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid color-mix(in srgb, var(--g-lg) 30%, transparent);
+}
+
+.published:hover,
+.archived:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px var(--shadow);
+}
+
+.published {
+    background: linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--main-color) 18%, var(--w-ld)),
+            var(--w-ld)
+    );
+}
+
+.archived {
+    background: linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--g-ld) 85%, var(--w-ld)),
+            var(--w-ld)
+    );
+}
+
+.published::before,
+.archived::before {
+    position: absolute;
+    top: 16px;
+    left: 18px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 800;
+}
+
+.published::before {
+    content: "Published";
+    color: var(--main-color);
+}
+
+.archived::before {
+    content: "Archived";
+    color: var(--g-lg);
+}
+@media (max-width: 768px) {
+
+    .userBlock {
+        flex-direction: column;
+    }
+
+    .leftSide {
+        width: 100%;
+        border-top-right-radius: 36px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 36px;
+        padding: 24px 16px;
+    }
+
+    .rightSide {
+        width: 100%;
+        padding: 24px 16px;
+    }
+
+    .avatar {
+        width: 110px;
+        height: 110px;
+    }
+
+    .name {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .countStories,
+    .createdAt {
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .storiesGrid {
+        grid-template-columns: 1fr;
+    }
+}

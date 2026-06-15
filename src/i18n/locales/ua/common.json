@@ -1,0 +1,107 @@
+{
+  "header": {
+    "register": "Зареєструватися",
+    "login": "Увійти",
+    "home": "Головна",
+    "account": "Обліковий запис",
+    "create": "Створити",
+    "logout": "Вийти",
+    "profile": "Профіль"
+  },
+  "footer": {
+    "donate": "Donate",
+    "aboutTitle": "Про нас",
+    "aboutUs": "Про компанію",
+    "terms": "Умови користування",
+    "privacy": "Політика конфіденційності",
+    "journeyTitle": "Наш шлях",
+    "story": "Наша історія",
+    "roadmap": "План розвитку",
+    "community": "Спільнота",
+    "contact": "Контакти"
+  },
+  "main": {
+    "load": "Поринаємо у Gravity...",
+    "feel": "Відчуй поклик",
+    "feel2": "музики.",
+    "beat": "Кожен звук",
+    "beat2": "народжує рух.",
+    "playlist": "Плейлісти",
+    "playlist2": "зі своїми орбітами.",
+    "vibe": "Ділись своїм вайбом.",
+    "people": "Знаходь своїх друзів.",
+    "music": "Музика, яка",
+    "find": "знаходить тебе.",
+    "part": "Доєднуйся до",
+    "gravity": "SoundGravity.",
+    "free": "Почни слухати безкоштовно"
+  },
+  "auth": {
+    "loginForm": {
+      "welcome": "Ласкаво просимо!",
+      "question": "Не маєте акаунта?",
+      "login": "Увійти",
+      "socialMedia": "або",
+      "forgot": "Забули пароль?",
+      "register": "Зареєструватися",
+      "google": "Увійти через Google "
+    },
+    "registrationForm": {
+      "welcomeBack": "З поверненням!",
+      "question": "Вже маєте акаунт?",
+      "register": "Зареєструватися",
+      "socialMedia": "або",
+      "registration": "Реєстрація",
+      "google": "Увійти через Google "
+    },
+    "placeholders": {
+      "username": "Імʼя користувача",
+      "password": "Пароль",
+      "email": "Електронна пошта"
+    }
+  },
+  "common": {
+    "Loading": "Завантаження...",
+    "Saving": "Збереження...",
+    "Save": "Зберегти",
+    "Cancel": "Скасувати"
+  },
+  "user": {
+    "AvatarAlt": "користувач",
+    "RegisteredAt": "Зареєстрований:",
+    "PublishedTracksCount_one": "{{count}} опублікований трек",
+    "PublishedTracksCount_few": "{{count}} опубліковані треки",
+    "PublishedTracksCount_other": "{{count}} опублікованих треків",
+    "PublishedPlaylistsCount_one": "{{count}} опублікований плейлістів",
+    "PublishedPlaylistsCount_few": "{{count}} опубліковані плейлісти",
+    "PublishedPlaylistsCount_other": "{{count}} опублікованих плейлістів",
+    "Stories": "Треки",
+    "Playlists": "Плейлісти",
+    "Public": "Публічні",
+    "Private": "Приватні",
+    "NoStoriesYet": "Історій поки немає",
+    "NoPublicStories": "Немає публічних історій",
+    "NoPrivateStories": "Немає приватних історій",
+    "MakePrivate": "Зробити приватною",
+    "MakePublic": "Зробити публічною",
+    "StoryMadePrivate": "Історію зроблено приватною",
+    "StoryMadePublic": "Історію зроблено публічною",
+    "ChangeUsername": "Змінити ім'я",
+    "NewUsername": "Нове ім'я",
+    "UsernameUpdated": "Ім'я користувача оновлено"
+  },
+  "errors": {
+    "fillAllFields": "Заповни всі поля та додай хоча б одного персонажа.",
+    "mustBeLoggedIn": "Ти маєш увійти в акаунт, щоб створити історію.",
+    "failedToGenerateStory": "Не вдалося згенерувати історію.",
+    "NotLoggedIn": "Ви не увійшли в акаунт",
+    "UserNotFound": "Користувача не знайдено",
+    "TracksNotFound": "Історії не знайдено",
+    "PlaylistsNotFound": "Плейлісти не знайдено",
+    "FailedToUpdateStoryStatus": "Не вдалося оновити статус історії",
+    "EmptyUsername": "Ім'я користувача не може бути порожнім",
+    "FailedToUpdateUsername": "Не вдалося оновити ім'я користувача",
+    "TrackNotFound": "Історію не знайдено",
+    "PlaylistNotFound": "Плейліст не знайдено"
+  }
+}

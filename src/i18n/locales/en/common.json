@@ -1,0 +1,103 @@
+{
+  "header": {
+    "register": "Register",
+    "login": "Login",
+    "home": "Home",
+    "account": "Account",
+    "create": "Create",
+    "logout": "Logout",
+    "profile": "Profile"
+  },
+  "footer": {
+    "orbits": "SOUNDGRAVITY. All orbits aligned.",
+    "donate": "Donate",
+    "aboutTitle": "About",
+    "aboutUs": "About Us",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "journeyTitle": "Our Journey",
+    "story": "Our Story",
+    "roadmap": "Roadmap",
+    "community": "Community",
+    "contact": "Contact"
+  },
+  "main": {
+    "load": "Entering Gravity...",
+    "feel": "Feel the pull",
+    "feel2": "of music.",
+    "beat": "Every beat",
+    "beat2": "creates motion.",
+    "playlist": "Playlists with",
+    "playlist2": "their own orbit.",
+    "vibe": "Share your vibe.",
+    "people": "Find your people.",
+    "music": "Music that",
+    "find": "finds you.",
+    "part": "Become part of",
+    "gravity": "SoundGravity.",
+    "free":"Start listening for free"
+
+  },
+  "auth": {
+    "loginForm": {
+      "welcome": "Welcome!",
+      "question": "Don't have an account?",
+      "login": "Login",
+      "socialMedia": "or you can",
+      "forgot": "Forgot password?",
+      "register": "Register",
+      "google": "Continue with Google"
+    },
+    "registrationForm": {
+      "welcomeBack": "Welcome Back!",
+      "question": "Have an account?",
+      "register": "Register",
+      "socialMedia": "or you can",
+      "registration": "Registration",
+      "google": "Continue with Google"
+    },
+    "placeholders": {
+      "username": "Username",
+      "password": "Password",
+      "email": "Email"
+    }
+  },
+  "errors": {
+    "fillAllFields": "Please fill all fields and add at least one character.",
+    "mustBeLoggedIn": "You must be logged in to create a story.",
+    "failedToGenerateStory": "Failed to generate story.",
+    "NotLoggedIn": "You are not logged in",
+    "UserNotFound": "User not found",
+    "StoriesNotFound": "Stories not found",
+    "FailedToUpdateStoryStatus": "Failed to update story status",
+    "EmptyUsername": "Username cannot be empty",
+    "FailedToUpdateUsername": "Failed to update username",
+    "StoryNotFound": "Story not found"
+  },
+  "user": {
+    "RegisteredAt": "Registered at",
+    "ChangeUsername": "Change name",
+    "Empty": "No stories yet",
+    "AvatarAlt": "user",
+    "PublishedStoriesCount_one": "{{count}} published story",
+    "PublishedStoriesCount_other": "{{count}} published stories",
+    "Stories": "Stories",
+    "Public": "Public",
+    "Private": "Private",
+    "NoStoriesYet": "No stories yet",
+    "NoPublicStories": "No public stories",
+    "NoPrivateStories": "No private stories",
+    "MakePrivate": "Make private",
+    "MakePublic": "Make public",
+    "StoryMadePrivate": "Story is now private",
+    "StoryMadePublic": "Story is now public",
+    "NewUsername": "New username",
+    "UsernameUpdated": "Username updated"
+  },
+  "common": {
+    "Loading": "Loading...",
+    "Saving": "Saving...",
+    "Save": "Save",
+    "Cancel": "Cancel"
+  }
+}

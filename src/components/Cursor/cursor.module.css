@@ -1,0 +1,22 @@
+.cursorGravity {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+
+    transition:
+            transform 0.1s cubic-bezier(0.25, 1, 0.5, 1),
+            width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+            height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+            background-color 0.3s ease;
+}
+
+.cursorGravity.active {
+    width: 80px;
+    height: 80px;
+}

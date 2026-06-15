@@ -1,0 +1,285 @@
+.container *{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: var(--main-font);
+ }
+
+.bold{
+    font-family: var(--tittle-font);
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.authWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--gradient);
+}
+
+.container{
+    position: relative;
+    width: 850px;
+    height: 550px;
+    background: var(--white-dark);
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    margin: 20px;
+    overflow: hidden;
+}
+
+.formBox{
+    padding: 40px;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    color: var(--b-w);
+    text-align: center;
+    z-index: 1;
+    transition: 0.6s ease-in-out 1.2s, visibility 0s 1s;
+}
+
+.container.active .formBox{
+    right: 50%;
+}
+
+.container.active .formBox.login{
+    visibility: hidden;
+}
+
+.formBox.register{
+    visibility: hidden;
+}
+
+.container.active .formBox.register{
+    visibility: visible;
+}
+
+.container form{
+    width: 100%;
+}
+
+.container form p {
+    margin-bottom: 8px;
+}
+
+.container h1{
+    font-size: 36px;
+    margin: 10px 0;
+}
+
+.forgotLink{
+    margin: -15px 0 15px;
+}
+
+.forgotLink a{
+    font-size: 14.5px;
+    color: var(--b-w);
+    text-decoration: none;
+}
+
+.forgotLink a:hover{
+    text-decoration: underline;
+}
+
+.forgotPassword{
+    font-size: 14.5px;
+    color: var(--b-w);
+    text-decoration: none;
+}
+
+.btn{
+    width: 100%;
+    height: 48px;
+    background-color: var(--p-transperent);
+    border: 2px solid var(--p-w);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn i{
+    margin-right: 10px;
+}
+
+.btn:active{
+    transform: scale(0.98);
+}
+
+.btn:hover{
+    background-color: var(--transparent-p);
+    border: 2px solid var(--main-color);
+    color: var(--p-w);
+}
+
+
+
+.btnToggle{
+    width: 180px;
+    height: 46px;
+    background-color: transparent;
+    border: 2px solid #fff;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btnToggle:hover{
+    background-color: #fff;
+    color: var(--main-color);
+}
+
+
+.btnToggle:active{
+    transform: scale(0.98);
+}
+
+.toggleBox{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+}
+
+.toggleBox::before{
+    content: '';
+    position: absolute;
+    width: 300%;
+    height: 100%;
+    background: var(--main-color);
+    left: -250%;
+    z-index: 2;
+    border-radius: 150px;
+    transition: 1.8s ease-in-out;
+}
+
+.container.active .toggleBox::before{
+    left: 50%;
+}
+
+.togglePanel{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: 0.6s ease-in-out;
+}
+
+.formText{
+    margin: 8px;
+    font-size: 14.5px;
+}
+
+.socialIcons{
+    display: flex;
+    justify-content: center;
+}
+
+.togglePanel.toggleLeft{
+    left: 0;
+    transition-delay: 1.2s ;
+}
+
+.container.active .togglePanel.toggleLeft{
+    left: -50%;
+    transition-delay: 0.6s;
+}
+
+.togglePanel.toggleRight {
+    right: -50%;
+    transition-delay: 0.6s;
+}
+
+.container.active .togglePanel.toggleRight{
+    right: 0;
+    transition-delay: 1.2s;
+}
+
+.togglePanel p{
+    margin-bottom: 20px;
+}
+
+
+@media screen and (max-width: 750px){
+    .container{
+        height: calc(100vh - 40px);
+    }
+
+    .formBox{
+        width: 100%;
+        height: 70%;
+        bottom: 0;
+    }
+
+    .container.active .formBox{
+        right: 0;
+        bottom: 30%;
+    }
+
+    .toggleBox::before{
+        width: 100%;
+        height: 300%;
+        left: 0;
+        top: -270%;
+        border-radius: 20vw;
+    }
+
+    .container.active .toggleBox::before{
+        top: 70%;
+        left: 0;
+    }
+
+    .togglePanel{
+        width: 100%;
+        height: 30%;
+    }
+
+    .togglePanel.toggleLeft{
+        top: 0;
+    }
+
+    .container.active .togglePanel.toggleLeft{
+        left: 0;
+        top: -30%;
+    }
+
+    .togglePanel.toggleRight{
+        right: 0;
+        bottom: -30%;
+    }
+
+    .container.active .togglePanel.toggleRight{
+        bottom: 0;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .formBox{
+        padding: 20px;
+    }
+
+    .togglePanel h1{
+        font-size: 28px;
+    }
+}
