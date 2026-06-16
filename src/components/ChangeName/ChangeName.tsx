@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./changeName.module.css";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
+import { fetchWithAuth } from "../../API/apiClient";
 
 interface UserType {
     username: string;
@@ -20,8 +21,6 @@ export default function ChangeUsername({ user, setUser }: ChangeUsernameProps) {
     const [loading, setLoading] = useState(false);
     const { t } = useTranslation();
 
-    const apiUrl = import.meta.env.VITE_APP_API_URL || "http://localhost:5000/api/";
-
     const handleSave = async () => {
         if (!newUsername.trim()) {
             toast.error(t("errors.EmptyUsername"));
@@ -31,33 +30,11 @@ export default function ChangeUsername({ user, setUser }: ChangeUsernameProps) {
         try {
             setLoading(true);
 
-            const token = localStorage.getItem("JWT_TOKEN");
-            const accessToken = localStorage.getItem("JWT_ACCESS_TOKEN");
-
-            if (!token || !accessToken) {
-                throw new Error(t("errors.mustBeLoggedIn"));
-            }
-
-            const response = await fetch(
-                `${apiUrl}users/update-username`,
-                {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                        "x-refresh-token": accessToken,
-                    },
-                    body: JSON.stringify({
-                        newUsername: newUsername.trim(),
-                    }),
-                }
-            );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || t("errors.FailedToUpdateUsername"));
-            }
+            const data = await fetchWithAuth("users/update-username", {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ newUsername: newUsername.trim() }),
+            });
 
             setUser((prev: any) => ({
                 ...prev,

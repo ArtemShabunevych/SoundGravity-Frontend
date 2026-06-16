@@ -18,7 +18,9 @@ export default function Footer() {
 
             <div className={styles.footerRight}>
                 <div className={styles.footerLinks}>
-                    <a href="https://donate.example.com" target="_blank" rel="noreferrer" className={styles.donateLink}>
+                    <a href="https://send.monobank.ua/jar/2JbpBYkhMv"className={styles.donateLink}
+                       target="_blank"
+                       rel="noopener noreferrer">
                         {t("footer.donate")}
                     </a>
                     <Link to="/privacy">{t("footer.privacy")}</Link>

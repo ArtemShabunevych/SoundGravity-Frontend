@@ -1,20 +1,5 @@
-.mainHeader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 32px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    pointer-events: auto;
-    box-sizing: border-box;
-    background-color: transparent;
-}
-
 .logo {
-    font-family: var(--logo-font), serif;
+    font-family: var(--logo-font), sans-serif;
     font-weight: 700;
     font-size: 18px;
     letter-spacing: -0.02em;
@@ -22,8 +7,37 @@
     align-items: center;
     gap: 8px;
     color: var(--text-main);
+    cursor: pointer;
 }
 
+.logoImg {
+    height: 58px;
+    width: 100px;
+    object-fit: contain;
+}
+
+.userAvatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--main-color);
+}
+
+.profileLink {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.profileLink:hover {
+    color: var(--main-color);
+}
 
 .mainNav {
     display: flex;
@@ -32,33 +46,101 @@
 }
 
 .navLink {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
-    color: var(--text-muted);
+    color: var(--text-main);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .navLink:hover {
-    color: var(--text-main);
+    color: var(--text-muted);
 }
 
 .launchBtn {
     background: var(--main-color);
-    color: var(--g-ld);
+    color: var(--text-main);
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-family: var(--logo-font) serif;
+    font-family: var(--logo-font), sans-serif;
     box-shadow: 0 4px 14px var(--shadow);
     transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .launchBtn:hover {
     transform: translateY(-1px);
     box-shadow: 0 6px 20px var(--shadow);
+    color: var(--text-main);
+
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.buttonToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 36px;
+    border-radius: 6px;
+    border: 1px solid var(--input-bg);
+    background-color: var(--input-bg);
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+    padding: 0 8px;
+}
+
+.buttonToggle:hover {
+    background-color: var(--g-ld);
+    border-color: var(--main-color);
+}
+
+.buttonToggle:active {
+    transform: scale(0.98);
+}
+
+.buttonToggle :global(.fi) {
+    display: inline-block !important;
+    width: 24px !important;
+    height: 18px !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0 1px 3px var(--shadow);
+    border-radius: 2px;
+}
+
+.icon {
+    font-size: 25px !important;
+    color: var(--text-main);
+    transition: color 0.2s;
+}
+
+.buttonToggle:hover .icon {
+    color: var(--main-color);
+}
+
+.mainHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background-color: var(--white-dark);
+    border-bottom: 1px solid var(--input-bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 100;
 }

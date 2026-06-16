@@ -1,48 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
 :root {
-    --logo-font: "Outfit", monospace;
-    --title-font: "Syne", sans-serif;
-    --main-font: "Lexend Deca", sans-serif;
-    --mono-font: "Lexend Deca", monospace;
+    --logo-font: "Lexend Deca", sans-serif;
+    --title-font: "Outfit", monospace;
+    --main-font: "Lexend Deca", monospace;
+    --mono-font: "Outfit", sans-serif;
+}
 
-    --main-color: #7fa8ff;
+[data-theme="light"] {
+    --main-color: #4f7fff;
+
     --bg-deep: #f5f7ff;
     --white-dark: #ffffff;
-    --text-main: #05060d;
-    --text-muted: #626b93;
+    --input-bg: #e2e7f7;
+    --g-ld: #eef1fc;
 
-    --input-bg: #eef2ff;
+    --text-main: #05060d;
+    --text-muted: #525a80;
+
     --b-w: #000000;
     --w-ld: #ffffff;
-    --g-ld: #f1f4fc;
-    --shadow: rgba(13, 18, 48, 0.08);
+    --shadow: rgba(13, 18, 48, 0.06);
 
     --accent-a: #cfe8ff;
     --accent-b: #7fa8ff;
-    --gradient: linear-gradient(135deg, #7fa8ff, #caa6ff);
+    --gradient: linear-gradient(135deg, #4f7fff, #082df3);
     --vignette-color: rgba(245, 247, 255, 0.4);
     --loader-overlay: #ffffff;
 }
 
 [data-theme="dark"] {
-    --main-color: #0d1230;
+    --main-color: #7fa8ff;
+
     --bg-deep: #05060d;
-    --white-dark: #0d1230;
-    --text-main: #eef1fb;
+    --white-dark: #0b0d19;
+    --input-bg: #141933;
+    --g-ld: #0e1224;
+
+    --text-main: #f0f3fa;
     --text-muted: #8a93b8;
 
-    --input-bg: #13193f;
     --b-w: #ffffff;
-    --w-ld: #0d1230;
-    --g-ld: #0d1230;
-    --shadow: rgba(0, 0, 0, 0.5);
+    --w-ld: #0b0d19;
+    --shadow: rgba(0, 0, 0, 0.6);
 
-    --accent-a: #ffffff;
-    --accent-b: #bfe1ff;
-    --gradient: linear-gradient(90deg, #05060d, #0d1230);
-    --vignette-color: rgba(5, 6, 13, 0.6);
+    --accent-a: #1a224d;
+    --accent-b: #7fa8ff;
+    --gradient: linear-gradient(135deg, #05060d, #11163a);
+    --vignette-color: rgba(5, 6, 13, 0.7);
     --loader-overlay: #05060d;
 }

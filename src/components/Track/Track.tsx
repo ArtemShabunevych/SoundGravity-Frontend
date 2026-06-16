@@ -1,75 +1,64 @@
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styles from "./track.module.css";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
+import { fetchWithAuth } from "../../API/apiClient";
 
 interface TrackType {
     id: string;
     title?: string;
+    genre?: string;
     description?: string;
-    cover: string;
+    coverUrl?: string;
+    audioUrl?: string;
+    createdAt?: string;
+    likesCount?: number;
+    visibility?: string;
+    user?: { id: string; username: string };
 }
 
 export default function Track() {
-    const {id} = useParams<{ id: string }>();
-    const {t} = useTranslation();
-
-    const [story, setStory] = useState<TrackType | null>(null);
-
-    const apiUrl = import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/";
+    const { id } = useParams<{ id: string }>();
+    const { t } = useTranslation();
+    const [track, setTrack] = useState<TrackType | null>(null);
 
     useEffect(() => {
+        if (!id) return;
         const fetchTrack = async () => {
             try {
-                const token = localStorage.getItem("JWT_TOKEN");
-                const accessToken = localStorage.getItem("JWT_ACCESS_TOKEN");
-
-                if (!token || !accessToken) {
-                    throw new Error(t("errors.mustBeLoggedIn"));
-                }
-
-                const response = await fetch(`${apiUrl}tracks/${id}`, {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "x-refresh-token": accessToken,
-                    },
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.message || t("errors.TrackNotFound"));
-                }
-
-                setStory(data);
+                const data = await fetchWithAuth(`tracks/${id}`);
+                setTrack(data);
             } catch (error: any) {
                 toast.error(error.message || t("errors.TrackNotFound"));
             }
         };
+        fetchTrack();
+    }, [id, t]);
 
-        if (id) {
-            fetchTrack();
-        }
-    }, [id, t, apiUrl]);
-
-    if (!story) {
-        return (
-            <div className={styles.loader}>
-                Loading...
-            </div>
-        );
+    if (!track) {
+        return <div className={styles.loader}>Loading...</div>;
     }
 
     return (
         <div className={styles.page}>
             <div className={styles.layout}>
                 <div className={styles.wrapper}>
+                    <div className={styles.coverWrapper}>
+                        {track.coverUrl ? (
+                            <img src={track.coverUrl} alt={track.title} className={styles.cover} />
+                        ) : (
+                            <div className={styles.placeholderCover}>
+                                <i className="bx bx-music"></i>
+                            </div>
+                        )}
+                    </div>
                     <div className={styles.text}>
-
-                        <h1>{story.title}</h1>
-                        <p>{story.description}</p>
+                        <h1>{track.title}</h1>
+                        {track.user && <p className={styles.artist}>{track.user.username}</p>}
+                        {track.genre && <span className={styles.genre}>{track.genre}</span>}
+                        {track.description && <p>{track.description}</p>}
+                        {track.likesCount !== undefined && <p>❤️ {track.likesCount}</p>}
                     </div>
                 </div>
             </div>

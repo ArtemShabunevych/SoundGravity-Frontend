@@ -2,10 +2,16 @@ import {createContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 export const UserContext = createContext();
-export const UserProvider = ({ children }) => {
+
+export const UserProvider = ({children}) => {
     const navigate = useNavigate();
 
-    const [isAuth, setIsAuth] = useState(false);
+    const [isAuth, setIsAuth] = useState  (() => {
+
+        const token = localStorage.getItem("JWT_TOKEN");
+
+        return !!token;
+    });
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
 
@@ -22,6 +28,16 @@ export const UserProvider = ({ children }) => {
         navigate("/");
     };
 
+    const getApiUrl = () => {
+        let url = import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/";
+        if (!url.endsWith("/api/")) {
+            url = url.endsWith("/") ? `${url}api/` : `${url}/api/`;
+        }
+        return url;
+    };
+
+    const apiUrl = getApiUrl();
+
     const fetchUser = async () => {
         try {
             const token = localStorage.getItem("JWT_TOKEN");
@@ -29,7 +45,7 @@ export const UserProvider = ({ children }) => {
 
             if (!token || !access_token) return;
 
-            const res = await fetch(`${process.env.REACT_APP_API_URL}users/me`, {
+            const res = await fetch(`${apiUrl}users/me`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "x-refresh-token": access_token,
@@ -50,13 +66,13 @@ export const UserProvider = ({ children }) => {
     const checkAuth = async () => {
         if (!token || !refreshToken) {
             setIsAuth(false);
-            setLoading(false);
             setUser(null);
+            setLoading(false);
             return;
         }
 
         try {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}auth/verify`, {
+            const res = await fetch(`${apiUrl}auth/verify`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({token}),
@@ -69,7 +85,7 @@ export const UserProvider = ({ children }) => {
 
         } catch {
             try {
-                const res = await fetch(`${process.env.REACT_APP_API_URL}auth/refresh`, {
+                const res = await fetch(`${apiUrl}auth/refresh`, {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify({refreshToken}),
@@ -87,9 +103,9 @@ export const UserProvider = ({ children }) => {
             } catch {
                 logout();
             }
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
 
 
@@ -99,7 +115,7 @@ export const UserProvider = ({ children }) => {
 
     return (
         <UserContext.Provider
-            value={{ isAuth, setIsAuth, user, setUser, token, refreshToken, setToken, setRefreshToken, loading, logout }}
+            value={{isAuth, setIsAuth, user, setUser, token, refreshToken, setToken, setRefreshToken, loading, logout}}
         >
             {children}
         </UserContext.Provider>

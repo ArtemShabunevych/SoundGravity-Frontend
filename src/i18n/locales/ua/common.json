@@ -6,10 +6,12 @@
     "account": "Обліковий запис",
     "create": "Створити",
     "logout": "Вийти",
-    "profile": "Профіль"
+    "profile": "Профіль",
+    "tracks": "Треки",
+    "playlists": "Плейлісти"
   },
   "footer": {
-    "donate": "Donate",
+    "donate": "Задонатити",
     "aboutTitle": "Про нас",
     "aboutUs": "Про компанію",
     "terms": "Умови користування",
@@ -18,7 +20,8 @@
     "story": "Наша історія",
     "roadmap": "План розвитку",
     "community": "Спільнота",
-    "contact": "Контакти"
+    "contact": "Контакти",
+    "orbits": "SOUNDGRAVITY. Усі орбіти зійшлися."
   },
   "main": {
     "load": "Поринаємо у Gravity...",
@@ -37,6 +40,7 @@
     "free": "Почни слухати безкоштовно"
   },
   "auth": {
+    "or": "aбо",
     "loginForm": {
       "welcome": "Ласкаво просимо!",
       "question": "Не маєте акаунта?",
@@ -45,6 +49,7 @@
       "forgot": "Забули пароль?",
       "register": "Зареєструватися",
       "google": "Увійти через Google "
+
     },
     "registrationForm": {
       "welcomeBack": "З поверненням!",
