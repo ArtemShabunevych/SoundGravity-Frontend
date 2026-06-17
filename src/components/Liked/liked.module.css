@@ -1,0 +1,118 @@
+.page {
+    padding: 100px 48px 48px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.headerIcon {
+    color: #ff4d6a;
+    font-size: 32px;
+}
+
+.headerTitle {
+    margin: 0;
+    color: var(--text-main);
+    font-family: var(--title-font);
+}
+
+.tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--g-ld);
+    border-radius: 16px;
+    padding: 4px;
+    margin-bottom: 24px;
+    border: 1px solid color-mix(in srgb, var(--text-muted) 12%, transparent);
+}
+
+.tab {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: var(--main-font);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.tabActive {
+    background: var(--w-ld);
+    color: var(--main-color);
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.tabInactive {
+    background: transparent;
+    color: var(--text-muted);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    text-decoration: none;
+    color: inherit;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--w-ld);
+    box-shadow: 0 4px 16px var(--shadow);
+    border: 1px solid color-mix(in srgb, var(--text-muted) 12%, transparent);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cardCover {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+}
+
+.cardBody {
+    padding: 14px 16px;
+}
+
+.cardTitle {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-main);
+    font-family: var(--main-font);
+}
+
+.cardGenre {
+    margin: 4px 0;
+    font-size: 13px;
+    color: var(--main-color);
+    font-weight: 600;
+}
+
+.cardUser {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 48px;
+    color: var(--text-muted);
+}
+
+.loader {
+    padding: 100px 48px;
+    text-align: center;
+    color: var(--text-muted);
+}

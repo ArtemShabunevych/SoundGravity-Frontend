@@ -81,7 +81,7 @@
     "PublishedPlaylistsCount_one": "{{count}} опублікований плейлістів",
     "PublishedPlaylistsCount_few": "{{count}} опубліковані плейлісти",
     "PublishedPlaylistsCount_other": "{{count}} опублікованих плейлістів",
-    "Stories": "Треки",
+    "Tracks": "Треки",
     "Playlists": "Плейлісти",
     "Public": "Публічні",
     "Private": "Приватні",
@@ -130,7 +130,8 @@
     "genre": "Жанр:",
     "description": "Опис:",
     "like": "Вподобати",
-    "liked": "Вподобано"
+    "liked": "Вподобано",
+    "no": "No Playlist Found"
   },
   "create": {
     "title": "Назва",
@@ -172,5 +173,11 @@
     "reggae": "Реггі",
     "country": "Кантрі",
     "other": "Інше"
+  },
+  "settings": {
+    "custom": "Кастомний курсор",
+    "enabled": "Увімкнено",
+    "disabled":"Вимкнено",
+    "settings":"Налаштування"
   }
 }

@@ -1,0 +1,61 @@
+.page {
+    padding: 100px 48px 48px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.card {
+    text-decoration: none;
+    color: inherit;
+    background: var(--white-dark);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 12px var(--shadow);
+    border: 1px solid var(--input-bg);
+}
+
+.coverWrap {
+    width: 100%;
+    height: 180px;
+    background: var(--bg-deep, #1a1a2e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.title {
+    margin: 12px 0 4px;
+    font-size: 18px;
+}
+
+.genre {
+    margin: 4px 0;
+    font-size: 13px;
+    color: var(--main-color);
+    font-weight: 600;
+}
+
+.meta {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.empty {
+    padding: 48px;
+    text-align: center;
+    color: var(--text-muted);
+}

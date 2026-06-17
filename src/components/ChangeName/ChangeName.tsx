@@ -16,7 +16,6 @@ interface ChangeUsernameProps {
 
 export default function ChangeUsername({ user, setUser }: ChangeUsernameProps) {
     const [isEditing, setIsEditing] = useState(false);
-    const [showActions, setShowActions] = useState(false);
     const [newUsername, setNewUsername] = useState(user?.username || "");
     const [loading, setLoading] = useState(false);
     const { t } = useTranslation();
@@ -42,7 +41,6 @@ export default function ChangeUsername({ user, setUser }: ChangeUsernameProps) {
             }));
 
             setIsEditing(false);
-            setShowActions(false);
 
             toast.success(t("user.UsernameUpdated"));
         } catch (error: any) {
@@ -55,53 +53,48 @@ export default function ChangeUsername({ user, setUser }: ChangeUsernameProps) {
     const handleCancel = () => {
         setNewUsername(user?.username || "");
         setIsEditing(false);
-        setShowActions(false);
     };
 
-    return (
-        <div className={styles.wrapper}>
-            {!isEditing ? (
-                <button
-                    className={styles.changeButton}
-                    onClick={() => {
-                        setNewUsername(user?.username || "");
-                        setIsEditing(true);
-                        setShowActions(true);
-                    }}
-                >
-                    {t("user.ChangeUsername")}
-                </button>
-            ) : (
-                <>
-                    <input
-                        className={styles.input}
-                        value={newUsername}
-                        onChange={(e) => setNewUsername(e.target.value)}
-                        placeholder={t("user.NewUsername")}
+    if (isEditing) {
+        return (
+            <div className={styles.wrapper}>
+                <input
+                    className={styles.input}
+                    value={newUsername}
+                    onChange={(e) => setNewUsername(e.target.value)}
+                    placeholder={t("user.NewUsername")}
+                    disabled={loading}
+                    autoFocus
+                />
+                <div className={styles.actions}>
+                    <button
+                        className={styles.saveButton}
+                        onClick={handleSave}
                         disabled={loading}
-                    />
+                    >
+                        {loading ? t("common.Saving") : t("common.Save")}
+                    </button>
+                    <button
+                        className={styles.cancelButton}
+                        onClick={handleCancel}
+                        disabled={loading}
+                    >
+                        {t("common.Cancel")}
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
-                    {showActions && (
-                        <div className={styles.actions}>
-                            <button
-                                className={styles.saveButton}
-                                onClick={handleSave}
-                                disabled={loading}
-                            >
-                                {loading ? t("common.Saving") : t("common.Save")}
-                            </button>
-
-                            <button
-                                className={styles.cancelButton}
-                                onClick={handleCancel}
-                                disabled={loading}
-                            >
-                                {t("common.Cancel")}
-                            </button>
-                        </div>
-                    )}
-                </>
-            )}
+    return (
+        <div className={styles.nameWrap}>
+            <h1 className={styles.name}>{user.username}</h1>
+            <div className={styles.nameOverlay} onClick={() => {
+                setNewUsername(user?.username || "");
+                setIsEditing(true);
+            }}>
+                {t("user.ChangeUsername")}
+            </div>
         </div>
     );
 }

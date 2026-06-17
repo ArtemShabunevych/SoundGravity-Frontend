@@ -32,6 +32,8 @@ export default function UserPage() {
     const [playlists, setPlaylists] = useState<any[]>([]);
     const [activeTab, setActiveTab] = useState<Tab>("tracks");
     const [uploadingAvatar, setUploadingAvatar] = useState(false);
+    const [hoveredTrackId, setHoveredTrackId] = useState<string | null>(null);
+    const [hoveredPlaylistId, setHoveredPlaylistId] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const { user: currentUser, fetchUser: fetchUserContext } = useContext(UserContext);
@@ -112,6 +114,11 @@ export default function UserPage() {
         fetchPlaylists();
     }, [username, currentUser]);
 
+    useEffect(() => {
+        if (!isOwner) return;
+        if (!user) return;
+    }, [user, isOwner]);
+
     const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
@@ -135,6 +142,60 @@ export default function UserPage() {
         }
     };
 
+    const handleDeleteTrack = async (trackId: string) => {
+        try {
+            await fetchWithAuth(`tracks/${trackId}`, { method: "DELETE" });
+            setTracks(prev => prev.filter((t: any) => t.id !== trackId));
+            toast.success("Track deleted");
+        } catch (err: any) {
+            toast.error(err.message || "Failed to delete track");
+        }
+    };
+
+    const handleToggleTrackVisibility = async (trackId: string, currentVisibility: string) => {
+        const newVisibility = currentVisibility === "private" ? "public" : "private";
+        try {
+            await fetchWithAuth(`tracks/${trackId}/visibility`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: newVisibility }),
+            });
+            setTracks(prev => prev.map((t: any) =>
+                t.id === trackId ? { ...t, visibility: newVisibility } : t
+            ));
+            toast.success(`Track is now ${newVisibility}`);
+        } catch (err: any) {
+            toast.error(err.message || "Failed to update visibility");
+        }
+    };
+
+    const handleDeletePlaylist = async (playlistId: string) => {
+        try {
+            await fetchWithAuth(`playlists/${playlistId}`, { method: "DELETE" });
+            setPlaylists(prev => prev.filter((p: any) => p.id !== playlistId));
+            toast.success("Playlist deleted");
+        } catch (err: any) {
+            toast.error(err.message || "Failed to delete playlist");
+        }
+    };
+
+    const handleTogglePlaylistVisibility = async (playlistId: string, currentVisibility: string) => {
+        const newVisibility = currentVisibility === "private" ? "public" : "private";
+        try {
+            await fetchWithAuth(`playlists/${playlistId}/visibility`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: newVisibility }),
+            });
+            setPlaylists(prev => prev.map((p: any) =>
+                p.id === playlistId ? { ...p, visibility: newVisibility } : p
+            ));
+            toast.success(`Playlist is now ${newVisibility}`);
+        } catch (err: any) {
+            toast.error(err.message || "Failed to update visibility");
+        }
+    };
+
     const publicTracks = tracks.filter((t: any) => t.visibility === "public" || !t.visibility);
     const privateTracks = tracks.filter((t: any) => t.visibility === "private");
     const publicPlaylists = playlists.filter((p: any) => p.visibility === "public" || !p.visibility);
@@ -146,21 +207,18 @@ export default function UserPage() {
                 <StarBackground bgColor="#05060d" contained />
                 <div className={styles.heroContent}>
                     <div className={styles.avatarWrap}>
-                        <img
-                            src={`${user?.avatarUrl || icon}${user?.avatarUrl ? `?t=${Date.now()}` : ""}`}
-                            alt={t("user.AvatarAlt")}
-                            className={styles.avatar}
-                        />
-                        {isOwner && user && (
-                            <div className={styles.editBadge}>
-                                <ChangeUsername user={user} setUser={setUser} />
-                                <button
-                                    className={styles.avatarUploadBtn}
-                                    onClick={() => fileInputRef.current?.click()}
-                                    disabled={uploadingAvatar}
-                                >
+                        <label className={styles.avatarLabel}>
+                            <img
+                                src={`${user?.avatarUrl || icon}${user?.avatarUrl ? `?t=${Date.now()}` : ""}`}
+                                alt={t("user.AvatarAlt")}
+                                className={styles.avatar}
+                            />
+                            {isOwner && user && (
+                                <div className={styles.avatarOverlay}>
                                     {uploadingAvatar ? "..." : t("user.ChangeAvatar")}
-                                </button>
+                                </div>
+                            )}
+                            {isOwner && (
                                 <input
                                     ref={fileInputRef}
                                     type="file"
@@ -168,12 +226,16 @@ export default function UserPage() {
                                     onChange={handleAvatarChange}
                                     hidden
                                 />
-                            </div>
-                        )}
+                            )}
+                        </label>
                     </div>
                     {user && (
                         <div className={styles.heroInfo}>
-                            <h1 className={styles.name}>{user.username}</h1>
+                            {isOwner ? (
+                                <ChangeUsername user={user} setUser={setUser} />
+                            ) : (
+                                <h1 className={styles.name}>{user.username}</h1>
+                            )}
                             <span className={styles.joinBadge}>
                                 {t("user.RegisteredAt")}{" "}
                                 {new Date(user.createdAt).toLocaleDateString()}
@@ -187,7 +249,7 @@ export default function UserPage() {
                 <div className={styles.statsRow}>
                     <div className={styles.stat}>
                         <span className={styles.statNum}>{tracks.length}</span>
-                        <span className={styles.statLabel}>{t("user.Stories")}</span>
+                        <span className={styles.statLabel}>{t("user.Tracks")}</span>
                     </div>
                     <div className={styles.stat}>
                         <span className={styles.statNum}>{playlists.length}</span>
@@ -213,14 +275,37 @@ export default function UserPage() {
                 {activeTab === "tracks" && (
                     <div className={styles.contentGrid}>
                         {[...publicTracks, ...privateTracks].map((track: any) => (
-                            <Link to={`/track/${track.id}`} key={track.id} className={styles.card}>
-                                <div className={styles.cardCover}>
-                                    <img src={track.coverUrl || defaultTrackCover} alt={track.title} />
-                                </div>
-                                <div className={styles.cardBody}>
-                                    <h4 className={styles.cardTitle}>{track.title}</h4>
-                                </div>
-                            </Link>
+                            <div
+                                key={track.id}
+                                className={styles.cardWrap}
+                                onMouseEnter={() => setHoveredTrackId(track.id)}
+                                onMouseLeave={() => setHoveredTrackId(null)}
+                            >
+                                <Link to={`/track/${track.id}`} className={styles.card}>
+                                    <div className={styles.cardCover}>
+                                        <img src={track.coverUrl || defaultTrackCover} alt={track.title} />
+                                    </div>
+                                    <div className={styles.cardBody}>
+                                        <h4 className={styles.cardTitle}>{track.title}</h4>
+                                    </div>
+                                </Link>
+                                {isOwner && hoveredTrackId === track.id && (
+                                    <div className={styles.cardActions}>
+                                        <button
+                                            className={styles.cardActionBtn}
+                                            onClick={() => handleToggleTrackVisibility(track.id, track.visibility)}
+                                        >
+                                            {track.visibility === "private" ? "Public" : "Private"}
+                                        </button>
+                                        <button
+                                            className={`${styles.cardActionBtn} ${styles.cardActionDanger}`}
+                                            onClick={() => handleDeleteTrack(track.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         ))}
                         {tracks.length === 0 && (
                             <p className={styles.emptyState}>{t("user.NoTracks")}</p>
@@ -231,14 +316,37 @@ export default function UserPage() {
                 {activeTab === "playlists" && (
                     <div className={styles.contentGrid}>
                         {[...publicPlaylists, ...privatePlaylists].map((pl: any) => (
-                            <Link to={`/playlist/${pl.id}`} key={pl.id} className={styles.card}>
-                                <div className={styles.cardCover}>
-                                    <img src={pl.coverUrl || defaultPlaylistCover} alt={pl.name} />
-                                </div>
-                                <div className={styles.cardBody}>
-                                    <h4 className={styles.cardTitle}>{pl.name}</h4>
-                                </div>
-                            </Link>
+                            <div
+                                key={pl.id}
+                                className={styles.cardWrap}
+                                onMouseEnter={() => setHoveredPlaylistId(pl.id)}
+                                onMouseLeave={() => setHoveredPlaylistId(null)}
+                            >
+                                <Link to={`/playlist/${pl.id}`} key={pl.id} className={styles.card}>
+                                    <div className={styles.cardCover}>
+                                        <img src={pl.coverUrl || defaultPlaylistCover} alt={pl.name} />
+                                    </div>
+                                    <div className={styles.cardBody}>
+                                        <h4 className={styles.cardTitle}>{pl.name}</h4>
+                                    </div>
+                                </Link>
+                                {isOwner && hoveredPlaylistId === pl.id && (
+                                    <div className={styles.cardActions}>
+                                        <button
+                                            className={styles.cardActionBtn}
+                                            onClick={() => handleTogglePlaylistVisibility(pl.id, pl.visibility)}
+                                        >
+                                            {pl.visibility === "private" ? "Public" : "Private"}
+                                        </button>
+                                        <button
+                                            className={`${styles.cardActionBtn} ${styles.cardActionDanger}`}
+                                            onClick={() => handleDeletePlaylist(pl.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         ))}
                         {playlists.length === 0 && (
                             <p className={styles.emptyState}>{t("user.NoPlaylists")}</p>

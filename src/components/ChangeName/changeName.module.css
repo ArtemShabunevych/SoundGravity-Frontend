@@ -1,28 +1,49 @@
+.nameWrap {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+}
+
+.name {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 800;
+    color: #fff;
+    font-family: var(--title-font);
+    text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    transition: opacity 0.2s;
+}
+
+.nameWrap:hover .name {
+    opacity: 0.3;
+}
+
+.nameOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--main-font);
+    letter-spacing: 0.02em;
+}
+
+.nameWrap:hover .nameOverlay {
+    opacity: 1;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
-}
-
-.changeButton {
-    padding: 8px 18px;
-    border-radius: 100px;
-    border: 2px solid rgba(255,255,255,0.6);
-    background: rgba(255,255,255,0.1);
-    color: #fff;
-    font-size: 13px;
-    font-family: var(--main-font), sans-serif;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
-    backdrop-filter: blur(4px);
-    letter-spacing: 0.02em;
-}
-
-.changeButton:hover {
-    background: rgba(255,255,255,0.2);
-    transform: translateY(-1px);
 }
 
 .input {

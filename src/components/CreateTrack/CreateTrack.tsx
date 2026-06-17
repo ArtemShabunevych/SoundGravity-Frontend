@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FileUploadProgressBar, type UploadedFile } from "../FileUpload/FileUploadProgressBar";
 import toast from "react-hot-toast";
-import { fetchWithAuth } from "../../API/apiClient";
 import styles from "./create-track.module.css";
+import defaultTrackCover from "../../photos/track.png";
 
 const GENRES = [
   "rock", "pop", "jazz", "electronic", "hiphop",
@@ -31,6 +31,17 @@ const fileToBase64 = (file: File): Promise<string> => {
   });
 };
 
+const urlToBase64 = async (url: string): Promise<string> => {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+};
+
 export default function CreateTrack() {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -40,7 +51,19 @@ export default function CreateTrack() {
     const [coverFiles, setCoverFiles] = useState<UploadedFile[]>([]);
     const [audioFiles, setAudioFiles] = useState<UploadedFile[]>([]);
     const [loading, setLoading] = useState(false);
-    const [uploadProgress, setUploadProgress] = useState(0);
+
+    const audioReady = audioFiles.length > 0 && !!audioFiles[0]?.fileObject;
+    const canSubmit = title.trim() && audioReady && genre;
+
+    const handleAudioUpload = (
+        file: UploadedFile,
+        updateProgress: (pct: number) => void,
+        markDone: (serverUrl: string) => void,
+        markFailed: () => void
+    ) => {
+        updateProgress(100);
+        markDone("");
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -48,15 +71,14 @@ export default function CreateTrack() {
             toast.error("Title is required");
             return;
         }
-        if (audioFiles.length === 0 || !audioFiles[0]?.fileObject) {
-            toast.error("Audio file is required");
+        if (!audioFiles[0]?.fileObject) {
+            toast.error("Please select an audio file");
             return;
         }
-        if (coverFiles.length === 0 || !coverFiles[0]?.fileObject) {
-            toast.error("Cover image is required");
+        if (!genre) {
+            toast.error("Genre is required");
             return;
         }
-
         const userId = getUserIdFromToken();
         if (!userId) {
             toast.error("User not authenticated");
@@ -65,39 +87,24 @@ export default function CreateTrack() {
 
         try {
             setLoading(true);
-            setUploadProgress(0);
-
-            await fetchWithAuth("tracks/check-token", { method: "HEAD" });
-
             const base = (import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/").replace(/\/+$/, "");
 
-            const coverBase64 = await fileToBase64(coverFiles[0].fileObject);
-
             const formData = new FormData();
-            formData.append("audio", audioFiles[0].fileObject);
             formData.append("title", title.trim());
-            formData.append("genre", genre);
             formData.append("description", description.trim());
-            formData.append("cover", coverBase64);
+            formData.append("genre", genre);
+            formData.append("audio", audioFiles[0].fileObject);
+            formData.append("cover", coverFiles[0]?.fileObject
+                ? await fileToBase64(coverFiles[0].fileObject)
+                : await urlToBase64(defaultTrackCover));
             formData.append("userId", userId);
 
             const result = await new Promise<any>((resolve, reject) => {
                 const xhr = new XMLHttpRequest();
-                xhr.upload.onprogress = (e) => {
-                    if (e.lengthComputable) {
-                        const pct = Math.round((e.loaded / e.total) * 100);
-                        setUploadProgress(pct);
-                        audioFiles[0].progress = pct;
-                        setAudioFiles([...audioFiles]);
-                    }
-                };
                 xhr.onload = () => {
                     if (xhr.status >= 200 && xhr.status < 300) {
-                        try {
-                            resolve(JSON.parse(xhr.responseText));
-                        } catch {
-                            reject(new Error("Invalid response"));
-                        }
+                        try { resolve(JSON.parse(xhr.responseText)); }
+                        catch { reject(new Error("Invalid response")); }
                     } else {
                         try {
                             const err = JSON.parse(xhr.responseText);
@@ -130,7 +137,7 @@ export default function CreateTrack() {
     return (
         <div className={styles.page}>
             <h1 className={styles.title}>{t("create.createTrack")}</h1>
-            <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
+            <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.field}>
                     <label className={styles.label}>{t("create.title")}</label>
                     <input
@@ -185,22 +192,16 @@ export default function CreateTrack() {
                         multiple={false}
                         files={audioFiles}
                         onFilesChange={setAudioFiles}
+                        onUpload={handleAudioUpload}
                     />
                 </div>
 
-                {loading && (
-                    <div className={styles.progressBar}>
-                        <div className={styles.progressFill} style={{ width: `${uploadProgress}%` }} />
-                        <span className={styles.progressText}>{uploadProgress}%</span>
-                    </div>
-                )}
-
                 <button
                     type="submit"
-                    disabled={loading || !title.trim() || audioFiles.length === 0 || !audioFiles[0]?.fileObject || coverFiles.length === 0 || !coverFiles[0]?.fileObject}
+                    disabled={loading || !canSubmit}
                     className={styles.submit}
                 >
-                    {loading ? `${t("create.uploading")} ${uploadProgress}%` : t("create.createTrack")}
+                    {loading ? t("create.uploading") : t("create.createTrack")}
                 </button>
             </form>
         </div>

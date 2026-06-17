@@ -8,6 +8,7 @@ export interface UploadedFile {
   progress: number;
   failed?: boolean;
   fileObject?: File;
+  serverUrl?: string;
 }
 
 export function getReadableFileSize(bytes: number): string {
@@ -32,34 +33,40 @@ function useFileUpload() {
   return ctx;
 }
 
-function Root({ children }: { children: ReactNode }) {
-  const [files, setFiles] = useState<UploadedFile[]>([]);
+function Root({ children, externalFiles }: { children: ReactNode, externalFiles?: UploadedFile[] }) {
+    const [internalFiles, setFiles] = useState<UploadedFile[]>([]);
 
-  const addFiles = useCallback((newFiles: File[]) => {
-    const mapped: UploadedFile[] = newFiles.map((f) => ({
-      id: Math.random().toString(36).slice(2),
-      name: f.name,
-      type: f.type,
-      size: f.size,
-      progress: 0,
-      fileObject: f,
-    }));
-    setFiles((prev) => [...prev, ...mapped]);
-  }, []);
+    // Якщо передали зовнішні файли — беремо їх, якщо ні — внутрішній стейт
+    const files = externalFiles ?? internalFiles;
 
-  const updateFile = useCallback((id: string, data: Partial<UploadedFile>) => {
-    setFiles((prev) => prev.map((f) => (f.id === id ? { ...f, ...data } : f)));
-  }, []);
+    const addFiles = useCallback((newFiles: File[]) => {
+        if (externalFiles) return; // Якщо керування ззовні, додаванням займається батько
+        const mapped: UploadedFile[] = newFiles.map((f) => ({
+            id: Math.random().toString(36).slice(2),
+            name: f.name,
+            type: f.type,
+            size: f.size,
+            progress: 0,
+            fileObject: f,
+        }));
+        setFiles((prev) => [...prev, ...mapped]);
+    }, [externalFiles]);
 
-  const removeFile = useCallback((id: string) => {
-    setFiles((prev) => prev.filter((f) => f.id !== id));
-  }, []);
+    const updateFile = useCallback((id: string, data: Partial<UploadedFile>) => {
+        if (externalFiles) return;
+        setFiles((prev) => prev.map((f) => (f.id === id ? { ...f, ...data } : f)));
+    }, [externalFiles]);
 
-  return (
-    <FileUploadContext.Provider value={{ files, addFiles, updateFile, removeFile }}>
-      {children}
-    </FileUploadContext.Provider>
-  );
+    const removeFile = useCallback((id: string) => {
+        if (externalFiles) return;
+        setFiles((prev) => prev.filter((f) => f.id !== id));
+    }, [externalFiles]);
+
+    return (
+        <FileUploadContext.Provider value={{ files, addFiles, updateFile, removeFile }}>
+            {children}
+        </FileUploadContext.Provider>
+    );
 }
 
 function DropZone({
@@ -234,6 +241,7 @@ function ListItemProgressBar({
       <div style={{ display: "flex", gap: 4, flexShrink: 0 }}>
         {failed && onRetry && (
           <button
+            type="button"
             onClick={() => onRetry(id)}
             style={{
               background: "none",
@@ -250,6 +258,7 @@ function ListItemProgressBar({
           </button>
         )}
         <button
+          type="button"
           onClick={handleDelete}
           style={{
             background: "none",

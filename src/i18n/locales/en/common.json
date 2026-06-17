@@ -129,7 +129,8 @@
     "genre": "Genre:",
     "description": "Description:",
     "like": "Like",
-    "liked": "Liked"
+    "liked": "Liked",
+    "no": "No Playlist Found"
   },
   "create": {
     "title": "Title",
@@ -171,5 +172,12 @@
     "reggae": "Reggae",
     "country": "Country",
     "other": "Other"
+  },
+  "settings": {
+    "custom": "Custom Cursor",
+    "enabled": "Enabled",
+    "disabled":"Disabled",
+    "settings":"Settings"
   }
+
 }

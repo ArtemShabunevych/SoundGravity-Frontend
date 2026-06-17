@@ -3,24 +3,29 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 32px 48px;
+    padding: 12px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 15px;
+    font-size: 13px;
     color: var(--text-muted);
     font-family: var(--mono-font), monospace !important;
     z-index: 100;
-    pointer-events: auto;
+    pointer-events: none;
     box-sizing: border-box;
-    opacity: 0.95;
-    background-color: transparent;
+    background-color: var(--bg-dark, #0f0f0f);
+    height: 48px;
+}
+
+.mainFooter a {
+    pointer-events: auto;
 }
 
 .footerLeft {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
 }
 
 .breadcrumbs {

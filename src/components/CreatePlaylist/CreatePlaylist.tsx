@@ -6,11 +6,17 @@ import { FileUploadProgressBar, type UploadedFile } from "../FileUpload/FileUplo
 import toast from "react-hot-toast";
 import styles from "./create-playlist.module.css";
 
+const GENRES = [
+  "rock", "pop", "jazz", "electronic", "hiphop",
+  "classical", "rnb", "folk", "metal", "blues", "reggae", "country", "other"
+];
+
 export default function CreatePlaylist() {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [genre, setGenre] = useState("");
     const [visibility, setVisibility] = useState<"public" | "private">("public");
     const [coverFiles, setCoverFiles] = useState<UploadedFile[]>([]);
     const [loading, setLoading] = useState(false);
@@ -45,12 +51,14 @@ export default function CreatePlaylist() {
             toast.error("Name is required");
             return;
         }
+        if (!genre) {
+            toast.error("Genre is required");
+            return;
+        }
 
         try {
             setLoading(true);
             setUploadProgress(0);
-
-            await fetchWithAuth("tracks/check-token", { method: "HEAD" });
 
             const data = await fetchWithAuth("playlists", {
                 method: "POST",
@@ -58,13 +66,18 @@ export default function CreatePlaylist() {
                 body: JSON.stringify({
                     name: name.trim(),
                     description: description.trim(),
+                    genre,
                 }),
             });
 
             const playlistId = data.id;
 
             if (coverFiles[0]?.fileObject) {
-                await uploadCover(coverFiles[0].fileObject, playlistId);
+                try {
+                    await uploadCover(coverFiles[0].fileObject, playlistId);
+                } catch {
+                    toast.error("Failed to upload cover image");
+                }
             }
 
             toast.success(t("create.playlistCreated"));
@@ -106,6 +119,21 @@ export default function CreatePlaylist() {
                 </div>
 
                 <div className={styles.field}>
+                    <label className={styles.label}>{t("create.selectGenres")}</label>
+                    <select
+                        value={genre}
+                        onChange={(e) => setGenre(e.target.value)}
+                        className={styles.input}
+                        style={{ cursor: "pointer", appearance: "auto" }}
+                    >
+                        <option value="">{t("create.selectGenres")}</option>
+                        {GENRES.map((g) => (
+                            <option key={g} value={g}>{t(`genres.${g}`)}</option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className={styles.field}>
                     <label className={styles.label}>{t("create.visibility")}</label>
                     <div className={styles.radioGroup}>
                         <label className={styles.radio}>
@@ -141,7 +169,7 @@ export default function CreatePlaylist() {
                     />
                 </div>
 
-                {loading && uploadProgress > 0 && (
+                {loading && (
                     <div className={styles.progressBar}>
                         <div className={styles.progressFill} style={{ width: `${uploadProgress}%` }} />
                         <span className={styles.progressText}>{uploadProgress}%</span>
@@ -150,7 +178,7 @@ export default function CreatePlaylist() {
 
                 <button
                     type="submit"
-                    disabled={loading || !name.trim()}
+                    disabled={loading || !name.trim() || !genre}
                     className={styles.submit}
                 >
                     {loading ? `${t("create.uploading")} ${uploadProgress > 0 ? `${uploadProgress}%` : ""}` : t("create.createPlaylist")}

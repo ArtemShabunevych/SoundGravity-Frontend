@@ -11,7 +11,7 @@ import defaultTrackCover from "../../photos/track.png";
 interface TrackType {
     id: string;
     title?: string;
-    genre?: string;
+    genre: string;
     description?: string;
     coverUrl?: string;
     audioUrl?: string;
@@ -93,7 +93,7 @@ export default function Track() {
                     <div className={styles.text}>
                         <h1>{track.title}</h1>
                         {track.user && <p className={styles.artist}>{t("track.author")} {track.user.username}</p>}
-                        {track.genre && <span className={styles.genre}>{t("track.genre")} {track.genre}</span>}
+                        <span className={styles.genre}>{t("track.genre")} {track.genre}</span>
                         {track.description &&
                             <span className={styles.description}> {t("track.description")} <p>{track.description}</p> </span>}
                         <div className={styles.likeRow}>
