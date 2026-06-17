@@ -34,7 +34,7 @@ export default function UserPage() {
     const [uploadingAvatar, setUploadingAvatar] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const { user: currentUser } = useContext(UserContext);
+    const { user: currentUser, fetchUser: fetchUserContext } = useContext(UserContext);
 
     const isOwner = !username || currentUser?.username === username;
 
@@ -51,10 +51,6 @@ export default function UserPage() {
             let data;
             if (isOwner) {
                 data = await fetchWithAuth("users/me");
-                const savedAvatar = localStorage.getItem("USER_AVATAR_URL");
-                if (savedAvatar) {
-                    data.avatarUrl = savedAvatar;
-                }
             } else {
                 const res = await fetch(`${getPublicApiUrl()}users/username/${username}`);
                 if (!res.ok) {
@@ -125,13 +121,12 @@ export default function UserPage() {
             const formData = new FormData();
             formData.append("avatar", file);
 
-            const data = await fetchWithAuth("users/avatar", {
+            await fetchWithAuth("users/avatar", {
                 method: "PATCH",
                 body: formData,
             });
 
-            localStorage.setItem("USER_AVATAR_URL", data.avatarUrl);
-            setUser((prev: any) => prev ? {...prev, avatarUrl: data.avatarUrl} : prev);
+            await fetchUserContext();
             toast.success("Avatar updated");
         } catch (err: any) {
             toast.error(err.message || "Failed to update avatar");
@@ -152,7 +147,7 @@ export default function UserPage() {
                 <div className={styles.heroContent}>
                     <div className={styles.avatarWrap}>
                         <img
-                            src={user?.avatarUrl || icon}
+                            src={`${user?.avatarUrl || icon}${user?.avatarUrl ? `?t=${Date.now()}` : ""}`}
                             alt={t("user.AvatarAlt")}
                             className={styles.avatar}
                         />

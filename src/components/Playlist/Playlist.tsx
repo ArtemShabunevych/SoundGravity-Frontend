@@ -58,10 +58,21 @@ export default function Playlist() {
         }
     }, [id, fetchPlaylist]);
 
+    useEffect(() => {
+        if (!id) return;
+        (async () => {
+            try {
+                const res = await fetchWithAuth(`playlists/${id}/like-status`);
+                setLiked(res.liked);
+                if (res.likesCount !== undefined) setLikesCount(res.likesCount);
+            } catch { /* ignore */ }
+        })();
+    }, [id]);
+
     const handleLikePlaylist = async () => {
         const prevLiked = liked;
         try {
-            const res = await fetchWithAuth(`likes/playlist/${id}`, {method: "POST"});
+            const res = await fetchWithAuth(`playlists/${id}/like`, {method: "POST"});
             if (res && typeof res.liked === "boolean") {
                 setLiked(res.liked);
                 setLikesCount(res.likesCount ?? likesCount);
@@ -77,7 +88,7 @@ export default function Playlist() {
 
     const handleLikeTrack = async (trackId: string, trackLiked: boolean) => {
         try {
-            const res = await fetchWithAuth(`likes/track/${trackId}`, {method: "POST"});
+            const res = await fetchWithAuth(`tracks/${trackId}/like`, {method: "POST"});
             let nowLiked = !trackLiked;
             if (res && typeof res.liked === "boolean") {
                 nowLiked = res.liked;

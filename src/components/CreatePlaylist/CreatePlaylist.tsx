@@ -6,31 +6,6 @@ import { FileUploadProgressBar, type UploadedFile } from "../FileUpload/FileUplo
 import toast from "react-hot-toast";
 import styles from "./create-playlist.module.css";
 
-const uploadFileWithProgress = (
-  file: File,
-  playlistId: string,
-  onProgress: (p: number) => void
-): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const formData = new FormData();
-    formData.append("cover", file);
-    const xhr = new XMLHttpRequest();
-    xhr.upload.onprogress = (e) => {
-      if (e.lengthComputable) onProgress(Math.round((e.loaded / e.total) * 100));
-    };
-    xhr.onload = () => {
-      if (xhr.status >= 200 && xhr.status < 300) resolve();
-      else reject(new Error(`Upload failed: ${xhr.statusText}`));
-    };
-    xhr.onerror = () => reject(new Error("Upload failed"));
-    const base = (import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/").replace(/\/+$/, "");
-    xhr.open("POST", `${base}/playlists/${playlistId}/cover`);
-    xhr.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("JWT_TOKEN")}`);
-    xhr.setRequestHeader("x-refresh-token", localStorage.getItem("JWT_ACCESS_TOKEN") || "");
-    xhr.send(formData);
-  });
-};
-
 export default function CreatePlaylist() {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -39,6 +14,30 @@ export default function CreatePlaylist() {
     const [visibility, setVisibility] = useState<"public" | "private">("public");
     const [coverFiles, setCoverFiles] = useState<UploadedFile[]>([]);
     const [loading, setLoading] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState(0);
+
+    const uploadCover = (file: File, playlistId: string): Promise<void> => {
+        return new Promise((resolve, reject) => {
+            const formData = new FormData();
+            formData.append("cover", file);
+            const xhr = new XMLHttpRequest();
+            const base = (import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/").replace(/\/+$/, "");
+            xhr.upload.onprogress = (e) => {
+                if (e.lengthComputable) {
+                    setUploadProgress(Math.round((e.loaded / e.total) * 100));
+                }
+            };
+            xhr.onload = () => {
+                if (xhr.status >= 200 && xhr.status < 300) resolve();
+                else reject(new Error(`Upload failed: ${xhr.statusText}`));
+            };
+            xhr.onerror = () => reject(new Error("Upload failed"));
+            xhr.open("PATCH", `${base}/playlists/${playlistId}/cover`);
+            xhr.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("JWT_TOKEN")}`);
+            xhr.setRequestHeader("x-refresh-token", localStorage.getItem("JWT_ACCESS_TOKEN") || "");
+            xhr.send(formData);
+        });
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -49,6 +48,9 @@ export default function CreatePlaylist() {
 
         try {
             setLoading(true);
+            setUploadProgress(0);
+
+            await fetchWithAuth("tracks/check-token", { method: "HEAD" });
 
             const data = await fetchWithAuth("playlists", {
                 method: "POST",
@@ -56,30 +58,22 @@ export default function CreatePlaylist() {
                 body: JSON.stringify({
                     name: name.trim(),
                     description: description.trim(),
-                    visibility,
                 }),
             });
 
             const playlistId = data.id;
 
-            const uploads = coverFiles.map((f) => {
-                if (f.fileObject) {
-                    const fileRef = f;
-                    return uploadFileWithProgress(f.fileObject, playlistId, (p) => {
-                        fileRef.progress = p;
-                        setCoverFiles((prev) => [...prev]);
-                    });
-                }
-                return Promise.resolve();
-            });
-
-            if (uploads.length > 0) {
-                await Promise.all(uploads);
+            if (coverFiles[0]?.fileObject) {
+                await uploadCover(coverFiles[0].fileObject, playlistId);
             }
 
             toast.success(t("create.playlistCreated"));
             navigate(`/playlist/${playlistId}`);
         } catch (err: any) {
+            if (err.message === "Session expired") {
+                toast.error("Session expired");
+                return;
+            }
             toast.error(err.message || "Failed to create playlist");
         } finally {
             setLoading(false);
@@ -147,12 +141,19 @@ export default function CreatePlaylist() {
                     />
                 </div>
 
+                {loading && uploadProgress > 0 && (
+                    <div className={styles.progressBar}>
+                        <div className={styles.progressFill} style={{ width: `${uploadProgress}%` }} />
+                        <span className={styles.progressText}>{uploadProgress}%</span>
+                    </div>
+                )}
+
                 <button
                     type="submit"
-                    disabled={loading}
+                    disabled={loading || !name.trim()}
                     className={styles.submit}
                 >
-                    {loading ? t("create.uploading") : t("create.createPlaylist")}
+                    {loading ? `${t("create.uploading")} ${uploadProgress > 0 ? `${uploadProgress}%` : ""}` : t("create.createPlaylist")}
                 </button>
             </form>
         </div>

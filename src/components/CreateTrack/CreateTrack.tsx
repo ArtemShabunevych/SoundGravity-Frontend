@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FileUploadProgressBar, type UploadedFile } from "../FileUpload/FileUploadProgressBar";
 import toast from "react-hot-toast";
+import { fetchWithAuth } from "../../API/apiClient";
 import styles from "./create-track.module.css";
 
 const GENRES = [
@@ -66,6 +67,10 @@ export default function CreateTrack() {
             setLoading(true);
             setUploadProgress(0);
 
+            await fetchWithAuth("tracks/check-token", { method: "HEAD" });
+
+            const base = (import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/").replace(/\/+$/, "");
+
             const coverBase64 = await fileToBase64(coverFiles[0].fileObject);
 
             const formData = new FormData();
@@ -75,8 +80,6 @@ export default function CreateTrack() {
             formData.append("description", description.trim());
             formData.append("cover", coverBase64);
             formData.append("userId", userId);
-
-            const base = (import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/").replace(/\/+$/, "");
 
             const result = await new Promise<any>((resolve, reject) => {
                 const xhr = new XMLHttpRequest();
@@ -114,6 +117,10 @@ export default function CreateTrack() {
             toast.success(t("create.trackCreated"));
             navigate(`/track/${result.id}`);
         } catch (err: any) {
+            if (err.message === "Session expired") {
+                toast.error("Session expired");
+                return;
+            }
             toast.error(err.message || "Failed to create track");
         } finally {
             setLoading(false);
@@ -123,7 +130,7 @@ export default function CreateTrack() {
     return (
         <div className={styles.page}>
             <h1 className={styles.title}>{t("create.createTrack")}</h1>
-            <form onSubmit={handleSubmit} className={styles.form}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data" className={styles.form}>
                 <div className={styles.field}>
                     <label className={styles.label}>{t("create.title")}</label>
                     <input
@@ -190,7 +197,7 @@ export default function CreateTrack() {
 
                 <button
                     type="submit"
-                    disabled={loading}
+                    disabled={loading || !title.trim() || audioFiles.length === 0 || !audioFiles[0]?.fileObject || coverFiles.length === 0 || !coverFiles[0]?.fileObject}
                     className={styles.submit}
                 >
                     {loading ? `${t("create.uploading")} ${uploadProgress}%` : t("create.createTrack")}

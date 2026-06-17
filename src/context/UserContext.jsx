@@ -55,11 +55,6 @@ export const UserProvider = ({children}) => {
             if (!res.ok) throw new Error();
 
             const data = await res.json();
-            const savedAvatar = localStorage.getItem("USER_AVATAR_URL");
-            if (savedAvatar) {
-                data.avatarUrl = savedAvatar;
-            }
-
             setUser(data);
 
         } catch {
@@ -119,7 +114,7 @@ export const UserProvider = ({children}) => {
 
     return (
         <UserContext.Provider
-            value={{isAuth, setIsAuth, user, setUser, token, refreshToken, setToken, setRefreshToken, loading, logout}}
+            value={{isAuth, setIsAuth, user, setUser, token, refreshToken, setToken, setRefreshToken, loading, logout, fetchUser}}
         >
             {children}
         </UserContext.Provider>

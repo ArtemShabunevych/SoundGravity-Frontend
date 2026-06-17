@@ -47,10 +47,21 @@ export default function Track() {
         fetchTrack();
     }, [fetchTrack]);
 
+    useEffect(() => {
+        if (!id) return;
+        (async () => {
+            try {
+                const res = await fetchWithAuth(`tracks/${id}/like-status`);
+                setLiked(res.liked);
+                if (res.likesCount !== undefined) setLikesCount(res.likesCount);
+            } catch { /* ignore */ }
+        })();
+    }, [id]);
+
     const handleLike = async () => {
         const prevLiked = liked;
         try {
-            const res = await fetchWithAuth(`likes/track/${id}`, {method: "POST"});
+            const res = await fetchWithAuth(`tracks/${id}/like`, {method: "POST"});
             if (res && typeof res.liked === "boolean") {
                 setLiked(res.liked);
                 setLikesCount(res.likesCount ?? likesCount);
