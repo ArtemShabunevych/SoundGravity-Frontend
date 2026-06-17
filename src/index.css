@@ -21,9 +21,14 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   font-family: var(--main-font);
   background: var(--bg-deep);
   color: var(--text-main);
+  overflow-x: hidden;
 }

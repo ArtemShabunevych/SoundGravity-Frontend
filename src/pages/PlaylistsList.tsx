@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { fetchWithAuth } from "../API/apiClient";
+import defaultPlaylistCover from "../photos/playlist.png";
 
 interface PlaylistItem {
   id: string;
@@ -47,14 +48,13 @@ export default function PlaylistsList() {
               padding: 16, boxShadow: "0 4px 12px var(--shadow)",
               border: "1px solid var(--input-bg)",
             }}>
-            {pl.coverUrl ? (
-              <img src={pl.coverUrl} alt={pl.name}
-                style={{ width: "100%", height: 180, objectFit: "cover", borderRadius: 12 }} />
-            ) : (
-              <div style={{ width: "100%", height: 180, borderRadius: 12, background: "var(--g-ld)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                🎵
-              </div>
-            )}
+            <div style={{ width: "100%", height: 180, background: "var(--bg-deep, #1a1a2e)", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 12, overflow: "hidden" }}>
+              <img
+                src={pl.coverUrl || defaultPlaylistCover}
+                alt={pl.name}
+                style={{ width: "100%", height: "100%", objectFit: "contain" }}
+              />
+            </div>
             <h3 style={{ margin: "12px 0 4px", fontSize: 18 }}>{pl.name}</h3>
             <p style={{ margin: 0, fontSize: 14, color: "var(--text-muted)" }}>
               {pl.tracks?.length || 0} tracks • {pl.user?.username || "SoundGravity"}

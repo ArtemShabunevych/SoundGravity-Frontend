@@ -8,7 +8,8 @@
     "logout": "Вийти",
     "profile": "Профіль",
     "tracks": "Треки",
-    "playlists": "Плейлісти"
+    "playlists": "Плейлісти",
+    "liked": "Вподобані"
   },
   "footer": {
     "donate": "Задонатити",
@@ -93,7 +94,12 @@
     "StoryMadePublic": "Історію зроблено публічною",
     "ChangeUsername": "Змінити ім'я",
     "NewUsername": "Нове ім'я",
-    "UsernameUpdated": "Ім'я користувача оновлено"
+    "UsernameUpdated": "Ім'я користувача оновлено",
+    "NoTracks": "Треків поки немає",
+    "NoPlaylists": "Плейлістів поки немає",
+    "CreateTrack": "Створити трек",
+    "CreatePlaylist": "Створити плейліст",
+    "ChangeAvatar": "Змінити фото"
   },
   "errors": {
     "fillAllFields": "Заповни всі поля та додай хоча б одного персонажа.",
@@ -108,5 +114,63 @@
     "FailedToUpdateUsername": "Не вдалося оновити ім'я користувача",
     "TrackNotFound": "Історію не знайдено",
     "PlaylistNotFound": "Плейліст не знайдено"
+  },
+  "tracks": {
+    "all": "Усі треки"
+  },
+  "track": {
+    "author": "Автор:",
+    "title": "Назва:",
+    "genre": "Жанр:",
+    "description": "Опис:"
+  },
+  "playlist": {
+    "author": "Автор:",
+    "title": "Назва:",
+    "genre": "Жанр:",
+    "description": "Опис:",
+    "like": "Вподобати",
+    "liked": "Вподобано"
+  },
+  "create": {
+    "title": "Назва",
+    "description": "Опис",
+    "genre": "Жанр",
+    "visibility": "Видимість",
+    "public": "Публічний",
+    "private": "Приватний",
+    "coverImage": "Обкладинка",
+    "audioFile": "Аудіофайл",
+    "selectCover": "Вибрати обкладинку",
+    "selectAudio": "Вибрати аудіофайл",
+    "uploading": "Завантаження...",
+    "createTrack": "Створити трек",
+    "createPlaylist": "Створити плейліст",
+    "trackCreated": "Трек створено",
+    "playlistCreated": "Плейліст створено",
+    "name": "Назва",
+    "selectGenres": "Виберіть жанр"
+  },
+  "liked": {
+    "title": "Вподобані треки",
+    "playlists": "Вподобані плейлісти",
+    "empty": "Поки нічого не вподобано",
+    "emptyTracks": "Немає вподобаних треків",
+    "emptyPlaylists": "Немає вподобаних плейлістів"
+  },
+  "genres": {
+    "rock": "Рок",
+    "pop": "Поп",
+    "jazz": "Джаз",
+    "electronic": "Електроніка",
+    "hiphop": "Хіп-Хоп",
+    "classical": "Класика",
+    "rnb": "R&B",
+    "folk": "Фольк",
+    "metal": "Метал",
+    "blues": "Блюз",
+    "reggae": "Реггі",
+    "country": "Кантрі",
+    "other": "Інше"
   }
 }

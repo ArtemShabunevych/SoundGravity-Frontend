@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import {useCallback, useEffect, useState} from "react";
+import {useParams, Link} from "react-router-dom";
 import styles from "./playlist.module.css";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 import toast from "react-hot-toast";
-import { fetchWithAuth } from "../../API/apiClient";
+import {fetchWithAuth} from "../../API/apiClient";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import defaultPlaylistCover from "../../photos/playlist.png";
 
 interface TrackInPlaylist {
     id: string;
@@ -21,31 +24,77 @@ interface PlaylistType {
     description?: string;
     coverUrl?: string;
     tracks: TrackInPlaylist[];
+    likesCount?: number;
+    isLiked?: boolean;
     user?: {
         username: string;
     };
 }
 
 export default function Playlist() {
-    const { id } = useParams<{ id: string }>();
-    const { t } = useTranslation();
+    const {id} = useParams<{ id: string }>();
+    const {t} = useTranslation();
 
     const [playlist, setPlaylist] = useState<PlaylistType | null>(null);
+    const [liked, setLiked] = useState(false);
+    const [likesCount, setLikesCount] = useState(0);
+
+    const fetchPlaylist = useCallback(async () => {
+        try {
+            const data = await fetchWithAuth(`playlists/${id}`);
+            setPlaylist(data);
+            if (data.isLiked !== undefined) {
+                setLiked(data.isLiked);
+            }
+            setLikesCount(data.likesCount || 0);
+        } catch (error: any) {
+            toast.error(error.message || t("errors.PlaylistNotFound") || "Playlist not found");
+        }
+    }, [id, t]);
 
     useEffect(() => {
-        const fetchPlaylist = async () => {
-            try {
-                const data = await fetchWithAuth(`playlists/${id}`);
-                setPlaylist(data);
-            } catch (error: any) {
-                toast.error(error.message || t("errors.PlaylistNotFound") || "Playlist not found");
-            }
-        };
-
         if (id) {
             fetchPlaylist();
         }
-    }, [id, t]);
+    }, [id, fetchPlaylist]);
+
+    const handleLikePlaylist = async () => {
+        const prevLiked = liked;
+        try {
+            const res = await fetchWithAuth(`likes/playlist/${id}`, {method: "POST"});
+            if (res && typeof res.liked === "boolean") {
+                setLiked(res.liked);
+                setLikesCount(res.likesCount ?? likesCount);
+            } else {
+                setLiked(!prevLiked);
+                setLikesCount(prev => prevLiked ? Math.max(0, prev - 1) : prev + 1);
+            }
+        } catch (err: any) {
+            setLiked(prevLiked);
+            toast.error(err.message || "Failed to update like");
+        }
+    };
+
+    const handleLikeTrack = async (trackId: string, trackLiked: boolean) => {
+        try {
+            const res = await fetchWithAuth(`likes/track/${trackId}`, {method: "POST"});
+            let nowLiked = !trackLiked;
+            if (res && typeof res.liked === "boolean") {
+                nowLiked = res.liked;
+            }
+            setPlaylist(prev => {
+                if (!prev) return prev;
+                return {
+                    ...prev,
+                    tracks: prev.tracks.map(t =>
+                        t.id === trackId ? {...t} : t
+                    )
+                };
+            });
+        } catch (err: any) {
+            toast.error(err.message || "Failed to update like");
+        }
+    };
 
     if (!playlist) {
         return (
@@ -60,13 +109,11 @@ export default function Playlist() {
             <div className={styles.layout}>
                 <div className={styles.header}>
                     <div className={styles.coverWrapper}>
-                        {playlist.coverUrl ? (
-                            <img src={playlist.coverUrl} alt={playlist.name} className={styles.cover} />
-                        ) : (
-                            <div className={styles.placeholderCover}>
-                                <i className="bx bx-music"></i>
-                            </div>
-                        )}
+                        <img
+                            src={playlist.coverUrl || defaultPlaylistCover}
+                            alt={playlist.name}
+                            className={styles.cover}
+                        />
                     </div>
                     <div className={styles.info}>
                         <span className={styles.badge}>Playlist</span>
@@ -76,7 +123,17 @@ export default function Playlist() {
                             <span className={styles.author}>{playlist.user?.username || "SoundGravity"}</span>
                             <span className={styles.dot}>•</span>
                             <span>{playlist.tracks?.length || 0} tracks</span>
+                            <span className={styles.dot}>•</span>
+                            <span>{likesCount} likes</span>
                         </div>
+                        <button onClick={handleLikePlaylist} className={styles.likeBtn}>
+                            {liked ? (
+                                <FavoriteIcon className={styles.likedIcon} />
+                            ) : (
+                                <FavoriteBorderIcon className={styles.notLikedIcon} />
+                            )}
+                            <span>{liked ? t("playlist.liked") : t("playlist.like")}</span>
+                        </button>
                     </div>
                 </div>
 
@@ -94,10 +151,17 @@ export default function Playlist() {
                                             {track.title}
                                         </Link>
                                         <span className={styles.trackArtist}>
+                                            {t("playlist.author")}
                                             {track.user?.username || "Unknown Artist"}
                                         </span>
                                     </div>
                                 </div>
+                                <button
+                                    onClick={() => handleLikeTrack(track.id, false)}
+                                    className={styles.trackLikeBtn}
+                                >
+                                    <FavoriteBorderIcon className={styles.trackNotLikedIcon} />
+                                </button>
                             </div>
                         ))
                     ) : (

@@ -42,6 +42,8 @@ function AppRoutes() {
         isAuth ? (
             <Routes>
                 <Route path="/auth" element={<AuthPage />} />
+                <Route path="/auth/login" element={<AuthPage />} />
+                <Route path="/auth/register" element={<AuthPage />} />
                 <Route path="/auth/callback" element={<AuthCallback />} />
                 <Route path="/" element={<Navigate to="/tracks" replace />} />
                 <Route element={<MainLayout />}>
@@ -61,13 +63,19 @@ function AppRoutes() {
         ) : (
             <Routes>
                 <Route path="/auth" element={<AuthPage />} />
+                <Route path="/auth/login" element={<AuthPage />} />
+                <Route path="/auth/register" element={<AuthPage />} />
                 <Route path="/auth/callback" element={<AuthCallback />} />
                 <Route path="/tracks" element={<OAuthRedirect />} />
+                <Route path="/tracks/create" element={<OAuthRedirect />} />
                 <Route path="/track/:id" element={<OAuthRedirect />} />
                 <Route path="/playlists" element={<OAuthRedirect />} />
+                <Route path="/playlists/create" element={<OAuthRedirect />} />
                 <Route path="/playlist/:id" element={<OAuthRedirect />} />
                 <Route path="/user" element={<OAuthRedirect />} />
                 <Route path="/user/:username" element={<OAuthRedirect />} />
+                <Route path="/liked" element={<OAuthRedirect />} />
+                <Route path="/settings" element={<OAuthRedirect />} />
                 <Route element={<MainLayout />}>
                     {publicRoute.map(route => {
                         const Component = route.component;

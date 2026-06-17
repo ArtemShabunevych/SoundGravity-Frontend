@@ -4,9 +4,13 @@ import { useTranslation } from "react-i18next";
 import MyInput from "../../UI/MyInput/MyInput.tsx";
 import toast from "react-hot-toast";
 import { UserContext } from "../../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import StarBackground from "../StarBackground/StarBackground.tsx";
-
+import LoginIcon from '@mui/icons-material/Login';
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
+import KeyIcon from '@mui/icons-material/Key';
+import FiberNewIcon from '@mui/icons-material/FiberNew';
 const GoogleIcon = () => (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
@@ -17,7 +21,8 @@ const GoogleIcon = () => (
 );
 
 function AuthForm() {
-    const [flipped, setFlipped] = useState(false);
+    const location = useLocation();
+    const [flipped, setFlipped] = useState(location.pathname === "/auth/register");
     const { t } = useTranslation();
     const navigate = useNavigate();
     const { setUser, setIsAuth } = useContext(UserContext);
@@ -148,7 +153,6 @@ function AuthForm() {
             <div className={style.scene}>
                 <div className={`${style.card} ${flipped ? style.flipped : ""}`}>
 
-                    {/* ЛИЦЬОВА СТОРОНА (LOGIN) */}
                     <div className={style.cardFace}>
                         <div className={style.bluePanel}>
                             <h1 className={style.bluePanelTitle}>{t("auth.loginForm.welcome")}</h1>
@@ -164,26 +168,23 @@ function AuthForm() {
 
                         <div className={style.formPanel}>
                             <form onSubmit={handleLoginSubmit} className={style.form}>
-                                <h1 className={style.formTitle}>{t("auth.loginForm.login")}</h1>
-
+                                <h1 className={style.formTitle}><LoginIcon className={style.headingIcon} /> {t("auth.loginForm.login")}</h1>
                                 <MyInput
                                     type="email"
                                     placeholder={t("auth.placeholders.email")}
                                     required
-                                    icon={<i className="bx bxs-envelope-open bx-flip-horizontal"></i>}
+                                    icon={<EmailIcon />}
                                     value={loginEmail}
                                     onChange={(e) => setLoginEmail(e.target.value)}
                                 />
-
                                 <MyInput
                                     type="password"
                                     placeholder={t("auth.placeholders.password")}
                                     required
-                                    icon={<i className="bx bxs-lock-alt"></i>}
+                                    icon={<KeyIcon />}
                                     value={loginPassword}
                                     onChange={(e) => setLoginPassword(e.target.value)}
                                 />
-
                                 <button type="submit" className={style.btn}>
                                     {t("auth.loginForm.login")}
                                 </button>
@@ -199,40 +200,34 @@ function AuthForm() {
                             </form>
                         </div>
                     </div>
-
-                    {/* ЗВОРОТНЯ СТОРОНА (REGISTER) */}
                     <div className={`${style.cardFace} ${style.cardBack}`}>
                         <div className={style.formPanel}>
                             <form onSubmit={handleRegisterSubmit} className={style.form}>
-                                <h1 className={style.formTitle}>{t("auth.registrationForm.registration")}</h1>
-
+                                <h1 className={style.formTitle}>< FiberNewIcon className={style.headingIcon} /> {t("auth.registrationForm.registration")}</h1>
                                 <MyInput
                                     type="text"
                                     placeholder={t("auth.placeholders.username")}
                                     required
-                                    icon={<i className="bx bxs-user"></i>}
+                                    icon={<PersonIcon />}
                                     value={registerUsername}
                                     onChange={(e) => setRegisterUsername(e.target.value)}
                                 />
-
                                 <MyInput
                                     type="email"
                                     placeholder={t("auth.placeholders.email")}
                                     required
-                                    icon={<i className="bx bxs-envelope-open bx-flip-horizontal"></i>}
+                                    icon={<EmailIcon />}
                                     value={registerEmail}
                                     onChange={(e) => setRegisterEmail(e.target.value)}
                                 />
-
                                 <MyInput
                                     type="password"
                                     placeholder={t("auth.placeholders.password")}
                                     required
-                                    icon={<i className="bx bxs-lock-alt"></i>}
+                                    icon={<KeyIcon />}
                                     value={registerPassword}
                                     onChange={(e) => setRegisterPassword(e.target.value)}
                                 />
-
                                 <button type="submit" className={style.btn}>
                                     {t("auth.registrationForm.register")}
                                 </button>

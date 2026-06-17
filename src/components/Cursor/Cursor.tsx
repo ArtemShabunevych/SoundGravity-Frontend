@@ -14,6 +14,9 @@ export default function Cursor() {
     const pointsRef = useRef<Point[]>([]);
 
     useEffect(() => {
+        const isEnabled = localStorage.getItem("cursor_enabled") !== "false";
+        if (!isEnabled) return;
+
         const canvas = canvasRef.current;
         if (!canvas) return;
 
@@ -115,6 +118,9 @@ export default function Cursor() {
         };
     }, []);
 
+    const isEnabled = localStorage.getItem("cursor_enabled") !== "false";
+    if (!isEnabled) return null;
+
     return (
         <canvas
             ref={canvasRef}
@@ -122,7 +128,7 @@ export default function Cursor() {
                 position: 'fixed',
                 top: 0,
                 left: 0,
-                width: '100vw',
+                width: '100%',
                 height: '100vh',
                 pointerEvents: 'none',
                 zIndex: 99999,

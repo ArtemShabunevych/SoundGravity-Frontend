@@ -173,6 +173,63 @@
     color: var(--text-muted);
 }
 
+.likeBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 8px 18px;
+    border-radius: 100px;
+    border: 2px solid var(--input-bg);
+    background: var(--white-dark);
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--main-font);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.likeBtn:hover {
+    border-color: var(--main-color);
+    transform: translateY(-1px);
+}
+
+.likedIcon {
+    color: #ff4d6a !important;
+    font-size: 20px !important;
+}
+
+.notLikedIcon {
+    color: var(--text-muted) !important;
+    font-size: 20px !important;
+}
+
+.trackLikeBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+}
+
+.trackLikeBtn:hover {
+    transform: scale(1.15);
+}
+
+.trackLikedIcon {
+    color: #ff4d6a !important;
+    font-size: 18px !important;
+}
+
+.trackNotLikedIcon {
+    color: var(--text-muted) !important;
+    font-size: 18px !important;
+}
+
 .loader {
     padding: 100px 48px;
     text-align: center;

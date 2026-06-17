@@ -17,7 +17,7 @@
     box-sizing: border-box;
 }
 
-.inputBox:focus-within i {
+.inputBox:focus-within .iconWrap {
     color: var(--main-color);
 }
 .inputBox input::placeholder {
@@ -37,12 +37,19 @@
     color: #ffffff;
 }
 
-.inputBox i{
+.iconWrap {
     position: absolute;
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text-muted);
     transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.iconWrap svg {
+    font-size: 20px;
 }

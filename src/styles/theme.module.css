@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
 :root {
-    --logo-font: "Lexend Deca", sans-serif;
-    --title-font: "Outfit", monospace;
-    --main-font: "Lexend Deca", monospace;
-    --mono-font: "Outfit", sans-serif;
+    --logo-font: "Lexend Deca";
+    --title-font: "Outfit";
+    --main-font: "Lexend Deca";
+    --mono-font: "Outfit";
 }
 
 [data-theme="light"] {

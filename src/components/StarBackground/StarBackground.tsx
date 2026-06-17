@@ -13,6 +13,8 @@ export interface StarFieldProps {
   bgColor?: string;
   /** z-index of the canvas. Default: 0 */
   zIndex?: number;
+  /** If true, canvas is absolute inside parent instead of fixed fullscreen. Default: false */
+  contained?: boolean;
 }
 
 const rand = (a: number, b: number) => a + Math.random() * (b - a);
@@ -114,6 +116,7 @@ export default function StarField({
                                     gravityEnabled = true,
                                     bgColor = "#05060d",
                                     zIndex = 0,
+                                    contained = false,
                                   }: StarFieldProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -312,7 +315,7 @@ export default function StarField({
   return (
       <canvas
           ref={canvasRef}
-          className={styles.canvas}
+          className={`${styles.canvas} ${contained ? styles.contained : ""}`}
           style={{ zIndex }}
       />
   );

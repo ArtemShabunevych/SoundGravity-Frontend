@@ -55,6 +55,10 @@ export const UserProvider = ({children}) => {
             if (!res.ok) throw new Error();
 
             const data = await res.json();
+            const savedAvatar = localStorage.getItem("USER_AVATAR_URL");
+            if (savedAvatar) {
+                data.avatarUrl = savedAvatar;
+            }
 
             setUser(data);
 

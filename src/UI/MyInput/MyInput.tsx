@@ -20,7 +20,7 @@ function MyInput({ type, placeholder, icon, required = false, value, onChange }:
                 onChange={onChange}
                 required={required}
             />
-            {icon}
+            {icon && <span className={style.iconWrap}>{icon}</span>}
         </div>
     );
 }

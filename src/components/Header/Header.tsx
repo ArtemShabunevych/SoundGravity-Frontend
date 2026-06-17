@@ -11,7 +11,13 @@ import "flag-icons/css/flag-icons.min.css";
 import logoLight from "../../photos/logo-light.png";
 import logoDark from "../../photos/logo-dark.png";
 import userIcon from "../../photos/user_icon.png";
-
+import LogoutIcon from '@mui/icons-material/Logout';
+import AudiotrackIcon from '@mui/icons-material/Audiotrack';
+import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import MusicNoteOutlinedIcon from '@mui/icons-material/MusicNoteOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import SettingsIcon from '@mui/icons-material/Settings';
 export default function Header() {
     const { t } = useTranslation();
     const { theme, toggleTheme } = useContext(ThemeContext);
@@ -27,7 +33,6 @@ export default function Header() {
                     alt="SoundGravity"
                     className={styles.logoImg}
                 />
-                <span className={styles.logoDot}></span>
                 SoundGravity
             </div>
 
@@ -39,18 +44,22 @@ export default function Header() {
                     </>
                 ) : (
                     <>
-                        <Link to="/tracks" className={styles.navLink}>{t("header.tracks")}</Link>
-                        <Link to="/playlists" className={styles.navLink}>{t("header.playlists")}</Link>
+                        <Link to="/tracks" className={styles.navLink}><MusicNoteOutlinedIcon className={styles.navIcon} /> {t("header.tracks")}</Link>
+                        <Link to="/playlists" className={styles.navLink}><FeaturedPlayListIcon className={styles.navIcon} /> {t("header.playlists")}</Link>
+                        <Link to="/liked" className={styles.navLink}><FavoriteIcon className={styles.navIcon} /> {t("header.liked")}</Link>
+                        <Link to="/tracks/create" className={styles.createBtn}><AudiotrackIcon className={styles.btnIcon} /> {t("user.CreateTrack")}</Link>
+                        <Link to="/playlists/create" className={styles.createBtn}><PlaylistAddIcon className={styles.btnIcon} /> {t("user.CreatePlaylist")}</Link>
+                        <Link to="/settings" className={styles.navLink}><SettingsIcon className={styles.navIcon} /></Link>
                         <Link to="/user" className={styles.profileLink}>
                             <img
                                 src={user?.avatarUrl || userIcon}
                                 alt={t("user.AvatarAlt")}
                                 className={styles.userAvatar}
                             />
-                            {user?.username || 'User'}
+                            {user?.username}
                         </Link>
-                        <button onClick={logout} className={styles.navLink} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
-                            {t("header.logout")}
+                        <button onClick={logout} className={styles.navLink} >
+                            <LogoutIcon className={styles.navIcon} /> {t("header.logout")}
                         </button>
                     </>
                 )}

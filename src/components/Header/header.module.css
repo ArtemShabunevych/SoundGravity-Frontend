@@ -46,6 +46,11 @@
 }
 
 .navLink {
+    font-family: var(--logo-font), sans-serif;
+    background: var(--main-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
     font-size: 14px;
     font-weight: 500;
     color: var(--text-main);
@@ -55,6 +60,27 @@
 
 .navLink:hover {
     color: var(--text-muted);
+}
+
+.createBtn {
+    padding: 8px 18px;
+    border-radius: 100px;
+    background: var(--main-color);
+    border: none;
+    color: #fff;
+    font-family: var(--main-font);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+
+.createBtn:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+    color: #fff;
 }
 
 .launchBtn {
@@ -130,7 +156,19 @@
     color: var(--main-color);
 }
 
+.navIcon {
+    font-size: 18px !important;
+    vertical-align: middle;
+}
+
+.btnIcon {
+    font-size: 16px !important;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
 .mainHeader {
+    font-family: var(--logo-font), sans-serif;
     display: flex;
     align-items: center;
     justify-content: space-between;

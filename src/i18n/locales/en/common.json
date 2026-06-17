@@ -8,7 +8,8 @@
     "logout": "Logout",
     "profile": "Profile",
     "tracks": "Tracks",
-    "playlists": "Playlists"
+    "playlists": "Playlists",
+    "liked": "Liked"
   },
   "footer": {
     "orbits": "SOUNDGRAVITY. All orbits aligned.",
@@ -88,7 +89,8 @@
     "AvatarAlt": "user",
     "PublishedStoriesCount_one": "{{count}} published story",
     "PublishedStoriesCount_other": "{{count}} published stories",
-    "Stories": "Stories",
+    "Tracks": "Tracks",
+    "Playlists": "Playlists",
     "Public": "Public",
     "Private": "Private",
     "NoStoriesYet": "No stories yet",
@@ -99,12 +101,75 @@
     "StoryMadePrivate": "Story is now private",
     "StoryMadePublic": "Story is now public",
     "NewUsername": "New username",
-    "UsernameUpdated": "Username updated"
+    "UsernameUpdated": "Username updated",
+    "NoTracks": "No tracks yet",
+    "NoPlaylists": "No playlists yet",
+    "CreateTrack": "Create Track",
+    "CreatePlaylist": "Create Playlist",
+    "ChangeAvatar": "Change photo"
   },
   "common": {
     "Loading": "Loading...",
     "Saving": "Saving...",
     "Save": "Save",
     "Cancel": "Cancel"
+  },
+  "tracks": {
+    "all": "All Tracks"
+  },
+  "track": {
+    "author": "Author:",
+    "title": "Name:",
+    "genre": "Genre:",
+    "description": "Description:"
+  },
+  "playlist": {
+    "author": "Author:",
+    "title": "Name:",
+    "genre": "Genre:",
+    "description": "Description:",
+    "like": "Like",
+    "liked": "Liked"
+  },
+  "create": {
+    "title": "Title",
+    "description": "Description",
+    "genre": "Genre",
+    "visibility": "Visibility",
+    "public": "Public",
+    "private": "Private",
+    "coverImage": "Cover Image",
+    "audioFile": "Audio File",
+    "selectCover": "Select cover image",
+    "selectAudio": "Select audio file",
+    "uploading": "Uploading...",
+    "createTrack": "Create Track",
+    "createPlaylist": "Create Playlist",
+    "trackCreated": "Track created",
+    "playlistCreated": "Playlist created",
+    "name": "Name",
+    "selectGenres": "Select genre"
+  },
+  "liked": {
+    "title": "Liked Tracks",
+    "playlists": "Liked Playlists",
+    "empty": "No liked items yet",
+    "emptyTracks": "No liked tracks yet",
+    "emptyPlaylists": "No liked playlists yet"
+  },
+  "genres": {
+    "rock": "Rock",
+    "pop": "Pop",
+    "jazz": "Jazz",
+    "electronic": "Electronic",
+    "hiphop": "Hip-Hop",
+    "classical": "Classical",
+    "rnb": "R&B",
+    "folk": "Folk",
+    "metal": "Metal",
+    "blues": "Blues",
+    "reggae": "Reggae",
+    "country": "Country",
+    "other": "Other"
   }
 }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { fetchWithAuth } from "../API/apiClient";
 import styles from "../components/Track/track.module.css";
+import defaultTrackCover from "../photos/track.png";
 
 interface TrackItem {
   id: string;
@@ -13,6 +14,7 @@ interface TrackItem {
   audioUrl?: string;
   createdAt: string;
   likesCount: number;
+  isLiked?: boolean;
   visibility?: string;
   user?: { username: string };
 }
@@ -41,15 +43,21 @@ export default function TracksList() {
   return (
     <div className={styles.page}>
       <div className={styles.layout}>
-        <h1>All Tracks</h1>
+        <h1>{t("tracks.all")}</h1>
         <div className={styles.grid}>
           {tracks.map((track) => (
             <Link to={`/track/${track.id}`} key={track.id} className={styles.card}>
-              {track.coverUrl && <img src={track.coverUrl} alt={track.title} className={styles.cover} />}
+              <div className={styles.cardCoverWrap}>
+                <img
+                  src={track.coverUrl || defaultTrackCover}
+                  alt={track.title}
+                  className={styles.cardCoverImg}
+                />
+              </div>
               <div className={styles.info}>
                 <h3>{track.title}</h3>
                 <p>{track.user?.username || "Unknown"}</p>
-                <span className={styles.genre}>{track.genre}</span>
+                {track.genre && <span className={styles.genre}>{track.genre}</span>}
               </div>
             </Link>
           ))}
