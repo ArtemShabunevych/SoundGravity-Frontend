@@ -19,13 +19,6 @@ interface PlaylistItem {
     tracksCount?: number;
     user?: { username: string };
 }
-
-function trackCount(pl: PlaylistItem): number {
-    if (pl.tracksCount !== undefined) return pl.tracksCount;
-    if (Array.isArray(pl.tracks)) return pl.tracks.length;
-    return 0;
-}
-
 function truncate(text: string, max: number): string {
     return text.length > max ? text.slice(0, max) + "..." : text;
 }

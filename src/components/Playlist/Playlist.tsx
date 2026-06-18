@@ -1,5 +1,5 @@
 import {useCallback, useContext, useEffect, useState} from "react";
-import {useParams, Link, useNavigate} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 import styles from "./playlist.module.css";
 import {useTranslation} from "react-i18next";
 import toast from "react-hot-toast";
@@ -13,7 +13,7 @@ import PlayArrowRounded from "@mui/icons-material/PlayArrowRounded";
 import DeleteIcon from "@mui/icons-material/Delete";
 import defaultUserIcon from "../../photos/user_icon.png";
 import defaultPlaylistCover from "../../photos/playlist.png";
-import { hexToRgba, extractDominantColor } from "../../utils/color";
+import { extractDominantColor } from "../../utils/color";
 
 interface TrackInPlaylist {
     id: string;
@@ -62,7 +62,7 @@ export default function Playlist() {
     const [liked, setLiked] = useState(false);
     const [likesCount, setLikesCount] = useState(0);
     const [showAddTrack, setShowAddTrack] = useState(false);
-    const [autoColor, setAutoColor] = useState<string | null>(null);
+    const [setAutoColor] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState<SearchTrack[]>([]);
     const [searching, setSearching] = useState(false);
@@ -106,28 +106,6 @@ export default function Playlist() {
             });
         }
     };
-
-    const handleSelectTrack = (track: TrackInPlaylist) => {
-        const trackWithAudio = playlist?.tracks.find(t => t.id === track.id);
-        if (!trackWithAudio) return;
-        if (currentTrack?.audioUrl === trackWithAudio.audioUrl) return;
-        const queueTracks = playlist?.tracks
-            .filter(t => t.audioUrl)
-            .map(t => ({
-                title: t.title,
-                username: t.user?.username,
-                coverUrl: t.coverUrl,
-                audioUrl: t.audioUrl,
-            })) || [];
-        setQueue(queueTracks, trackWithAudio.audioUrl);
-        playTrack({
-            title: trackWithAudio.title,
-            username: trackWithAudio.user?.username,
-            coverUrl: trackWithAudio.coverUrl,
-            audioUrl: trackWithAudio.audioUrl,
-        });
-    };
-
     const fetchPlaylist = useCallback(async () => {
         try {
             const data = await fetchWithAuth(`playlists/${id}`);

@@ -54,17 +54,6 @@ export default function CreateTrack() {
 
     const audioReady = audioFiles.length > 0 && !!audioFiles[0]?.fileObject;
     const canSubmit = title.trim() && audioReady && genre;
-
-    const handleAudioUpload = (
-        file: UploadedFile,
-        updateProgress: (pct: number) => void,
-        markDone: (serverUrl: string) => void,
-        markFailed: () => void
-    ) => {
-        updateProgress(100);
-        markDone("");
-    };
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!title.trim()) {
@@ -191,13 +180,11 @@ export default function CreateTrack() {
                 <div className={styles.field}>
                     <label className={styles.label}>{t("create.audioFile")}</label>
                     <FileUploadProgressBar
-                        accept="audio/*"
-                        label="audio"
-                        multiple={false}
-                        files={audioFiles}
-                        onFilesChange={setAudioFiles}
-                        onUpload={handleAudioUpload}
-                    />
+    accept="audio/*"
+    label="audio"
+    multiple={false}
+    files={audioFiles}
+    onFilesChange={setAudioFiles}/>
                 </div>
 
                 <button
