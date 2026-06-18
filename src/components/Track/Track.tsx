@@ -126,7 +126,7 @@ export default function Track() {
                 lists.map(pl => fetchWithAuth(`playlists/${pl.id}`))
             );
             const trackId = id;
-            const filtered = lists.filter((pl, i) => {
+            const filtered = lists.filter(function ( i) {
                 const res = withTracks[i];
                 if (res.status === "fulfilled") {
                     const plData = res.value;

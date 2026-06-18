@@ -149,7 +149,7 @@ function AuthForm() {
 
     return (
         <div className={style.authWrapper}>
-            <StarBackground interactive zIndex={1} />
+            <StarBackground />
             <div className={style.scene}>
                 <div className={`${style.card} ${flipped ? style.flipped : ""}`}>
 
