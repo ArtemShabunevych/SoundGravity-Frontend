@@ -1,0 +1,412 @@
+.page {
+    padding: 100px 48px 48px;
+    min-height: 100vh;
+    background: var(--bg-deep);
+    color: var(--text-main);
+    font-family: var(--main-font), sans-serif;
+}
+
+.layout {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    gap: 32px;
+    align-items: flex-end;
+}
+
+.coverWrapper {
+    flex-shrink: 0;
+    width: 320px;
+    height: 320px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--g-ld);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 40px var(--shadow);
+}
+
+.cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.coverFallback {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--main-color), var(--accent-b));
+    opacity: 0.6;
+}
+
+.headerBody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 24px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.badge {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.title {
+    font-family: var(--title-font);
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 4px 0 8px;
+    color: var(--text-main);
+}
+
+.genre {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    background: var(--accent-a);
+    color: var(--main-color);
+    font-size: 12px;
+    font-weight: 700;
+    align-self: flex-start;
+    letter-spacing: 0.02em;
+}
+
+.description {
+    margin: 0;
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.authorLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-main);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 13px;
+}
+
+.authorLink:hover {
+    color: var(--main-color);
+    text-decoration: underline;
+}
+
+.authorAvatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: none;
+}
+
+.dot {
+    color: var(--text-muted);
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bigPlayBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, var(--main-color), var(--accent-b));
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.5);
+}
+
+.bigPlayBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(108, 99, 255, 0.7);
+}
+
+.bigPlayBtn:active {
+    transform: scale(0.96);
+}
+
+.likeBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+    margin-left: auto;
+}
+
+.likeBtn:hover {
+    transform: scale(1.15);
+}
+
+.likedIcon {
+    color: var(--color-liked) !important;
+    font-size: 28px !important;
+}
+
+.notLikedIcon {
+    color: var(--text-muted) !important;
+    font-size: 28px !important;
+}
+
+.likeBtn:hover .notLikedIcon {
+    color: var(--text-main) !important;
+}
+
+.addTrackBtn {
+    padding: 8px 18px;
+    border-radius: 100px;
+    border: 2px solid var(--main-color);
+    background: transparent;
+    color: var(--main-color);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--main-font);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.addTrackBtn:hover {
+    background: var(--main-color);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.gradientDivider {
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--input-bg), transparent);
+    margin: 32px 0 24px;
+}
+
+.trackInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 32px;
+}
+
+.infoLabel {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+.loader {
+    padding: 100px 48px;
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--main-font), sans-serif;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 24px;
+}
+
+.modalContent {
+    background: var(--white-dark);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 420px;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 16px 64px rgba(0,0,0,0.4);
+}
+
+.modalHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px 0;
+}
+
+.modalHeader h2 {
+    margin: 0;
+    font-size: 20px;
+    font-family: var(--title-font);
+    color: var(--text-main);
+}
+
+.modalClose {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 4px;
+}
+
+.modalSearch {
+    margin: 16px 24px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--input-bg);
+    background: var(--g-ld);
+    color: var(--text-main);
+    font-size: 15px;
+    font-family: var(--main-font);
+    outline: none;
+}
+
+.modalSearch:focus {
+    border-color: var(--main-color);
+}
+
+.modalResults {
+    overflow-y: auto;
+    padding: 0 24px 20px;
+    flex: 1;
+}
+
+.modalLoading {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-muted);
+    font-family: var(--main-font);
+}
+
+.modalTrack {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-radius: 10px;
+    transition: background 0.2s;
+}
+
+.modalTrack:hover {
+    background: var(--g-ld);
+}
+
+.modalTrackInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.modalTrackInfo strong {
+    font-size: 14px;
+    color: var(--text-main);
+    font-family: var(--main-font);
+}
+
+.modalTrackInfo span {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--main-font);
+}
+
+.modalAddBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--main-color);
+    background: transparent;
+    color: var(--main-color);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.modalAddBtn:hover {
+    background: var(--main-color);
+    color: #fff;
+}
+
+.modalAddBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .page { padding: 80px 16px 48px; }
+    .header {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .coverWrapper {
+        width: 200px;
+        height: 200px;
+        flex-shrink: 0;
+    }
+    .headerBody { align-items: center; text-align: center; }
+    .info { align-items: center; }
+    .title { font-size: 2rem; text-align: center; }
+    .badge { font-size: 0.65rem; }
+    .meta { justify-content: center; flex-wrap: wrap; }
+    .headerActions { justify-content: center; }
+    .likeBtn { margin-left: 0; }
+    .gradientDivider { margin: 20px 0 16px; }
+    .bigPlayBtn { width: 48px; height: 48px; }
+    .likedIcon { font-size: 24px !important; }
+    .notLikedIcon { font-size: 24px !important; }
+}
+
+@media (max-width: 300px) {
+    .page { padding: 70px 8px 48px; }
+    .header { gap: 12px; }
+    .coverWrapper { width: 140px; height: 140px; }
+    .title { font-size: 1.4rem; }
+    .badge { font-size: 0.55rem; }
+    .genre { font-size: 10px; padding: 2px 8px; }
+    .description { font-size: 13px; }
+    .meta { font-size: 11px; }
+    .headerActions { gap: 8px; }
+    .bigPlayBtn { width: 40px; height: 40px; }
+    .addTrackBtn { padding: 6px 12px; font-size: 12px; }
+    .likedIcon { font-size: 20px !important; }
+    .notLikedIcon { font-size: 20px !important; }
+    .gradientDivider { margin: 12px 0; }
+}

@@ -1,0 +1,209 @@
+.logo {
+    font-family: var(--logo-font), sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.logoImg {
+    height: 58px;
+    width: 100px;
+    object-fit: contain;
+}
+
+.userAvatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--main-color);
+}
+
+.profileLink {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.profileLink:hover {
+    color: var(--main-color);
+}
+
+.navLink {
+    font-family: var(--logo-font), sans-serif;
+    background: var(--main-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.navLink:hover {
+    color: var(--text-muted);
+}
+
+.launchBtn {
+    background: var(--main-color);
+    color: var(--text-main);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    font-family: var(--logo-font), sans-serif;
+    box-shadow: 0 4px 14px var(--shadow);
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.launchBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--shadow);
+    color: var(--text-main);
+}
+
+.buttonToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 36px;
+    border-radius: 6px;
+    border: 1px solid var(--input-bg);
+    background-color: var(--input-bg);
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+    padding: 0 8px;
+}
+
+.buttonToggle:hover {
+    background-color: var(--g-ld);
+    border-color: var(--main-color);
+}
+
+.buttonToggle:active {
+    transform: scale(0.98);
+}
+
+.buttonToggle :global(.fi) {
+    display: inline-block !important;
+    width: 24px !important;
+    height: 18px !important;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0 1px 3px var(--shadow);
+    border-radius: 2px;
+}
+
+.icon {
+    font-size: 25px !important;
+    color: var(--text-main);
+    transition: color 0.2s;
+}
+
+.buttonToggle:hover .icon {
+    color: var(--main-color);
+}
+
+.burgerBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.burgerBtn:hover {
+    background: var(--input-bg);
+}
+
+.navIcon {
+    font-size: 18px !important;
+    vertical-align: middle;
+}
+
+.mainHeader {
+    font-family: var(--logo-font), sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background-color: var(--white-dark);
+    border-bottom: 1px solid var(--input-bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.leftGroup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.centerNav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.rightGroup {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .mainHeader {
+        padding: 14px 16px;
+        gap: 8px;
+    }
+    .logoImg {
+        height: 40px;
+        width: 68px;
+    }
+    .centerNav { display: none; }
+    .rightGroup { gap: 8px; }
+    .userAvatar { width: 24px; height: 24px; }
+}
+
+@media (max-width: 300px) {
+    .mainHeader { padding: 10px 8px; gap: 4px; }
+    .logoImg { height: 28px; width: 48px; }
+    .logo { font-size: 13px; gap: 4px; }
+    .rightGroup { gap: 4px; }
+    .buttonToggle { min-width: 32px; height: 28px; padding: 0 4px; }
+    .buttonToggle :global(.fi) { width: 18px !important; height: 14px !important; }
+    .icon { font-size: 18px !important; }
+    .burgerBtn { padding: 4px; }
+    .userAvatar { width: 20px; height: 20px; border-width: 1px; }
+    .profileLink { gap: 4px; }
+    .profileLink span { font-size: 11px; }
+    .launchBtn { padding: 6px 10px; font-size: 10px; }
+    .navLink { padding: 6px 10px; font-size: 11px; }
+}

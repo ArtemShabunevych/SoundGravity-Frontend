@@ -1,0 +1,153 @@
+.page {
+    padding: 120px 48px 96px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.title {
+    color: var(--text-main);
+    font-family: var(--title-font);
+    font-size: 28px;
+    margin-bottom: 24px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-family: var(--main-font);
+}
+
+.input, .textarea, .select {
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--input-bg);
+    background: var(--white-dark);
+    color: var(--text-main);
+    font-size: 16px;
+    font-family: var(--main-font);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input:focus, .textarea:focus, .select:focus {
+    border-color: var(--main-color);
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.select {
+    cursor: pointer;
+    appearance: auto;
+}
+
+.progressBar {
+    width: 100%;
+    height: 8px;
+    background: var(--input-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progressFill {
+    height: 100%;
+    background: var(--gradient);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progressText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.fileWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.preview {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--input-bg);
+}
+
+.fileName {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: var(--main-font);
+}
+
+.fileButton {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 100px;
+    background: var(--main-color);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--main-font);
+    cursor: pointer;
+    transition: opacity 0.2s;
+    border: none;
+}
+
+.fileButton:hover {
+    opacity: 0.85;
+}
+
+.submit {
+    padding: 14px 24px;
+    border-radius: 12px;
+    border: none;
+    background: var(--main-color);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: var(--main-font);
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+.submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .page { padding: 80px 16px 48px; }
+    .form { padding: 20px 16px; }
+    .title { font-size: 20px; }
+}
+
+@media (max-width: 300px) {
+    .page { padding: 70px 8px 48px; }
+    .form { padding: 16px 12px; }
+    .title { font-size: 16px; }
+}

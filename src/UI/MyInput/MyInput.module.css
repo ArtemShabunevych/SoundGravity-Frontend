@@ -1,0 +1,55 @@
+.inputBox{
+    position: relative;
+    margin: 0;
+    width: 100%;
+}
+
+.inputBox input{
+    width: 100%;
+    padding: 13px 50px 13px 20px;
+    background-color: var(--input-bg);
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-main);
+    box-sizing: border-box;
+}
+
+.inputBox:focus-within .iconWrap {
+    color: var(--main-color);
+}
+.inputBox input::placeholder {
+    transition: color 0.3s ease;
+    color: var(--text-muted);
+}
+
+.inputBox input:focus::placeholder {
+    color: var(--text-main);
+}
+
+[data-theme="dark"] .inputBox input::placeholder {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .inputBox input:focus::placeholder {
+    color: #ffffff;
+}
+
+.iconWrap {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.iconWrap svg {
+    font-size: 20px;
+}

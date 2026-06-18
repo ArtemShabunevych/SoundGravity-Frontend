@@ -1,0 +1,109 @@
+.nameWrap {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+}
+
+.name {
+    margin: 0;
+    font-size: 48px;
+    font-weight: 800;
+    color: #fff;
+    font-family: var(--title-font);
+    text-shadow: 0 2px 16px var(--shadow);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    transition: opacity 0.2s;
+}
+
+.nameWrap:hover .name {
+    opacity: 0.3;
+}
+
+.nameOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--main-font);
+    letter-spacing: 0.02em;
+}
+
+.nameWrap:hover .nameOverlay {
+    opacity: 1;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.input {
+    width: 100%;
+    max-width: 200px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 2px solid rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    font-size: 14px;
+    font-family: var(--main-font);
+    outline: none;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.saveButton,
+.cancelButton {
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-family: var(--main-font);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.saveButton {
+    border: none;
+    background: #fff;
+    color: var(--main-color);
+}
+
+.cancelButton {
+    border: 2px solid rgba(255,255,255,0.5);
+    background: transparent;
+    color: #fff;
+}
+
+.saveButton:hover,
+.cancelButton:hover {
+    transform: translateY(-1px);
+}
+
+.error {
+    margin: 0;
+    color: #ffd2d2;
+    font-size: 13px;
+    font-family: var(--main-font);
+    text-align: center;
+}
