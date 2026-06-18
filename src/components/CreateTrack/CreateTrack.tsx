@@ -79,6 +79,10 @@ export default function CreateTrack() {
             toast.error("Genre is required");
             return;
         }
+        if (description.trim().length < 20) {
+            toast.error("Description must be at least 20 characters");
+            return;
+        }
         const userId = getUserIdFromToken();
         if (!userId) {
             toast.error("User not authenticated");

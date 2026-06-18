@@ -83,3 +83,23 @@
 .donateLink:hover {
     color: var(--text-main) !important;
 }
+
+@media (max-width: 768px) {
+    .mainFooter {
+        padding: 8px 12px;
+        height: 40px;
+        font-size: 11px;
+    }
+    .footerLeft { gap: 8px; }
+    .breadcrumbs { font-size: 12px; gap: 6px; }
+    .footerLinks { gap: 12px; }
+    .copyright { font-size: 11px; }
+}
+
+@media (max-width: 300px) {
+    .mainFooter { padding: 4px 8px; height: 32px; font-size: 9px; }
+    .footerLeft { gap: 4px; }
+    .breadcrumbs { font-size: 9px; gap: 3px; }
+    .footerLinks { gap: 6px; }
+    .copyright { font-size: 9px; }
+}

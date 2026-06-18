@@ -193,6 +193,11 @@
     background: var(--g-ld);
 }
 
+@media (max-width: 768px) {
+    .card { padding: 24px 16px; }
+    .formTitle { font-size: 22px; }
+}
+
 @media (max-width: 600px) {
     .authWrapper {
         padding: 0;
@@ -256,4 +261,10 @@
         height: 36px;
         font-size: 13px;
     }
+}
+
+@media (max-width: 300px) {
+    .page { padding: 70px 8px 48px; }
+    .card { padding: 16px 12px; }
+    .title { font-size: 18px; }
 }

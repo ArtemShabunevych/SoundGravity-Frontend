@@ -67,3 +67,15 @@
     transition: left 0.2s;
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
+
+@media (max-width: 768px) {
+    .page { padding: 80px 16px 48px; }
+    .card { padding: 16px; }
+    .title { font-size: 20px; }
+}
+
+@media (max-width: 300px) {
+    .page { padding: 70px 8px 48px; }
+    .card { padding: 12px; }
+    .title { font-size: 16px; }
+}

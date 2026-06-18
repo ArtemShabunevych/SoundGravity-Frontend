@@ -169,7 +169,7 @@ CSS
 
 .launchBtn {
     background: var(--main-color);
-    color: var(--w-p);
+    color: var(--w-ld);
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
@@ -348,4 +348,11 @@ CSS
 
 .footerLinks a:hover {
     color: var(--text-main);
+}
+
+@media (max-width: 768px) {
+    .mainHeader { padding: 20px 16px; }
+    .mainNav { gap: 16px; }
+    .mainNav a { font-size: 13px; }
+    .launchBtn { padding: 8px 16px; font-size: 11px; }
 }

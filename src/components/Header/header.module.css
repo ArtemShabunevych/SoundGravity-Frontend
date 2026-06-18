@@ -39,12 +39,6 @@
     color: var(--main-color);
 }
 
-.mainNav {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-}
-
 .navLink {
     font-family: var(--logo-font), sans-serif;
     background: var(--main-color);
@@ -60,27 +54,6 @@
 
 .navLink:hover {
     color: var(--text-muted);
-}
-
-.createBtn {
-    padding: 8px 18px;
-    border-radius: 100px;
-    background: var(--main-color);
-    border: none;
-    color: #fff;
-    font-family: var(--main-font);
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-}
-
-.createBtn:hover {
-    opacity: 0.85;
-    transform: translateY(-1px);
-    color: #fff;
 }
 
 .launchBtn {
@@ -103,13 +76,6 @@
     transform: translateY(-1px);
     box-shadow: 0 6px 20px var(--shadow);
     color: var(--text-main);
-
-}
-
-.controls {
-    display: flex;
-    align-items: center;
-    gap: 16px;
 }
 
 .buttonToggle {
@@ -156,14 +122,25 @@
     color: var(--main-color);
 }
 
-.navIcon {
-    font-size: 18px !important;
-    vertical-align: middle;
+.burgerBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s;
 }
 
-.btnIcon {
-    font-size: 16px !important;
-    margin-right: 4px;
+.burgerBtn:hover {
+    background: var(--input-bg);
+}
+
+.navIcon {
+    font-size: 18px !important;
     vertical-align: middle;
 }
 
@@ -181,4 +158,52 @@
     width: 100%;
     box-sizing: border-box;
     z-index: 100;
+}
+
+.leftGroup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.centerNav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.rightGroup {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+@media (max-width: 768px) {
+    .mainHeader {
+        padding: 14px 16px;
+        gap: 8px;
+    }
+    .logoImg {
+        height: 40px;
+        width: 68px;
+    }
+    .centerNav { display: none; }
+    .rightGroup { gap: 8px; }
+    .userAvatar { width: 24px; height: 24px; }
+}
+
+@media (max-width: 300px) {
+    .mainHeader { padding: 10px 8px; gap: 4px; }
+    .logoImg { height: 28px; width: 48px; }
+    .logo { font-size: 13px; gap: 4px; }
+    .rightGroup { gap: 4px; }
+    .buttonToggle { min-width: 32px; height: 28px; padding: 0 4px; }
+    .buttonToggle :global(.fi) { width: 18px !important; height: 14px !important; }
+    .icon { font-size: 18px !important; }
+    .burgerBtn { padding: 4px; }
+    .userAvatar { width: 20px; height: 20px; border-width: 1px; }
+    .profileLink { gap: 4px; }
+    .profileLink span { font-size: 11px; }
+    .launchBtn { padding: 6px 10px; font-size: 10px; }
+    .navLink { padding: 6px 10px; font-size: 11px; }
 }

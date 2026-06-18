@@ -9,7 +9,8 @@
     "profile": "Профіль",
     "tracks": "Треки",
     "playlists": "Плейлісти",
-    "liked": "Вподобані"
+    "liked": "Вподобані",
+    "settings": "Налаштування"
   },
   "footer": {
     "donate": "Задонатити",
@@ -70,7 +71,14 @@
     "Loading": "Завантаження...",
     "Saving": "Збереження...",
     "Save": "Зберегти",
-    "Cancel": "Скасувати"
+    "Cancel": "Скасувати",
+    "Play": "Запустити",
+    "Pause": "Пауза",
+    "trackAdded": "Трек додано до плейліста",
+    "trackRemoved": "Трек видалено з плейліста",
+    "failedToAdd": "Не вдалося додати трек",
+    "failedToLike": "Не вдалося оновити лайк",
+    "about": "Інформація"
   },
   "user": {
     "AvatarAlt": "користувач",
@@ -78,7 +86,7 @@
     "PublishedTracksCount_one": "{{count}} опублікований трек",
     "PublishedTracksCount_few": "{{count}} опубліковані треки",
     "PublishedTracksCount_other": "{{count}} опублікованих треків",
-    "PublishedPlaylistsCount_one": "{{count}} опублікований плейлістів",
+    "PublishedPlaylistsCount_one": "{{count}} опублікований плейліст",
     "PublishedPlaylistsCount_few": "{{count}} опубліковані плейлісти",
     "PublishedPlaylistsCount_other": "{{count}} опублікованих плейлістів",
     "Tracks": "Треки",
@@ -99,7 +107,11 @@
     "NoPlaylists": "Плейлістів поки немає",
     "CreateTrack": "Створити трек",
     "CreatePlaylist": "Створити плейліст",
-    "ChangeAvatar": "Змінити фото"
+    "ChangeAvatar": "Змінити фото",
+    "Actions": "Дії",
+    "Delete": "Видалити",
+    "ChangeDescription": "Змінити опис",
+    "AddDescription": "Додати опис"
   },
   "errors": {
     "fillAllFields": "Заповни всі поля та додай хоча б одного персонажа.",
@@ -107,31 +119,46 @@
     "failedToGenerateStory": "Не вдалося згенерувати історію.",
     "NotLoggedIn": "Ви не увійшли в акаунт",
     "UserNotFound": "Користувача не знайдено",
-    "TracksNotFound": "Історії не знайдено",
+    "TracksNotFound": "Треки не знайдено",
     "PlaylistsNotFound": "Плейлісти не знайдено",
     "FailedToUpdateStoryStatus": "Не вдалося оновити статус історії",
     "EmptyUsername": "Ім'я користувача не може бути порожнім",
     "FailedToUpdateUsername": "Не вдалося оновити ім'я користувача",
-    "TrackNotFound": "Історію не знайдено",
+    "TrackNotFound": "Трек не знайдено",
     "PlaylistNotFound": "Плейліст не знайдено"
   },
   "tracks": {
-    "all": "Усі треки"
+    "all": "Усі треки",
+    "none": "Треків не знайдено"
   },
   "track": {
     "author": "Автор:",
     "title": "Назва:",
     "genre": "Жанр:",
-    "description": "Опис:"
+    "description": "Опис:",
+    "addToPlaylist": "Додати до плейліста",
+    "searchPlaylists": "Пошук плейлістів...",
+    "noPlaylists": "Плейлістів не знайдено"
   },
   "playlist": {
+    "all": "Всі плейлісти",
     "author": "Автор:",
     "title": "Назва:",
     "genre": "Жанр:",
     "description": "Опис:",
     "like": "Вподобати",
     "liked": "Вподобано",
-    "no": "No Playlist Found"
+    "no": "Плейліст не знайдено",
+    "addTrack": "Додати трек",
+    "noTracks": "У плейлісті ще немає треків.",
+    "duration": "Тривалість",
+    "searchTracks": "Пошук треків...",
+    "searching": "Пошук...",
+    "noTracksFound": "Треків не знайдено",
+    "typeToSearch": "Почніть вводити для пошуку",
+    "tracksCount": "треків",
+    "likesCount": "лайків",
+    "removeTrack": "Видалити трек"
   },
   "create": {
     "title": "Назва",

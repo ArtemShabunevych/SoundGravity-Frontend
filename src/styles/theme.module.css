@@ -1,16 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@735&display=swap');
 :root {
     --logo-font: "Lexend Deca";
-    --title-font: "Outfit";
+    --title-font: "Roboto";
     --main-font: "Lexend Deca";
-    --mono-font: "Outfit";
+    --mono-font: "Roboto";
 }
 
 [data-theme="light"] {
     --main-color: #4f7fff;
 
     --bg-deep: #f5f7ff;
+    --bg-dark: #ffffff;
     --white-dark: #ffffff;
     --input-bg: #e2e7f7;
     --g-ld: #eef1fc;
@@ -27,12 +28,17 @@
     --gradient: linear-gradient(135deg, #4f7fff, #082df3);
     --vignette-color: rgba(245, 247, 255, 0.4);
     --loader-overlay: #ffffff;
+    --color-liked: #ff4d6a;
+    --color-public: #4caf50;
+    --color-private: #ff9800;
+    --color-danger: #ff4d6a;
 }
 
 [data-theme="dark"] {
     --main-color: #7fa8ff;
 
     --bg-deep: #05060d;
+    --bg-dark: #0b0d19;
     --white-dark: #0b0d19;
     --input-bg: #141933;
     --g-ld: #0e1224;
@@ -49,4 +55,8 @@
     --gradient: linear-gradient(135deg, #05060d, #11163a);
     --vignette-color: rgba(5, 6, 13, 0.7);
     --loader-overlay: #05060d;
+    --color-liked: #ff4d6a;
+    --color-public: #4caf50;
+    --color-private: #ff9800;
+    --color-danger: #ff4d6a;
 }

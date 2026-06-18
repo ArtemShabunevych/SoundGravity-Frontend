@@ -2,60 +2,234 @@
     padding: 100px 48px 48px;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 24px;
+.layout {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.playlistList {
+    display: flex;
+    flex-direction: column;
     margin-top: 24px;
 }
 
-.card {
-    text-decoration: none;
-    color: inherit;
-    background: var(--white-dark);
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 4px 12px var(--shadow);
-    border: 1px solid var(--input-bg);
-}
-
-.coverWrap {
-    width: 100%;
-    height: 180px;
-    background: var(--bg-deep, #1a1a2e);
-    display: flex;
+.listHeader {
+    display: grid;
+    grid-template-columns: 44px 56px 1fr auto auto;
     align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.cover {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.title {
-    margin: 12px 0 4px;
-    font-size: 18px;
-}
-
-.genre {
-    margin: 4px 0;
-    font-size: 13px;
-    color: var(--main-color);
+    gap: 14px;
+    padding: 8px 20px;
+    border-bottom: 1px solid var(--input-bg);
+    margin-bottom: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
     font-weight: 600;
 }
 
-.meta {
-    margin: 0;
-    font-size: 14px;
+.colIndex {
+    width: 44px;
+    text-align: center;
+}
+
+.colTracks {
+    text-align: left;
+    justify-self: start;
+}
+
+.colLikes {
+    text-align: center;
+    min-width: 60px;
+}
+
+.playlistItem {
+    display: grid;
+    grid-template-columns: 44px 56px 1fr auto auto;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+
+.playlistItem:hover {
+    background: var(--g-ld);
+}
+
+.playlistIndex {
+    width: 44px;
+    text-align: center;
+    font-size: 15px;
     color: var(--text-muted);
+    font-weight: 500;
+}
+
+.playlistCover {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.playlistCoverFallback {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--main-color), var(--accent-b));
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+.playlistInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.playlistName {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.playlistAuthor {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.playlistAuthor:hover {
+    color: var(--main-color);
+    text-decoration: underline;
+}
+
+.trackNames {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    max-width: 200px;
+}
+
+.trackNameLink {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.trackNameLink:hover {
+    color: var(--main-color);
+    text-decoration: underline;
+}
+
+.moreTracks {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.likeCell {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+    min-width: 60px;
+}
+
+.likeBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.likeBtn:hover {
+    transform: scale(1.15);
+}
+
+.likedIcon {
+    color: var(--color-liked) !important;
+    font-size: 18px !important;
+}
+
+.notLikedIcon {
+    color: var(--text-muted) !important;
+    font-size: 18px !important;
+}
+
+.likesCount {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    min-width: 20px;
+    text-align: center;
 }
 
 .empty {
     padding: 48px;
     text-align: center;
     color: var(--text-muted);
+}
+
+.loader {
+    padding: 48px;
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--main-font);
+}
+
+.sentinel {
+    height: 20px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .page { padding: 80px 12px 48px; }
+    .listHeader { grid-template-columns: 30px 40px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .colIndex { width: 30px; font-size: 11px; }
+    .colLikes { display: none; }
+    .playlistItem { grid-template-columns: 30px 40px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .playlistIndex { width: 30px; font-size: 13px; }
+    .playlistCover { width: 36px; height: 36px; }
+    .playlistCoverFallback { width: 36px; height: 36px; }
+    .playlistName { font-size: 13px; }
+    .playlistAuthor { font-size: 11px; }
+    .trackNames { max-width: 120px; }
+    .trackNameLink { font-size: 11px; }
+    .likeCell { display: none; }
+    .empty { padding: 24px 16px; }
+    .loader { padding: 24px; }
+}
+
+@media (max-width: 300px) {
+    .page { padding: 70px 4px 48px; }
+    .listHeader { grid-template-columns: 20px 30px 1fr; gap: 4px; padding: 4px 6px; font-size: 9px; }
+    .colIndex { width: 20px; font-size: 9px; }
+    .playlistItem { grid-template-columns: 20px 30px 1fr; gap: 4px; padding: 6px; }
+    .playlistIndex { width: 20px; font-size: 11px; }
+    .playlistCover { width: 28px; height: 28px; }
+    .playlistCoverFallback { width: 28px; height: 28px; }
+    .playlistName { font-size: 11px; }
+    .playlistAuthor { font-size: 10px; }
+    .trackNames { display: none; }
+    .empty { padding: 16px 8px; font-size: 12px; }
+    .loader { padding: 16px; font-size: 12px; }
 }

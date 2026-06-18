@@ -9,7 +9,8 @@
     "profile": "Profile",
     "tracks": "Tracks",
     "playlists": "Playlists",
-    "liked": "Liked"
+    "liked": "Liked",
+    "settings": "Settings"
   },
   "footer": {
     "orbits": "SOUNDGRAVITY. All orbits aligned.",
@@ -106,31 +107,57 @@
     "NoPlaylists": "No playlists yet",
     "CreateTrack": "Create Track",
     "CreatePlaylist": "Create Playlist",
-    "ChangeAvatar": "Change photo"
+    "ChangeAvatar": "Change photo",
+    "Actions": "Actions",
+    "Delete": "Delete",
+    "ChangeDescription": "Change description",
+    "AddDescription": "Add description"
   },
   "common": {
     "Loading": "Loading...",
     "Saving": "Saving...",
     "Save": "Save",
-    "Cancel": "Cancel"
+    "Cancel": "Cancel",
+    "Play": "Play",
+    "Pause": "Pause",
+    "trackAdded": "Track added to playlist",
+    "trackRemoved": "Track removed from playlist",
+    "failedToAdd": "Failed to add track",
+    "failedToLike": "Failed to update like",
+    "about": "About"
   },
   "tracks": {
-    "all": "All Tracks"
+    "all": "All Tracks",
+    "none": "No tracks found"
   },
   "track": {
     "author": "Author:",
     "title": "Name:",
     "genre": "Genre:",
-    "description": "Description:"
+    "description": "Description:",
+    "addToPlaylist": "Add to playlist",
+    "searchPlaylists": "Search playlists...",
+    "noPlaylists": "No playlists found"
   },
   "playlist": {
+    "all": "All Playlists",
     "author": "Author:",
     "title": "Name:",
     "genre": "Genre:",
     "description": "Description:",
     "like": "Like",
     "liked": "Liked",
-    "no": "No Playlist Found"
+    "no": "No Playlist Found",
+    "addTrack": "Add track",
+    "noTracks": "This playlist has no tracks yet.",
+    "duration": "Duration",
+    "searchTracks": "Search tracks...",
+    "searching": "Searching...",
+    "noTracksFound": "No tracks found",
+    "typeToSearch": "Type to search",
+    "tracksCount": "tracks",
+    "likesCount": "likes",
+    "removeTrack": "Remove track"
   },
   "create": {
     "title": "Title",
