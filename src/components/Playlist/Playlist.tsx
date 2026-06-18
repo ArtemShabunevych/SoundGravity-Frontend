@@ -1,5 +1,5 @@
 import {useCallback, useContext, useEffect, useState} from "react";
-import {useParams, Link, useNavigate} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 import styles from "./playlist.module.css";
 import {useTranslation} from "react-i18next";
 import toast from "react-hot-toast";
@@ -105,27 +105,6 @@ export default function Playlist() {
                 audioUrl: trackWithAudio.audioUrl,
             });
         }
-    };
-
-    const handleSelectTrack = (track: TrackInPlaylist) => {
-        const trackWithAudio = playlist?.tracks.find(t => t.id === track.id);
-        if (!trackWithAudio) return;
-        if (currentTrack?.audioUrl === trackWithAudio.audioUrl) return;
-        const queueTracks = playlist?.tracks
-            .filter(t => t.audioUrl)
-            .map(t => ({
-                title: t.title,
-                username: t.user?.username,
-                coverUrl: t.coverUrl,
-                audioUrl: t.audioUrl,
-            })) || [];
-        setQueue(queueTracks, trackWithAudio.audioUrl);
-        playTrack({
-            title: trackWithAudio.title,
-            username: trackWithAudio.user?.username,
-            coverUrl: trackWithAudio.coverUrl,
-            audioUrl: trackWithAudio.audioUrl,
-        });
     };
 
     const fetchPlaylist = useCallback(async () => {
@@ -294,9 +273,9 @@ export default function Playlist() {
 
     if (!playlist) {
         return (
-                <div className={styles.loader}>
-                    {t("common.Loading")}
-                </div>
+            <div className={styles.loader}>
+                {t("common.Loading")}
+            </div>
         );
     }
 
@@ -324,13 +303,6 @@ export default function Playlist() {
             });
         }
     };
-
-    function hexToRgba(hex: string, alpha: number): string {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-    }
 
     const isPlayingPlaylist = currentTrack?.audioUrl && playlist?.tracks?.some(t => t.audioUrl === currentTrack.audioUrl);
 
@@ -378,9 +350,13 @@ export default function Playlist() {
                                 onClick={handlePlayFirst}
                                 title={isPlayingPlaylist && !paused ? t("common.Pause") : t("common.Play")}
                             >
-                                {isPlayingPlaylist && !paused ? <PauseRounded fontSize="large" /> : <PlayArrowRounded fontSize="large" />}
+                                {isPlayingPlaylist && !paused ? (
+                                    <PauseRounded fontSize="large" />
+                                ) : (
+                                    <PlayArrowRounded fontSize="large" />
+                                )}
                             </button>
-                            {isAuthor && playlist?.tracks?.length > 0 && (
+                            {isAuthor && (
                                 <button
                                     className={styles.addTrackBtn}
                                     onClick={() => setShowAddTrack(true)}
@@ -401,104 +377,50 @@ export default function Playlist() {
 
                 <div className={styles.gradientDivider} />
 
-                <div className={styles.playlistInfo}>
-                    <span className={styles.infoLabel}>{t("common.about")}</span>
-                    {playlist.description && <p className={styles.description}>{playlist.description}</p>}
-                    <span className={styles.genre}>{playlist.genre}</span>
-                </div>
-
                 <div className={styles.tracksList}>
-                    <div className={styles.trackListHeader}>
-                        <span className={styles.headerIndex}>#</span>
-                        <span />
-                        <span className={styles.headerTitle}>{t("playlist.tracksCount")}</span>
-                        <span className={styles.headerDuration}>{t("playlist.duration")}</span>
-                    </div>
                     {playlist.tracks && playlist.tracks.length > 0 ? (
-                        playlist.tracks.map((track, index) => {
-                            const isActive = isTrackPlaying(track.id);
-                            const duration = track.duration != null
-                                ? `${Math.floor(track.duration / 60)}:${String(Math.floor(track.duration % 60)).padStart(2, "0")}`
-                                : "--:--";
-                            return (
+                        playlist.tracks.map((track, index) => (
                             <div
                                 key={track.id}
-                                className={`${styles.trackItem} ${isActive ? styles.trackActive : ""}`}
+                                className={`${styles.trackItem} ${isTrackPlaying(track.id) ? styles.activeTrack : ""}`}
                                 onClick={() => handlePlayTrack(track)}
                             >
-                                <span className={styles.trackIndex}>{index + 1}</span>
-                                <div className={styles.trackCoverWrap}>
-                                    {track.coverUrl ? (
-                                        <img src={track.coverUrl} alt="" className={styles.trackCover} />
-                                    ) : (
-                                        <div className={styles.trackCoverFallback} />
-                                    )}
-                                    <div className={styles.trackPlayOverlay}>
-                                        {isActive && !paused ? (
-                                            <PauseRounded fontSize="small" />
-                                        ) : (
-                                            <PlayArrowRounded fontSize="small" />
-                                        )}
-                                    </div>
+                                <div className={styles.trackIndex}>{index + 1}</div>
+                                <img
+                                    src={track.coverUrl || defaultTrackCover}
+                                    alt=""
+                                    className={styles.trackCover}
+                                />
+                                <div className={styles.trackMeta}>
+                                    <span className={styles.trackTitle}>{track.title}</span>
+                                    <span className={styles.trackAuthor}>{track.user?.username}</span>
                                 </div>
-                                <div className={styles.trackDetails}>
-                                    <Link
-                                        to={`/track/${track.id}`}
-                                        className={styles.trackTitle}
-                                        onClick={e => e.stopPropagation()}
-                                    >
-                                        {track.title}
-                                    </Link>
-                                    {track.user?.username ? (
-                                        <Link
-                                            to={`/user/${track.user.username}`}
-                                            className={styles.trackArtistLink}
-                                            onClick={e => e.stopPropagation()}
-                                        >
-                                            {track.user.username}
-                                        </Link>
-                                    ) : null}
-                                </div>
-                                <div className={styles.trackActions}>
-                                    <span className={styles.trackDuration}>{duration}</span>
+                                <div className={styles.trackGenre}>{track.genre}</div>
+                                <div className={styles.trackActions} onClick={e => e.stopPropagation()}>
                                     <button
-                                        onClick={(e) => { e.stopPropagation(); handleLikeTrack(track.id); }}
+                                        onClick={() => handleLikeTrack(track.id)}
                                         className={styles.trackLikeBtn}
                                     >
                                         {likedTracks.has(track.id) ? (
-                                            <FavoriteIcon className={styles.trackLikedIcon} />
+                                            <FavoriteIcon fontSize="small" className={styles.likedIcon} />
                                         ) : (
-                                            <FavoriteBorderIcon className={styles.trackNotLikedIcon} />
+                                            <FavoriteBorderIcon fontSize="small" />
                                         )}
                                     </button>
-                                    {track.likesCount !== undefined && (
-                                        <span className={styles.trackLikesCount}>{track.likesCount}</span>
-                                    )}
                                     {isAuthor && (
                                         <button
-                                            className={styles.removeTrackBtn}
-                                            onClick={(e) => { e.stopPropagation(); handleRemoveTrack(track.id); }}
-                                            title={t("playlist.removeTrack")}
+                                            onClick={() => handleRemoveTrack(track.id)}
+                                            className={styles.trackDeleteBtn}
+                                            title="Remove from playlist"
                                         >
-                                            <DeleteIcon className={styles.removeIcon} />
+                                            <DeleteIcon fontSize="small" />
                                         </button>
                                     )}
                                 </div>
                             </div>
-                            );
-                        })
+                        ))
                     ) : (
-                        <div className={styles.empty}>
-                            <p>{t("playlist.noTracks")}</p>
-                            {isAuthor && (
-                                <button
-                                    className={styles.addTrackBtn}
-                                    onClick={() => setShowAddTrack(true)}
-                                >
-                                    + {t("playlist.addTrack")}
-                                </button>
-                            )}
-                        </div>
+                        <div className={styles.emptyState}>{t("playlist.empty")}</div>
                     )}
                 </div>
             </div>
@@ -508,12 +430,7 @@ export default function Playlist() {
                     <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
                         <div className={styles.modalHeader}>
                             <h2>{t("playlist.addTrack")}</h2>
-                            <button
-                                className={styles.modalClose}
-                                onClick={() => setShowAddTrack(false)}
-                            >
-                                ✕
-                            </button>
+                            <button className={styles.modalClose} onClick={() => setShowAddTrack(false)}>✕</button>
                         </div>
                         <input
                             className={styles.modalSearch}
@@ -524,10 +441,11 @@ export default function Playlist() {
                         />
                         <div className={styles.modalResults}>
                             {searching ? (
-                                <div className={styles.modalLoading}>{t("playlist.searching")}</div>
+                                <div className={styles.modalLoading}>{t("common.Loading")}</div>
                             ) : searchResults.length > 0 ? (
                                 searchResults.map(track => (
                                     <div key={track.id} className={styles.modalTrack}>
+                                        <img src={track.coverUrl || defaultTrackCover} alt="" />
                                         <div className={styles.modalTrackInfo}>
                                             <strong>{track.title}</strong>
                                             <span>{track.user?.username}</span>
@@ -544,7 +462,7 @@ export default function Playlist() {
                             ) : searchQuery.trim() ? (
                                 <div className={styles.modalLoading}>{t("playlist.noTracksFound")}</div>
                             ) : (
-                                <div className={styles.modalLoading}>{t("playlist.typeToSearch")}</div>
+                                <div className={styles.modalLoading}>{t("playlist.startTyping")}</div>
                             )}
                         </div>
                     </div>

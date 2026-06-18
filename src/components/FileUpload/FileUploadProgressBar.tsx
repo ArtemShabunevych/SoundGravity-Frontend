@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileUpload, getReadableFileSize, type UploadedFile } from "./file-upload-base";
+import { FileUpload, type UploadedFile } from "./file-upload-base";
 
 interface FileUploadProgressBarProps {
   isDisabled?: boolean;
@@ -12,14 +12,14 @@ interface FileUploadProgressBarProps {
 }
 
 export const FileUploadProgressBar = ({
-  isDisabled,
-  accept,
-  multiple = true,
-  label,
-  files: externalFiles,
-  onFilesChange,
-  onUpload,
-}: FileUploadProgressBarProps) => {
+                                        isDisabled,
+                                        accept,
+                                        multiple = true,
+                                        label,
+                                        files: externalFiles,
+                                        onFilesChange,
+                                        onUpload,
+                                      }: FileUploadProgressBarProps) => {
   const [internalFiles, setInternalFiles] = useState<UploadedFile[]>([]);
   const files = externalFiles ?? internalFiles;
   const setFiles = onFilesChange ?? setInternalFiles;
@@ -40,22 +40,22 @@ export const FileUploadProgressBar = ({
     mapped.forEach((file) => {
       if (accept?.includes("audio")) {
         onUpload?.(
-          file,
-          (pct) => {
-            setFiles((prev) =>
-              prev.map((f) => (f.id === file.id ? { ...f, progress: pct } : f))
-            );
-          },
-          (serverUrl) => {
-            setFiles((prev) =>
-              prev.map((f) => (f.id === file.id ? { ...f, progress: 100, serverUrl } : f))
-            );
-          },
-          () => {
-            setFiles((prev) =>
-              prev.map((f) => (f.id === file.id ? { ...f, failed: true } : f))
-            );
-          }
+            file,
+            (pct) => {
+              setFiles((prev: any) =>
+                  prev.map((f: any) => (f.id === file.id ? { ...f, progress: pct } : f))
+              );
+            },
+            (serverUrl) => {
+              setFiles((prev: any) =>
+                  prev.map((f: any) => (f.id === file.id ? { ...f, progress: 100, serverUrl } : f))
+              );
+            },
+            () => {
+              setFiles((prev: any) =>
+                  prev.map((f: any) => (f.id === file.id ? { ...f, failed: true } : f))
+              );
+            }
         );
       }
     });

@@ -15,7 +15,7 @@ import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import styles from "./mini-player.module.css";
 import defaultTrackCover from "../../photos/track.png";
 
-function formatDuration(value) {
+function formatDuration(value: any) {
   if (!isFinite(value)) return "0:00";
   const minute = Math.floor(value / 60);
   const secondLeft = Math.floor(value - minute * 60);

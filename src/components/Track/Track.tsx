@@ -129,7 +129,7 @@ export default function Track() {
             const filtered = lists.filter((pl, i) => {
                 const res = withTracks[i];
                 if (res.status === "fulfilled") {
-                    const plData = res.value;
+                    const plData: any = res.value;
                     return !plData.tracks?.some((t: any) => t.id === trackId);
                 }
                 return true;
