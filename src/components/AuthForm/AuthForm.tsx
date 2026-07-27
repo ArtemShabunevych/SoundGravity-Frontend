@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import style from "./authform.module.css";
+import style from "./AuthForm.module.css";
 import { useTranslation } from "react-i18next";
 import MyInput from "../../UI/MyInput/MyInput.tsx";
 import toast from "react-hot-toast";
