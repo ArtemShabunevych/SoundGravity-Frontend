@@ -6,6 +6,7 @@ import AppRoutes from "./components/AppRoutes/AppRoutes";
 import { UserProvider } from "./context/UserContext";
 import { PlayerProvider } from "./context/PlayerContext";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
     return (
@@ -50,6 +51,7 @@ function App() {
                     </ThemeProvider>
                 </LanguageProvider>
             </UserProvider>
+            <Analytics />
         </div>
     );
 }
