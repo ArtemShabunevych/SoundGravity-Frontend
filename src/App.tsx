@@ -1,12 +1,12 @@
 import Cursor from './components/Cursor/Cursor';
-import './styles/theme.module.css';
+import './styles/theme.css';
 import { LanguageProvider } from "./context/LanguageContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import AppRoutes from "./components/AppRoutes/AppRoutes";
 import { UserProvider } from "./context/UserContext";
 import { PlayerProvider } from "./context/PlayerContext";
 import { Toaster } from "react-hot-toast";
-
+import { Analytics } from "@vercel/analytics/next"
 function App() {
     return (
         <div className="App">
@@ -14,7 +14,7 @@ function App() {
                 <LanguageProvider>
                     <ThemeProvider>
                         <PlayerProvider>
-
+                            <Analytics />
                             <AppRoutes />
                             <Cursor />
                             <Toaster
