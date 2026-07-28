@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { fetchWithAuth } from "../../API/apiClient";
+import { fetchWithAuth, getApiUrl } from "../../API/apiClient";
 import { FileUploadProgressBar, type UploadedFile } from "../FileUpload/FileUploadProgressBar";
 import toast from "react-hot-toast";
 import styles from "./create-playlist.module.css";
@@ -27,7 +27,7 @@ export default function CreatePlaylist() {
             const formData = new FormData();
             formData.append("cover", file);
             const xhr = new XMLHttpRequest();
-            const base = (import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/").replace(/\/+$/, "");
+            const base = getApiUrl().replace(/\/+$/, "");
             xhr.upload.onprogress = (e) => {
                 if (e.lengthComputable) {
                     setUploadProgress(Math.round((e.loaded / e.total) * 100));

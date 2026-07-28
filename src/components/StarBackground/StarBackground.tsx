@@ -114,7 +114,7 @@ export default function StarField({
                                     count,
                                     driftSpeed = 0.012,
                                     gravityEnabled = true,
-                                    bgColor = "#05060d",
+                                    bgColor = "var(--bg-deep)",
                                     zIndex = 0,
                                     contained = false,
                                   }: StarFieldProps) {
@@ -124,9 +124,13 @@ export default function StarField({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const resolvedBg = bgColor === 'var(--bg-deep)'
+      ? getComputedStyle(document.documentElement).getPropertyValue('--bg-deep').trim()
+      : bgColor;
+
     const mobile    = window.innerWidth < 768;
     const COUNT     = count ?? (mobile ? 5000 : 12000);
-    const BG        = parseInt(bgColor.replace("#", ""), 16);
+    const BG        = parseInt(resolvedBg.replace("#", ""), 16);
 
     // ------------------------------------------------------------------
     // Renderer / Scene / Camera

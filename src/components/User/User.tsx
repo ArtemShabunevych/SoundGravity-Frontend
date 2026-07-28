@@ -6,7 +6,7 @@ import icon from "../../photos/user_icon.png";
 import ChangeUsername from "../ChangeName/ChangeName.tsx";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-import { fetchWithAuth } from "../../API/apiClient";
+import { fetchWithAuth, getApiUrl } from "../../API/apiClient";
 import { UserContext } from "../../context/UserContext";
 import { PlayerContext } from "../../context/PlayerContext";
 import StarBackground from "../StarBackground/StarBackground";
@@ -60,13 +60,7 @@ export default function UserPage() {
 
     const isOwner = !username || currentUser?.username === username;
 
-    const getPublicApiUrl = () => {
-        let url = import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/";
-        if (!url.endsWith("/api/")) {
-            url = url.endsWith("/") ? `${url}api/` : `${url}/api/`;
-        }
-        return url;
-    };
+    const getPublicApiUrl = getApiUrl;
 
     const fetchUser = async () => {
         try {
@@ -320,7 +314,7 @@ export default function UserPage() {
     return (
         <div className={styles.page}>
             <div className={styles.hero}>
-                <StarBackground bgColor="#05060d" contained />
+                <StarBackground contained />
                 <div className={styles.heroContent}>
                     <div className={styles.avatarWrap}>
                         <label className={styles.avatarLabel}>

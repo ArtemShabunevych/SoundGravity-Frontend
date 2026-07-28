@@ -3,6 +3,7 @@ import style from "./AuthForm.module.css";
 import { useTranslation } from "react-i18next";
 import MyInput from "../../UI/MyInput/MyInput.tsx";
 import toast from "react-hot-toast";
+import { getApiUrl } from "../../API/apiClient";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import StarBackground from "../StarBackground/StarBackground.tsx";
@@ -34,12 +35,7 @@ function AuthForm() {
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
 
-    // 🛡️ Залізобетонна нормалізація API URL, щоб уникнути 404 через відсутність /api/
-    let baseApiUrl = import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/";
-    if (!baseApiUrl.endsWith("/api/")) {
-        baseApiUrl = baseApiUrl.endsWith("/") ? `${baseApiUrl}api/` : `${baseApiUrl}/api/`;
-    }
-    const apiUrl = baseApiUrl;
+    const apiUrl = getApiUrl();
 
     useEffect(() => {
         document.body.style.overflow = "hidden";

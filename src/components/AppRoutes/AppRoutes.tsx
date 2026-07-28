@@ -24,7 +24,7 @@ function AppRoutes() {
             <div style={{
                 position: 'fixed', inset: 0,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                background: '#05060d', zIndex: 9999
+                background: 'var(--bg-deep)', zIndex: 9999
             }}>
                 <div style={{
                     width: 32, height: 32,

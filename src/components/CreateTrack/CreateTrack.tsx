@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FileUploadProgressBar, type UploadedFile } from "../FileUpload/FileUploadProgressBar";
 import toast from "react-hot-toast";
+import { getApiUrl } from "../../API/apiClient";
 import styles from "./create-track.module.css";
 import defaultTrackCover from "../../photos/track.png";
 
@@ -91,7 +92,7 @@ export default function CreateTrack() {
 
         try {
             setLoading(true);
-            const base = (import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/").replace(/\/+$/, "");
+            const base = getApiUrl().replace(/\/+$/, "");
 
             const formData = new FormData();
             formData.append("title", title.trim());

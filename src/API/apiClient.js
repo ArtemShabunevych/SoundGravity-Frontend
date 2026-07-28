@@ -1,4 +1,4 @@
-const getApiUrl = () => {
+export const getApiUrl = () => {
     let url = import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/";
     if (!url.endsWith("/api/")) {
         url = url.endsWith("/") ? `${url}api/` : `${url}/api/`;

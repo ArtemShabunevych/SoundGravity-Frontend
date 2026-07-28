@@ -1,5 +1,6 @@
 import {createContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import { getApiUrl } from "../API/apiClient";
 
 export const UserContext = createContext();
 
@@ -26,14 +27,6 @@ export const UserProvider = ({children}) => {
         setUser(null);
         setIsAuth(false);
         navigate("/");
-    };
-
-    const getApiUrl = () => {
-        let url = import.meta.env.VITE_APP_API_URL || "http://localhost:3000/api/";
-        if (!url.endsWith("/api/")) {
-            url = url.endsWith("/") ? `${url}api/` : `${url}/api/`;
-        }
-        return url;
     };
 
     const apiUrl = getApiUrl();
@@ -63,7 +56,10 @@ export const UserProvider = ({children}) => {
     };
 
     const checkAuth = async () => {
-        if (!token || !refreshToken) {
+        const currentToken = localStorage.getItem("JWT_TOKEN");
+        const currentRefreshToken = localStorage.getItem("JWT_ACCESS_TOKEN");
+
+        if (!currentToken || !currentRefreshToken) {
             setIsAuth(false);
             setUser(null);
             setLoading(false);
@@ -74,11 +70,13 @@ export const UserProvider = ({children}) => {
             const res = await fetch(`${apiUrl}auth/verify`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({token}),
+                body: JSON.stringify({token: currentToken}),
             });
 
             if (!res.ok) throw new Error();
 
+            setToken(currentToken);
+            setRefreshToken(currentRefreshToken);
             setIsAuth(true);
             await fetchUser();
 
@@ -87,7 +85,7 @@ export const UserProvider = ({children}) => {
                 const res = await fetch(`${apiUrl}auth/refresh`, {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({refreshToken}),
+                    body: JSON.stringify({refreshToken: currentRefreshToken}),
                 });
 
                 if (!res.ok) throw new Error();
@@ -110,7 +108,7 @@ export const UserProvider = ({children}) => {
 
     useEffect(() => {
         checkAuth();
-    }, [token]);
+    }, []);
 
     return (
         <UserContext.Provider

@@ -1,23 +1,28 @@
 import { useEffect, useContext } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 export default function AuthCallback() {
     const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
-    const { setIsAuth } = useContext(UserContext);
+    const { setIsAuth, fetchUser } = useContext(UserContext);
 
     useEffect(() => {
-        const token = searchParams.get('token');
-        const refreshToken = searchParams.get('refreshToken');
+        const handleAuth = async () => {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            const refreshToken = params.get('refreshToken');
 
-        if (token && refreshToken) {
-            localStorage.setItem('JWT_TOKEN', token);
-            localStorage.setItem('JWT_ACCESS_TOKEN', refreshToken);
-            setIsAuth(true);
-        }
+            if (token && refreshToken) {
+                localStorage.setItem('JWT_TOKEN', token);
+                localStorage.setItem('JWT_ACCESS_TOKEN', refreshToken);
+                setIsAuth(true);
+                await fetchUser();
+            }
 
-        navigate('/tracks', { replace: true });
+            navigate('/tracks', { replace: true });
+        };
+
+        handleAuth();
     }, []);
 
     return null;
