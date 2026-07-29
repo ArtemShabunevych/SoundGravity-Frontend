@@ -205,6 +205,26 @@
     "enabled": "Enabled",
     "disabled":"Disabled",
     "settings":"Settings"
+  },
+  "pages": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: July 29, 2026",
+      "interpretationAndDefinitions": "Interpretation and Definitions",
+      "collectingAndUsing": "Collecting and Using Your Personal Information",
+      "childrensPrivacy": "Children's and Minors' Privacy",
+      "linksToOtherWebsites": "Links to Other Websites",
+      "changesToPolicy": "Changes to this Privacy Policy",
+      "contactUs": "Contact Us"
+    },
+    "terms": {
+      "title": "Terms of Service for SoundGravity",
+      "lastUpdated": "Last updated: July 29, 2026",
+      "agreement": "1. Agreement to Terms",
+      "userAccounts": "2. User Accounts",
+      "acceptableUse": "3. Acceptable Use",
+      "disclaimer": "4. Disclaimer of Liability",
+      "changes": "5. Changes to Terms"
+    }
   }
-
 }
