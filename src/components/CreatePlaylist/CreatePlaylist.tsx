@@ -40,7 +40,7 @@ export default function CreatePlaylist() {
             xhr.onerror = () => reject(new Error("Upload failed"));
             xhr.open("PATCH", `${base}/playlists/${playlistId}/cover`);
             xhr.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("JWT_TOKEN")}`);
-            xhr.setRequestHeader("x-refresh-token", localStorage.getItem("JWT_ACCESS_TOKEN") || "");
+            xhr.setRequestHeader("x-refresh-token", localStorage.getItem("JWT_REFRESH_TOKEN") || "");
             xhr.send(formData);
         });
     };

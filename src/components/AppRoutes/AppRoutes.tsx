@@ -4,6 +4,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { privateRoutes, publicRoute } from "../../router/routes";
 import AuthPage from "../../pages/AuthPage";
 import AuthCallback from "../AuthCallback/AuthCallback";
+import PrivacyPolicyPage from "../../pages/PrivacyPolicyPage";
+import TermsOfServicePage from "../../pages/TermsOfServicePage";
 import MainLayout from "../../layouts/MainLayout.js";
 
 function OAuthRedirect() {
@@ -57,6 +59,8 @@ function AppRoutes() {
                             />
                         );
                     })}
+                    <Route path="/privacy" element={<PrivacyPolicyPage />} />
+                    <Route path="/terms" element={<TermsOfServicePage />} />
                     <Route path="*" element={<Navigate to="/tracks" replace />} />
                 </Route>
             </Routes>
@@ -77,6 +81,8 @@ function AppRoutes() {
                 <Route path="/liked" element={<OAuthRedirect />} />
                 <Route path="/settings" element={<OAuthRedirect />} />
                 <Route element={<MainLayout />}>
+                    <Route path="/privacy" element={<PrivacyPolicyPage />} />
+                    <Route path="/terms" element={<TermsOfServicePage />} />
                     {publicRoute.map(route => {
                         const Component = route.component;
                         return (

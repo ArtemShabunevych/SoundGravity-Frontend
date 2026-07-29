@@ -17,11 +17,11 @@ export const UserProvider = ({children}) => {
     const [user, setUser] = useState(null);
 
     const [token, setToken] = useState(localStorage.getItem("JWT_TOKEN"));
-    const [refreshToken, setRefreshToken] = useState(localStorage.getItem("JWT_ACCESS_TOKEN"));
+    const [refreshToken, setRefreshToken] = useState(localStorage.getItem("JWT_REFRESH_TOKEN"));
 
     const logout = () => {
         localStorage.removeItem("JWT_TOKEN");
-        localStorage.removeItem("JWT_ACCESS_TOKEN");
+        localStorage.removeItem("JWT_REFRESH_TOKEN");
         setToken(null);
         setRefreshToken(null);
         setUser(null);
@@ -34,14 +34,14 @@ export const UserProvider = ({children}) => {
     const fetchUser = async () => {
         try {
             const token = localStorage.getItem("JWT_TOKEN");
-            const access_token = localStorage.getItem("JWT_ACCESS_TOKEN");
+            const refreshToken = localStorage.getItem("JWT_REFRESH_TOKEN");
 
-            if (!token || !access_token) return;
+            if (!token || !refreshToken) return;
 
             const res = await fetch(`${apiUrl}users/me`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    "x-refresh-token": access_token,
+                    "x-refresh-token": refreshToken,
                 },
             });
 
@@ -57,7 +57,7 @@ export const UserProvider = ({children}) => {
 
     const checkAuth = async () => {
         const currentToken = localStorage.getItem("JWT_TOKEN");
-        const currentRefreshToken = localStorage.getItem("JWT_ACCESS_TOKEN");
+        const currentRefreshToken = localStorage.getItem("JWT_REFRESH_TOKEN");
 
         if (!currentToken || !currentRefreshToken) {
             setIsAuth(false);

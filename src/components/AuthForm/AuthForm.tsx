@@ -47,9 +47,9 @@ function AuthForm() {
     const fetchUser = async () => {
         try {
             const token = localStorage.getItem("JWT_TOKEN");
-            const accessToken = localStorage.getItem("JWT_ACCESS_TOKEN");
+            const refreshToken = localStorage.getItem("JWT_REFRESH_TOKEN");
 
-            if (!token || !accessToken) {
+            if (!token || !refreshToken) {
                 throw new Error(t("errors.mustBeLoggedIn"));
             }
 
@@ -57,7 +57,7 @@ function AuthForm() {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    "x-refresh-token": `${accessToken}`,
+                    "x-refresh-token": `${refreshToken}`,
                 },
             });
 
@@ -88,7 +88,7 @@ function AuthForm() {
         if (!response.ok) throw new Error(data.message || "Login failed");
 
         localStorage.setItem("JWT_TOKEN", data.accessToken);
-        localStorage.setItem("JWT_ACCESS_TOKEN", data.refreshToken);
+        localStorage.setItem("JWT_REFRESH_TOKEN", data.refreshToken);
         setIsAuth(true);
         await fetchUser();
         navigate("/tracks");
@@ -123,7 +123,7 @@ function AuthForm() {
         if (!response.ok) throw new Error(data.message || "Registration failed");
 
         localStorage.setItem("JWT_TOKEN", data.accessToken);
-        localStorage.setItem("JWT_ACCESS_TOKEN", data.refreshToken);
+        localStorage.setItem("JWT_REFRESH_TOKEN", data.refreshToken);
         setIsAuth(true);
         await fetchUser();
         navigate("/tracks"); // Виправив на /tracks для консистентності з логіном

@@ -23,7 +23,7 @@ export const fetchWithAuth = async (endpoint, options = {}) => {
     const url = endpoint.startsWith("http") ? endpoint : `${apiUrl}${endpoint.replace(/^\//, "")}`;
 
     const getToken = () => localStorage.getItem("JWT_TOKEN");
-    const getRefreshToken = () => localStorage.getItem("JWT_ACCESS_TOKEN");
+    const getRefreshToken = () => localStorage.getItem("JWT_REFRESH_TOKEN");
 
     const doFetch = (token) => {
         return fetch(url, {
@@ -72,7 +72,7 @@ export const fetchWithAuth = async (endpoint, options = {}) => {
             res = await doFetch(newToken);
         } catch {
             localStorage.removeItem("JWT_TOKEN");
-            localStorage.removeItem("JWT_ACCESS_TOKEN");
+            localStorage.removeItem("JWT_REFRESH_TOKEN");
             window.location.href = "/auth";
             throw new Error("Session expired");
         } finally {

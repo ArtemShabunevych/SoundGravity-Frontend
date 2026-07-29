@@ -14,7 +14,7 @@ export default function AuthCallback() {
 
             if (token && refreshToken) {
                 localStorage.setItem('JWT_TOKEN', token);
-                localStorage.setItem('JWT_ACCESS_TOKEN', refreshToken);
+                localStorage.setItem('JWT_REFRESH_TOKEN', refreshToken);
                 setIsAuth(true);
                 await fetchUser();
             }
