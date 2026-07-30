@@ -161,7 +161,7 @@ export default function Track() {
         : userPlaylists;
 
     if (!track) {
-        return <div className={styles.loader}>Loading...</div>;
+        return <div className={styles.loader}>{t("common.Loading")}</div>;
     }
 
     const dominantColor = autoColor || track.dominantColor || '#7c4dff';
@@ -184,7 +184,7 @@ export default function Track() {
                     </div>
                     <div className={styles.headerBody}>
                         <div className={styles.info}>
-                            <span className={styles.badge}>Track</span>
+                            <span className={styles.badge}>{t("track.badge")}</span>
                             <h1 className={styles.title}>{track.title}</h1>
                             <div className={styles.meta}>
                                 {track.user && (

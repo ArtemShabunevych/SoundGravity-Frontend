@@ -269,7 +269,7 @@ export default function Playlist() {
             setPlaylist(data);
             toast.success(t("common.trackRemoved"));
         } catch (err: any) {
-            toast.error(err.message || "Failed to remove track");
+            toast.error(err.message || t("common.failedToRemove"));
         }
     };
 
@@ -328,7 +328,7 @@ export default function Playlist() {
                     </div>
                     <div className={styles.headerBody}>
                         <div className={styles.info}>
-                            <span className={styles.badge}>Playlist</span>
+                            <span className={styles.badge}>{t("playlist.badge")}</span>
                             <h1 className={styles.title}>{playlist.name}</h1>
                             <div className={styles.meta}>
                                 {playlist.user?.username ? (
@@ -419,7 +419,7 @@ export default function Playlist() {
                                         <button
                                             onClick={() => handleRemoveTrack(track.id)}
                                             className={styles.trackDeleteBtn}
-                                            title="Remove from playlist"
+                                            title={t("playlist.removeTrack")}
                                         >
                                             <DeleteIcon className={styles.trackDeleteIcon} />
                                         </button>
@@ -428,7 +428,7 @@ export default function Playlist() {
                             </div>
                         ))
                     ) : (
-                        <div className={styles.emptyState}>{t("playlist.empty")}</div>
+                        <div className={styles.emptyState}>{t("playlist.noTracks")}</div>
                     )}
                 </div>
             </div>
@@ -470,7 +470,7 @@ export default function Playlist() {
                             ) : searchQuery.trim() ? (
                                 <div className={styles.modalLoading}>{t("playlist.noTracksFound")}</div>
                             ) : (
-                                <div className={styles.modalLoading}>{t("playlist.startTyping")}</div>
+                                <div className={styles.modalLoading}>{t("playlist.typeToSearch")}</div>
                             )}
                         </div>
                     </div>

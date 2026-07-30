@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { fetchWithAuth } from "../../API/apiClient";
 import defaultPlaylistCover from "../../photos/playlist.png";
-import {fetchWithAuth} from "../../API/apiClient";
 import defaultTrackCover from "../../photos/track.png";
 import styles from "./liked.module.css";
 
@@ -12,6 +13,9 @@ interface LikedTrack {
     title: string;
     genre: string;
     coverUrl?: string;
+    audioUrl?: string;
+    duration?: number;
+    likesCount?: number;
     user?: { username: string };
 }
 
@@ -21,17 +25,33 @@ interface LikedPlaylist {
     genre: string;
     coverUrl?: string;
     tracks?: any[];
+    likesCount?: number;
     user?: { username: string };
 }
 
 type Tab = "tracks" | "playlists";
 
+function formatDuration(seconds?: number): string {
+    if (seconds == null) return "--:--";
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${String(s).padStart(2, "0")}`;
+}
+
+function truncate(text: string, max: number): string {
+    return text.length > max ? text.slice(0, max) + "..." : text;
+}
+
 export default function Liked() {
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState<Tab>("tracks");
     const [tracks, setTracks] = useState<LikedTrack[]>([]);
     const [playlists, setPlaylists] = useState<LikedPlaylist[]>([]);
     const [loading, setLoading] = useState(true);
+    const [likedTracks, setLikedTracks] = useState<Set<string>>(new Set());
+    const [likedPlaylists, setLikedPlaylists] = useState<Set<string>>(new Set());
+    const sentinelRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const fetchLiked = async () => {
@@ -54,6 +74,52 @@ export default function Liked() {
         };
         fetchLiked();
     }, []);
+
+    const handleLikeTrack = useCallback(async (trackId: string, e: React.MouseEvent) => {
+        e.stopPropagation();
+        const wasLiked = likedTracks.has(trackId);
+        const next = new Set(likedTracks);
+        if (wasLiked) next.delete(trackId); else next.add(trackId);
+        setLikedTracks(next);
+        setTracks(prev => prev.map(t =>
+            t.id === trackId
+                ? { ...t, likesCount: (t.likesCount ?? 0) + (wasLiked ? -1 : 1) }
+                : t
+        ));
+        try {
+            await fetchWithAuth(`tracks/${trackId}/like`, { method: "POST" });
+        } catch {
+            setLikedTracks(likedTracks);
+            setTracks(prev => prev.map(t =>
+                t.id === trackId
+                    ? { ...t, likesCount: (t.likesCount ?? 0) + (wasLiked ? 1 : -1) }
+                    : t
+            ));
+        }
+    }, [likedTracks]);
+
+    const handleLikePlaylist = useCallback(async (playlistId: string, e: React.MouseEvent) => {
+        e.stopPropagation();
+        const wasLiked = likedPlaylists.has(playlistId);
+        const next = new Set(likedPlaylists);
+        if (wasLiked) next.delete(playlistId); else next.add(playlistId);
+        setLikedPlaylists(next);
+        setPlaylists(prev => prev.map(pl =>
+            pl.id === playlistId
+                ? { ...pl, likesCount: (pl.likesCount ?? 0) + (wasLiked ? -1 : 1) }
+                : pl
+        ));
+        try {
+            await fetchWithAuth(`playlists/${playlistId}/like`, { method: "POST" });
+        } catch {
+            setLikedPlaylists(likedPlaylists);
+            setPlaylists(prev => prev.map(pl =>
+                pl.id === playlistId
+                    ? { ...pl, likesCount: (pl.likesCount ?? 0) + (wasLiked ? 1 : -1) }
+                    : pl
+            ));
+        }
+    }, [likedPlaylists]);
 
     if (loading) {
         return <div className={styles.loader}>Loading...</div>;
@@ -81,49 +147,142 @@ export default function Liked() {
                 </button>
             </div>
 
-            {activeTab === "tracks" && (
-                <div className={styles.grid}>
-                    {tracks.map((track) => (
-                        <Link to={`/track/${track.id}`} key={track.id} className={styles.card}>
-                            <img
-                                src={track.coverUrl || defaultTrackCover}
-                                alt={track.title}
-                                className={styles.cardCover}
-                            />
-                            <div className={styles.cardBody}>
-                                <h4 className={styles.cardTitle}>{track.title}</h4>
-                                <p className={styles.cardGenre}>{track.genre}</p>
-                                <p className={styles.cardUser}>{track.user?.username || "Unknown"}</p>
-                            </div>
-                        </Link>
-                    ))}
-                    {tracks.length === 0 && (
-                        <p className={styles.empty}>{t("liked.emptyTracks")}</p>
-                    )}
-                </div>
-            )}
+            <div className={styles.layout}>
+                {activeTab === "tracks" && (
+                    <div className={styles.trackList}>
+                        <div className={styles.listHeader}>
+                            <span className={styles.colIndex}>#</span>
+                            <span />
+                            <span className={styles.colInfo}>{t("create.title")}</span>
+                            <span className={styles.colDuration}>{t("playlist.duration")}</span>
+                            <span className={styles.colLikes}>{t("playlist.likesCount")}</span>
+                        </div>
+                        {tracks.map((track, index) => {
+                            const duration = formatDuration(track.duration);
+                            const liked = likedTracks.has(track.id);
+                            return (
+                                <div
+                                    key={track.id}
+                                    className={styles.trackItem}
+                                    onClick={() => navigate(`/track/${track.id}`)}
+                                >
+                                    <span className={styles.trackIndex}>{index + 1}</span>
+                                    {track.coverUrl ? (
+                                        <img src={track.coverUrl} alt="" className={styles.trackCover} />
+                                    ) : (
+                                        <img src={defaultTrackCover} alt="" className={styles.trackCover} />
+                                    )}
+                                    <div className={styles.trackInfo}>
+                                        <span className={styles.trackTitle}>{track.title}</span>
+                                        {track.user?.username && (
+                                            <Link
+                                                to={`/user/${track.user.username}`}
+                                                className={styles.trackArtist}
+                                                onClick={e => e.stopPropagation()}
+                                            >
+                                                {track.user.username}
+                                            </Link>
+                                        )}
+                                    </div>
+                                    <span className={styles.trackDuration}>{duration}</span>
+                                    <div className={styles.trackLikes}>
+                                        <button
+                                            className={styles.likeBtn}
+                                            onClick={e => handleLikeTrack(track.id, e)}
+                                        >
+                                            {liked ? (
+                                                <FavoriteIcon className={styles.likedIcon} />
+                                            ) : (
+                                                <FavoriteBorderIcon className={styles.notLikedIcon} />
+                                            )}
+                                        </button>
+                                        <span className={styles.trackLikesCount}>{track.likesCount ?? 0}</span>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                        {tracks.length === 0 && (
+                            <p className={styles.empty}>{t("liked.emptyTracks")}</p>
+                        )}
+                    </div>
+                )}
 
-            {activeTab === "playlists" && (
-                <div className={styles.grid}>
-                    {playlists.map((pl) => (
-                        <Link to={`/playlist/${pl.id}`} key={pl.id} className={styles.card}>
-                            <img
-                                src={pl.coverUrl || defaultPlaylistCover}
-                                alt={pl.name}
-                                className={styles.cardCover}
-                            />
-                            <div className={styles.cardBody}>
-                                <h4 className={styles.cardTitle}>{pl.name}</h4>
-                                <p className={styles.cardGenre}>{pl.genre}</p>
-                                <p className={styles.cardUser}>{pl.tracks?.length || 0} tracks • {pl.user?.username || "SoundGravity"}</p>
-                            </div>
-                        </Link>
-                    ))}
-                    {playlists.length === 0 && (
-                        <p className={styles.empty}>{t("liked.emptyPlaylists")}</p>
-                    )}
-                </div>
-            )}
+                {activeTab === "playlists" && (
+                    <div className={styles.playlistList}>
+                        <div className={styles.listHeader}>
+                            <span className={styles.colIndex}>#</span>
+                            <span className={styles.colCover} />
+                            <span className={styles.colInfo}>{t("create.title")}</span>
+                            <span className={styles.colTracks}>{t("playlist.tracksCount")}</span>
+                            <span className={styles.colLikes}>{t("playlist.likesCount")}</span>
+                        </div>
+                        {playlists.map((pl, index) => {
+                            const liked = likedPlaylists.has(pl.id);
+                            const trackList = pl.tracks || [];
+                            const visibleTracks = trackList.slice(0, 3);
+                            const hasMoreTracks = trackList.length > 3;
+                            return (
+                                <div
+                                    key={pl.id}
+                                    className={styles.playlistItem}
+                                    onClick={() => navigate(`/playlist/${pl.id}`)}
+                                >
+                                    <span className={styles.playlistIndex}>{index + 1}</span>
+                                    {pl.coverUrl ? (
+                                        <img src={pl.coverUrl} alt="" className={styles.playlistCover} />
+                                    ) : (
+                                        <img src={defaultPlaylistCover} alt="" className={styles.playlistCover} />
+                                    )}
+                                    <div className={styles.playlistInfo}>
+                                        <span className={styles.playlistName}>{pl.name}</span>
+                                        <Link
+                                            to={`/user/${pl.user?.username}`}
+                                            className={styles.playlistAuthor}
+                                            onClick={e => e.stopPropagation()}
+                                        >
+                                            {pl.user?.username || "SoundGravity"}
+                                        </Link>
+                                    </div>
+                                    <div className={styles.trackNames}>
+                                        {visibleTracks.map((track: any) => (
+                                            <Link
+                                                key={track.id}
+                                                to={`/track/${track.id}`}
+                                                className={styles.trackNameLink}
+                                                onClick={e => e.stopPropagation()}
+                                                title={track.title}
+                                            >
+                                                {truncate(track.title, 15)}
+                                            </Link>
+                                        ))}
+                                        {hasMoreTracks && (
+                                            <span className={styles.moreTracks}>...</span>
+                                        )}
+                                    </div>
+                                    <div className={styles.likeCell}>
+                                        <button
+                                            className={styles.likeBtn}
+                                            onClick={e => handleLikePlaylist(pl.id, e)}
+                                        >
+                                            {liked ? (
+                                                <FavoriteIcon className={styles.likedIcon} />
+                                            ) : (
+                                                <FavoriteBorderIcon className={styles.notLikedIcon} />
+                                            )}
+                                        </button>
+                                        <span className={styles.likesCount}>{pl.likesCount ?? 0}</span>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                        {playlists.length === 0 && (
+                            <p className={styles.empty}>{t("liked.emptyPlaylists")}</p>
+                        )}
+                    </div>
+                )}
+
+                <div ref={sentinelRef} className={styles.sentinel} />
+            </div>
         </div>
     );
 }

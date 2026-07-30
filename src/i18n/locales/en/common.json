@@ -124,13 +124,17 @@
     "trackRemoved": "Track removed from playlist",
     "failedToAdd": "Failed to add track",
     "failedToLike": "Failed to update like",
-    "about": "About"
+    "failedToRemove": "Failed to remove track",
+    "about": "About",
+    "unknown": "Unknown",
+    "unknownAuthor": "SoundGravity"
   },
   "tracks": {
     "all": "All Tracks",
     "none": "No tracks found"
   },
   "track": {
+    "badge": "Track",
     "author": "Author:",
     "title": "Name:",
     "genre": "Genre:",
@@ -140,6 +144,7 @@
     "noPlaylists": "No playlists found"
   },
   "playlist": {
+    "badge": "Playlist",
     "all": "All Playlists",
     "author": "Author:",
     "title": "Name:",
@@ -158,6 +163,27 @@
     "tracksCount": "tracks",
     "likesCount": "likes",
     "removeTrack": "Remove track"
+  },
+  "carousel": {
+    "showAll": "Show all",
+    "scrollLeft": "Scroll left",
+    "scrollRight": "Scroll right"
+  },
+  "header": {
+    "register": "Register",
+    "login": "Login",
+    "home": "Home",
+    "account": "Account",
+    "create": "Create",
+    "logout": "Logout",
+    "profile": "Profile",
+    "tracks": "Tracks",
+    "playlists": "Playlists",
+    "liked": "Liked",
+    "settings": "Settings",
+    "toggleTheme": "Toggle theme",
+    "toggleLanguage": "Toggle language",
+    "menu": "Menu"
   },
   "create": {
     "title": "Title",

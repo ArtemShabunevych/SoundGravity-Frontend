@@ -78,7 +78,10 @@
     "trackRemoved": "Трек видалено з плейліста",
     "failedToAdd": "Не вдалося додати трек",
     "failedToLike": "Не вдалося оновити лайк",
-    "about": "Інформація"
+    "failedToRemove": "Не вдалося видалити трек",
+    "about": "Інформація",
+    "unknown": "Невідомо",
+    "unknownAuthor": "SoundGravity"
   },
   "user": {
     "AvatarAlt": "користувач",

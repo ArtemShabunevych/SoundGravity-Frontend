@@ -15,12 +15,12 @@ function App() {
     return (
         <div className="App">
             <Helmet>
-                <title>SoundGravity — Stream & Discover Music</title>
+                <title>SoundGravity</title>
                 <meta name="description" content="SoundGravity — інтерактивна музична платформа. Стріми, плейлисти, візуалізації та музика з усього світу." />
                 <meta property="og:type" content="website" />
-                <meta property="og:title" content="SoundGravity — Stream & Discover Music" />
+                <meta property="og:title" content="SoundGravity" />
                 <meta property="og:description" content="SoundGravity — інтерактивна музична платформа. Стріми, плейлисти, візуалізації та музика з усього світу." />
-                <meta property="og:image" content={`${BASE_URL}/favicon.svg`} />
+                <meta property="og:image" content={`${BASE_URL}/favicon.png`} />
                 <meta property="og:url" content={BASE_URL} />
             </Helmet>
             <UserProvider>
