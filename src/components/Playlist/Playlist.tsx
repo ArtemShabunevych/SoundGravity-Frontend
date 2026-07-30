@@ -1,5 +1,6 @@
 import {useCallback, useContext, useEffect, useState} from "react";
 import {useParams, Link} from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import styles from "./playlist.module.css";
 import {useTranslation} from "react-i18next";
 import toast from "react-hot-toast";
@@ -13,6 +14,7 @@ import PlayArrowRounded from "@mui/icons-material/PlayArrowRounded";
 import DeleteIcon from "@mui/icons-material/Delete";
 import defaultUserIcon from "../../photos/user_icon.png";
 import defaultPlaylistCover from "../../photos/playlist.png";
+import defaultTrackCover from "../../photos/track.png";
 import { hexToRgba, extractDominantColor } from "../../utils/color";
 
 interface TrackInPlaylist {
@@ -311,6 +313,10 @@ export default function Playlist() {
 
     return (
         <div className={styles.page} style={{ background: gradientBg }}>
+            <Helmet>
+                <title>{playlist.name ? `${playlist.name} — SoundGravity` : 'Playlist — SoundGravity'}</title>
+                <meta name="description" content={playlist.description || `Listen to ${playlist.name || 'this playlist'} on SoundGravity`} />
+            </Helmet>
             <div className={styles.layout}>
                 <div className={styles.header}>
                     <div className={styles.coverWrapper}>
@@ -395,28 +401,30 @@ export default function Playlist() {
                                     <span className={styles.trackTitle}>{track.title}</span>
                                     <span className={styles.trackAuthor}>{track.user?.username}</span>
                                 </div>
-                                <div className={styles.trackGenre}>{track.genre}</div>
-                                <div className={styles.trackActions} onClick={e => e.stopPropagation()}>
+                                <div className={styles.trackLikes} onClick={e => e.stopPropagation()}>
                                     <button
                                         onClick={() => handleLikeTrack(track.id)}
                                         className={styles.trackLikeBtn}
                                     >
                                         {likedTracks.has(track.id) ? (
-                                            <FavoriteIcon fontSize="small" className={styles.likedIcon} />
+                                            <FavoriteIcon className={styles.trackLikedIcon} />
                                         ) : (
-                                            <FavoriteBorderIcon fontSize="small" />
+                                            <FavoriteBorderIcon className={styles.trackNotLikedIcon} />
                                         )}
                                     </button>
-                                    {isAuthor && (
+                                    <span className={styles.trackLikesCount}>{track.likesCount ?? 0}</span>
+                                </div>
+                                {isAuthor && (
+                                    <div className={styles.trackActions} onClick={e => e.stopPropagation()}>
                                         <button
                                             onClick={() => handleRemoveTrack(track.id)}
                                             className={styles.trackDeleteBtn}
                                             title="Remove from playlist"
                                         >
-                                            <DeleteIcon fontSize="small" />
+                                            <DeleteIcon className={styles.trackDeleteIcon} />
                                         </button>
-                                    )}
-                                </div>
+                                    </div>
+                                )}
                             </div>
                         ))
                     ) : (

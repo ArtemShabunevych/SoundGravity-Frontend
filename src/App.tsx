@@ -7,9 +7,22 @@ import { UserProvider } from "./context/UserContext";
 import { PlayerProvider } from "./context/PlayerContext";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/react"
+import { Helmet } from "react-helmet-async";
+
+const BASE_URL = 'https://sound-gravity-frontend.vercel.app';
+
 function App() {
     return (
         <div className="App">
+            <Helmet>
+                <title>SoundGravity — Stream & Discover Music</title>
+                <meta name="description" content="SoundGravity — інтерактивна музична платформа. Стріми, плейлисти, візуалізації та музика з усього світу." />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="SoundGravity — Stream & Discover Music" />
+                <meta property="og:description" content="SoundGravity — інтерактивна музична платформа. Стріми, плейлисти, візуалізації та музика з усього світу." />
+                <meta property="og:image" content={`${BASE_URL}/favicon.svg`} />
+                <meta property="og:url" content={BASE_URL} />
+            </Helmet>
             <UserProvider>
                 <LanguageProvider>
                     <ThemeProvider>

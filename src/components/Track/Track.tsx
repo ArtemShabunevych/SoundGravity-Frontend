@@ -1,5 +1,6 @@
 import {useCallback, useContext, useEffect, useState} from "react";
 import {useParams, Link} from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import styles from "./track.module.css";
 import {useTranslation} from "react-i18next";
 import toast from "react-hot-toast";
@@ -168,6 +169,10 @@ export default function Track() {
 
     return (
         <div className={styles.page} style={{ background: gradientBg }}>
+            <Helmet>
+                <title>{track.title ? `${track.title} — SoundGravity` : 'Track — SoundGravity'}</title>
+                <meta name="description" content={track.description || `Listen to ${track.title || 'this track'} on SoundGravity`} />
+            </Helmet>
             <div className={styles.layout}>
                 <div className={styles.header}>
                     <div className={styles.coverWrapper}>

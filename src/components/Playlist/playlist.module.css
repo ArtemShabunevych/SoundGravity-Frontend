@@ -199,7 +199,7 @@
 
 .trackItem {
     display: grid;
-    grid-template-columns: 40px 45px 1fr auto;
+    grid-template-columns: 40px 45px 1fr auto auto;
     align-items: center;
     gap: 14px;
     padding: 10px 20px;
@@ -307,8 +307,24 @@
 .trackActions {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     justify-content: flex-end;
+}
+
+.trackLikes {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+    min-width: 40px;
+}
+
+.trackLikesCount {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+    min-width: 20px;
+    text-align: center;
 }
 
 .empty {
@@ -402,18 +418,28 @@
     font-size: 18px !important;
 }
 
-.trackActions {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+.trackLikeBtn:hover .trackNotLikedIcon {
+    color: var(--text-main) !important;
 }
 
-.trackLikesCount {
-    font-size: 12px;
-    color: var(--text-muted);
-    font-weight: 500;
-    min-width: 20px;
-    text-align: center;
+.trackDeleteBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.trackDeleteBtn:hover {
+    background: var(--g-ld);
+}
+
+.trackDeleteIcon {
+    color: var(--color-danger) !important;
+    font-size: 20px !important;
 }
 
 .removeTrackBtn {
@@ -634,6 +660,10 @@
     .trackDuration { font-size: 12px; min-width: 28px; }
     .likedIcon { font-size: 24px !important; }
     .notLikedIcon { font-size: 24px !important; }
+    .trackLikes { display: none; }
+    .trackActions { gap: 2px; }
+    .trackDeleteBtn { padding: 2px; }
+    .trackDeleteIcon { font-size: 16px !important; }
 }
 
 @media (max-width: 300px) {
@@ -642,7 +672,6 @@
     .coverWrapper { width: 140px; height: 140px; }
     .title { font-size: 1.4rem; }
     .badge { font-size: 0.55rem; }
-    .genre { font-size: 10px; padding: 2px 8px; }
     .description { font-size: 13px; }
     .meta { font-size: 11px; }
     .headerActions { gap: 8px; }
@@ -660,5 +689,6 @@
     .trackTitle { font-size: 11px; }
     .trackArtistLink { font-size: 10px; }
     .trackDuration { display: none; }
+    .trackLikes { display: none; }
     .trackActions { display: none; }
 }
