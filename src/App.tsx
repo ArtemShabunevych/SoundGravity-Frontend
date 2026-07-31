@@ -7,6 +7,7 @@ import { UserProvider } from "./context/UserContext";
 import { PlayerProvider } from "./context/PlayerContext";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Helmet } from "react-helmet-async";
 
 const BASE_URL = 'https://sound-gravity-frontend.vercel.app';
@@ -27,6 +28,7 @@ function App() {
                 <LanguageProvider>
                     <ThemeProvider>
                         <PlayerProvider>
+                            <SpeedInsights />
                             <Analytics />
                             <AppRoutes />
                             <Cursor />
