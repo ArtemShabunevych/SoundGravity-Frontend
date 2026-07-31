@@ -25,6 +25,7 @@ export default function Footer() {
                     </a>
                     <Link to="/privacy">{t("footer.privacy")}</Link>
                     <Link to="/terms">{t("footer.terms")}</Link>
+                    <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer">{t("footer.sitemap")}</a>
                 </div>
             </div>
         </footer>
