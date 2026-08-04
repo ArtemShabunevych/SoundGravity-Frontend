@@ -177,14 +177,14 @@
     width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .page { padding: 80px 12px 48px; }
-    .listHeader { grid-template-columns: 30px 1fr 50px; gap: 8px; padding: 8px 10px; }
-    .colIndex { width: 30px; font-size: 11px; }
+    .listHeader { grid-template-columns: 28px 36px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .colIndex { width: 28px; font-size: 11px; }
     .colDuration { font-size: 11px; }
     .colLikes { display: none; }
-    .trackItem { grid-template-columns: 30px 1fr 50px; gap: 8px; padding: 8px 10px; }
-    .trackIndex { width: 30px; font-size: 13px; }
+    .trackItem { grid-template-columns: 28px 36px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .trackIndex { width: 28px; font-size: 13px; }
     .trackCover { width: 32px; height: 32px; }
     .trackCoverFallback { width: 32px; height: 32px; }
     .trackTitle { font-size: 13px; }
@@ -195,18 +195,16 @@
     .loader { padding: 24px; }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 375px) {
     .page { padding: 70px 4px 48px; }
-    .listHeader { grid-template-columns: 20px 1fr; gap: 4px; padding: 4px 6px; }
-    .colIndex { width: 20px; font-size: 9px; }
-    .colDuration { display: none; }
-    .trackItem { grid-template-columns: 20px 1fr; gap: 4px; padding: 6px; }
-    .trackIndex { width: 20px; font-size: 11px; }
-    .trackCover { width: 24px; height: 24px; }
-    .trackCoverFallback { width: 24px; height: 24px; }
-    .trackTitle { font-size: 11px; }
-    .trackArtist { font-size: 10px; }
-    .trackDuration { display: none; }
+    .listHeader { display: none; }
+    .trackItem { grid-template-columns: 24px 28px 1fr auto; gap: 4px; padding: 8px; min-height: 44px; }
+    .trackIndex { width: 24px; font-size: 11px; }
+    .trackCover { width: 28px; height: 28px; }
+    .trackCoverFallback { width: 28px; height: 28px; }
+    .trackTitle { font-size: 12px; }
+    .trackArtist { font-size: 11px; }
+    .trackDuration { font-size: 10px; min-width: 24px; }
     .empty { padding: 16px 8px; font-size: 12px; }
     .loader { padding: 16px; font-size: 12px; }
 }

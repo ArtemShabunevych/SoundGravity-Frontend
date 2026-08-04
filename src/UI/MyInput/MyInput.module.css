@@ -53,3 +53,18 @@
 .iconWrap svg {
     font-size: 20px;
 }
+
+@media (max-width: 375px) {
+    .inputBox input {
+        padding: 11px 40px 11px 14px;
+        font-size: 16px;
+    }
+
+    .iconWrap {
+        right: 14px;
+    }
+
+    .iconWrap svg {
+        font-size: 18px;
+    }
+}

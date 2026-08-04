@@ -41,7 +41,7 @@ export default function Header() {
                         alt="SoundGravity"
                         className={styles.logoImg}
                     />
-                    SoundGravity
+                    <span className={styles.logoText}>SoundGravity</span>
                 </div>
                 <button
                     className={styles.buttonToggle}
@@ -90,7 +90,7 @@ export default function Header() {
                                 alt={t("user.AvatarAlt")}
                                 className={styles.userAvatar}
                             />
-                            {user?.username}
+                            <span className={styles.username}>{user?.username}</span>
                         </Link>
                         <button
                             className={styles.burgerBtn}
@@ -106,10 +106,18 @@ export default function Header() {
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                         >
-                            <MenuItem onClick={() => { setAnchorEl(null); navigate('/liked'); }}>
-                                <ListItemIcon><FavoriteIcon fontSize="small" /></ListItemIcon>
-                                {t("header.liked")}
-                            </MenuItem>
+                        <MenuItem onClick={() => { setAnchorEl(null); navigate('/tracks'); }}>
+                            <ListItemIcon><MusicNoteOutlinedIcon fontSize="small" /></ListItemIcon>
+                            {t("header.tracks")}
+                        </MenuItem>
+                        <MenuItem onClick={() => { setAnchorEl(null); navigate('/playlists'); }}>
+                            <ListItemIcon><FeaturedPlayListIcon fontSize="small" /></ListItemIcon>
+                            {t("header.playlists")}
+                        </MenuItem>
+                        <MenuItem onClick={() => { setAnchorEl(null); navigate('/liked'); }}>
+                            <ListItemIcon><FavoriteIcon fontSize="small" /></ListItemIcon>
+                            {t("header.liked")}
+                        </MenuItem>
                             <MenuItem onClick={() => { setAnchorEl(null); navigate('/tracks/create'); }}>
                                 <ListItemIcon><AudiotrackIcon fontSize="small" /></ListItemIcon>
                                 {t("user.CreateTrack")}

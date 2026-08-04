@@ -176,3 +176,78 @@
 .volumeSlider :global(.MuiSlider-thumb.Mui-active) {
   box-shadow: none;
 }
+
+@keyframes slideUpMobile {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 700px) {
+  .overlay {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    max-width: none;
+    padding: 0;
+    max-height: 92dvh;
+    display: flex;
+    justify-content: center;
+    animation: slideUpMobile 0.25s ease-out;
+  }
+
+  .widget {
+    width: 100%;
+    max-width: 480px;
+    border-radius: 16px 16px 0 0;
+    padding: 24px 20px calc(20px + env(safe-area-inset-bottom));
+    max-height: 92dvh;
+    overflow-y: auto;
+  }
+
+  .closeBtn {
+    top: 12px;
+    right: 12px;
+    padding: 10px;
+  }
+
+  .seekSlider :global(.MuiSlider-thumb) {
+    width: 16px;
+    height: 16px;
+  }
+
+  .seekSlider :global(.MuiSlider-thumb.Mui-active) {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 375px) {
+  .widget {
+    padding: 16px 14px calc(14px + env(safe-area-inset-bottom));
+  }
+
+  .coverImage {
+    width: 64px;
+    height: 64px;
+  }
+
+  .playIcon {
+    font-size: 3rem;
+  }
+
+  .topRow {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .volumeRow {
+    padding: 0 4px;
+  }
+}

@@ -11,7 +11,7 @@ export default function Main() {
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const isMobile = () => window.innerWidth < 768;
+        const isMobile = () => window.innerWidth < 700;
 
         const renderer = new THREE.WebGLRenderer({
             canvas,

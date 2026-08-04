@@ -128,7 +128,7 @@ export default function StarField({
       ? getComputedStyle(document.documentElement).getPropertyValue('--bg-deep').trim()
       : bgColor;
 
-    const mobile    = window.innerWidth < 768;
+    const mobile    = window.innerWidth < 700;
     const COUNT     = count ?? (mobile ? 5000 : 12000);
     const BG        = parseInt(resolvedBg.replace("#", ""), 16);
 

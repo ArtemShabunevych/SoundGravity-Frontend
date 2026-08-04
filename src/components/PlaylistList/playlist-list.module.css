@@ -201,7 +201,7 @@
     width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .page { padding: 80px 12px 48px; }
     .listHeader { grid-template-columns: 30px 40px 1fr auto; gap: 8px; padding: 8px 10px; }
     .colIndex { width: 30px; font-size: 11px; }
@@ -219,16 +219,16 @@
     .loader { padding: 24px; }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 375px) {
     .page { padding: 70px 4px 48px; }
-    .listHeader { grid-template-columns: 20px 30px 1fr; gap: 4px; padding: 4px 6px; font-size: 9px; }
+    .listHeader { grid-template-columns: 20px 30px 1fr; gap: 4px; padding: 6px; font-size: 9px; }
     .colIndex { width: 20px; font-size: 9px; }
-    .playlistItem { grid-template-columns: 20px 30px 1fr; gap: 4px; padding: 6px; }
+    .playlistItem { grid-template-columns: 20px 30px 1fr; gap: 4px; padding: 8px; min-height: 44px; }
     .playlistIndex { width: 20px; font-size: 11px; }
-    .playlistCover { width: 28px; height: 28px; }
-    .playlistCoverFallback { width: 28px; height: 28px; }
-    .playlistName { font-size: 11px; }
-    .playlistAuthor { font-size: 10px; }
+    .playlistCover { width: 30px; height: 30px; }
+    .playlistCoverFallback { width: 30px; height: 30px; }
+    .playlistName { font-size: 12px; }
+    .playlistAuthor { font-size: 11px; }
     .trackNames { display: none; }
     .empty { padding: 16px 8px; font-size: 12px; }
     .loader { padding: 16px; font-size: 12px; }

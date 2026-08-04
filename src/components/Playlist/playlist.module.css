@@ -268,6 +268,33 @@
     min-width: 0;
 }
 
+.trackMeta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.trackAuthor {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.activeTrack {
+    border-left: 3px solid var(--main-color);
+}
+
+.emptyState {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+}
+
 .trackTitle {
     font-size: 16px;
     font-weight: 600;
@@ -426,11 +453,14 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 4px;
+    padding: 8px;
     display: flex;
     align-items: center;
     border-radius: 6px;
     transition: all 0.2s;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
 }
 
 .trackDeleteBtn:hover {
@@ -503,7 +533,12 @@
     font-size: 20px;
     cursor: pointer;
     color: var(--text-muted);
-    padding: 4px;
+    padding: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modalSearch {
@@ -629,7 +664,7 @@
     color: var(--main-color);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .page { padding: 80px 16px 48px; }
     .header {
         flex-direction: column;
@@ -650,7 +685,7 @@
     .bigPlayBtn { width: 48px; height: 48px; }
     .trackListHeader { grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 10px; }
     .headerIndex { width: 30px; font-size: 11px; }
-    .trackItem { grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .trackItem { grid-template-columns: 28px 32px 1fr auto; gap: 8px; padding: 8px 10px; }
     .trackIndex { width: 30px; font-size: 13px; }
     .trackCoverWrap { width: 32px; height: 32px; }
     .trackCoverFallback { width: 32px; height: 32px; }
@@ -662,11 +697,11 @@
     .notLikedIcon { font-size: 24px !important; }
     .trackLikes { display: none; }
     .trackActions { gap: 2px; }
-    .trackDeleteBtn { padding: 2px; }
+    .trackDeleteBtn { padding: 6px; }
     .trackDeleteIcon { font-size: 16px !important; }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 375px) {
     .page { padding: 70px 8px 48px; }
     .header { gap: 12px; }
     .coverWrapper { width: 140px; height: 140px; }
@@ -674,21 +709,30 @@
     .badge { font-size: 0.55rem; }
     .description { font-size: 13px; }
     .meta { font-size: 11px; }
-    .headerActions { gap: 8px; }
-    .bigPlayBtn { width: 40px; height: 40px; }
-    .addTrackBtn { padding: 6px 12px; font-size: 12px; }
-    .likedIcon { font-size: 20px !important; }
-    .notLikedIcon { font-size: 20px !important; }
+    .headerActions { gap: 10px; }
+    .bigPlayBtn { width: 44px; height: 44px; }
+    .addTrackBtn { padding: 8px 14px; font-size: 13px; min-height: 44px; }
+    .likeBtn { padding: 10px; min-width: 44px; min-height: 44px; }
+    .likedIcon { font-size: 22px !important; }
+    .notLikedIcon { font-size: 22px !important; }
     .trackListHeader { grid-template-columns: 20px 1fr; gap: 4px; padding: 4px 6px; }
     .headerIndex { width: 20px; font-size: 9px; }
     .headerDuration { display: none; }
-    .trackItem { grid-template-columns: 20px 1fr; gap: 4px; padding: 6px; }
+    .trackItem { grid-template-columns: 20px 28px 1fr auto; gap: 4px; padding: 8px; }
     .trackIndex { width: 20px; font-size: 11px; }
-    .trackCoverWrap { width: 24px; height: 24px; }
-    .trackCoverFallback { width: 24px; height: 24px; }
+    .trackCoverWrap { width: 28px; height: 28px; }
+    .trackCoverFallback { width: 28px; height: 28px; }
     .trackTitle { font-size: 11px; }
     .trackArtistLink { font-size: 10px; }
+    .trackAuthor { font-size: 10px; }
     .trackDuration { display: none; }
     .trackLikes { display: none; }
-    .trackActions { display: none; }
+    .trackDeleteBtn { padding: 8px; min-width: 44px; min-height: 44px; }
+    .modal { padding: 12px; }
+    .modalContent { max-height: 85dvh; }
+    .modalHeader { padding: 14px 16px 0; }
+    .modalClose { padding: 10px; min-width: 44px; min-height: 44px; }
+    .modalSearch { margin: 12px 16px; font-size: 16px; }
+    .modalResults { padding: 0 16px 16px; }
+    .modalAddBtn { width: 44px; height: 44px; font-size: 22px; }
 }

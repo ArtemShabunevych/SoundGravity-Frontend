@@ -41,12 +41,14 @@
 
 .toggle {
     width: 48px;
-    height: 26px;
-    border-radius: 13px;
+    height: 28px;
+    border-radius: 14px;
     border: none;
     cursor: pointer;
     position: relative;
     transition: background 0.2s;
+    min-height: 44px;
+    min-width: 44px;
 }
 
 .toggleOn {
@@ -68,14 +70,16 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .page { padding: 80px 16px 48px; }
     .card { padding: 16px; }
     .title { font-size: 20px; }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 375px) {
     .page { padding: 70px 8px 48px; }
     .card { padding: 12px; }
     .title { font-size: 16px; }
+    .row { padding: 12px 14px; gap: 8px; }
+    .label { font-size: 14px; }
 }

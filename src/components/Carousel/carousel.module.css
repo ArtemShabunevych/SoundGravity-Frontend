@@ -26,6 +26,10 @@
     font-family: var(--main-font), sans-serif;
     cursor: pointer;
     transition: color 0.2s;
+    padding: 8px 12px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
 }
 
 .seeAll:hover {
@@ -146,14 +150,17 @@
     right: -20px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .wrapper { padding: 0 8px; }
     .arrow { display: none; }
     .sectionTitle { font-size: 18px; padding: 0 16px; }
+    .cardWrapper { min-width: 150px; width: 150px; }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 375px) {
     .wrapper { padding: 0 4px; }
-    .title { font-size: 14px; padding: 0 8px; }
-    .subtitle { font-size: 11px; padding: 0 8px; }
+    .sectionTitle { font-size: 14px; padding: 0 8px; }
+    .cardWrapper { min-width: 140px; width: 140px; }
+    .cardTitle { font-size: 13px; }
+    .cardDesc { font-size: 11px; }
 }

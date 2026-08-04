@@ -350,9 +350,26 @@ CSS
     color: var(--text-main);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .mainHeader { padding: 20px 16px; }
     .mainNav { gap: 16px; }
     .mainNav a { font-size: 13px; }
     .launchBtn { padding: 8px 16px; font-size: 11px; }
+    .scene[data-align="left"] { padding-left: 24px; }
+    .scene[data-align="right"] { padding-right: 24px; }
+    .scene[data-align="left"] .sceneNum { left: 24px; }
+    .scene[data-align="right"] .sceneNum { right: 24px; }
+    .sceneInner { max-width: 100%; }
+    .sceneTitle { font-size: clamp(26px, 7vw, 40px); }
+    .mainFooter { padding: 16px; gap: 12px; }
+    .footerLinks { gap: 16px; }
+}
+
+@media (max-width: 375px) {
+    .scene[data-align="left"] { padding-left: 16px; }
+    .scene[data-align="right"] { padding-right: 16px; }
+    .scene[data-align="left"] .sceneNum { left: 16px; }
+    .scene[data-align="right"] .sceneNum { right: 16px; }
+    .sceneTitle { font-size: clamp(22px, 8vw, 30px); }
+    .mainFooter { flex-direction: column; align-items: flex-start; gap: 8px; }
 }

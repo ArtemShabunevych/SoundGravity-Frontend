@@ -46,3 +46,17 @@
     transform: translateY(-3px);
     box-shadow: 2px 4px 8px var(--shadow);
 }
+
+@media (max-width: 375px) {
+    .customLabel {
+        padding: 8px 14px;
+        font-size: 16px;
+        gap: 8px;
+        min-height: 44px;
+    }
+
+    .customLabel::before {
+        height: 10px;
+        width: 10px;
+    }
+}

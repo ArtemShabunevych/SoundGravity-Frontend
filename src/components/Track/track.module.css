@@ -280,7 +280,12 @@
     font-size: 20px;
     cursor: pointer;
     color: var(--text-muted);
-    padding: 4px;
+    padding: 8px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modalSearch {
@@ -369,7 +374,7 @@
     cursor: not-allowed;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .page { padding: 80px 16px 48px; }
     .header {
         flex-direction: column;
@@ -394,7 +399,7 @@
     .notLikedIcon { font-size: 24px !important; }
 }
 
-@media (max-width: 300px) {
+@media (max-width: 375px) {
     .page { padding: 70px 8px 48px; }
     .header { gap: 12px; }
     .coverWrapper { width: 140px; height: 140px; }
@@ -403,10 +408,18 @@
     .genre { font-size: 10px; padding: 2px 8px; }
     .description { font-size: 13px; }
     .meta { font-size: 11px; }
-    .headerActions { gap: 8px; }
-    .bigPlayBtn { width: 40px; height: 40px; }
-    .addTrackBtn { padding: 6px 12px; font-size: 12px; }
-    .likedIcon { font-size: 20px !important; }
-    .notLikedIcon { font-size: 20px !important; }
+    .headerActions { gap: 10px; }
+    .bigPlayBtn { width: 44px; height: 44px; }
+    .addTrackBtn { padding: 8px 14px; font-size: 13px; min-height: 44px; }
+    .likeBtn { padding: 10px; min-width: 44px; min-height: 44px; }
+    .likedIcon { font-size: 22px !important; }
+    .notLikedIcon { font-size: 22px !important; }
     .gradientDivider { margin: 12px 0; }
+    .modal { padding: 12px; }
+    .modalContent { max-height: 85dvh; }
+    .modalHeader { padding: 14px 16px 0; }
+    .modalClose { padding: 10px; min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .modalSearch { margin: 12px 16px; font-size: 16px; }
+    .modalResults { padding: 0 16px 16px; }
+    .modalAddBtn { width: 44px; height: 44px; font-size: 22px; }
 }

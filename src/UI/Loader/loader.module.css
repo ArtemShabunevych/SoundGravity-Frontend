@@ -15,3 +15,11 @@
         transform: rotate(360deg);
     }
 }
+
+@media (max-width: 375px) {
+    .loader {
+        height: 60px;
+        width: 60px;
+        border-width: 5px;
+    }
+}

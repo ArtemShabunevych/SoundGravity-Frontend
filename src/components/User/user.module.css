@@ -150,11 +150,29 @@
     opacity: 1;
 }
 
+@media (pointer: coarse) {
+    .avatarOverlay {
+        opacity: 1;
+    }
+    .avatarLabel:hover .avatar {
+        opacity: 0.6;
+    }
+    .descOverlay {
+        opacity: 1;
+        background: rgba(0,0,0,0.4);
+        backdrop-filter: blur(2px);
+        border-radius: 8px;
+    }
+    .descWrap:hover .description {
+        opacity: 0.3;
+    }
+}
+
 .descAddBtn {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.15);
     color: rgba(255,255,255,0.6);
-    padding: 6px 18px;
+    padding: 10px 20px;
     border-radius: 100px;
     font-size: 13px;
     font-family: var(--main-font);
@@ -162,6 +180,7 @@
     cursor: pointer;
     transition: all 0.2s;
     margin-top: 4px;
+    min-height: 44px;
 }
 
 .descAddBtn:hover {
@@ -186,7 +205,7 @@
     border: 2px solid rgba(255,255,255,0.3);
     background: rgba(255,255,255,0.08);
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     font-family: var(--main-font);
     outline: none;
     box-sizing: border-box;
@@ -205,13 +224,14 @@
 
 .descSaveBtn,
 .descCancelBtn {
-    padding: 8px 16px;
+    padding: 10px 18px;
     border-radius: 100px;
     font-size: 13px;
     font-family: var(--main-font);
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
+    min-height: 44px;
 }
 
 .descSaveBtn {
@@ -324,22 +344,23 @@
     font-size: 16px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .hero {
         min-height: 300px;
     }
 
     .heroContent {
-        padding: 80px 16px 24px;
+        padding: 60px 16px 24px;
+        gap: 12px;
     }
 
     .avatar {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
     }
 
     .name {
-        font-size: 32px;
+        font-size: 28px;
     }
 
     .body {
@@ -347,10 +368,12 @@
     }
 
     .statsRow {
+        flex-wrap: wrap;
         gap: 8px;
     }
 
     .stat {
+        max-width: 140px;
         padding: 14px 10px;
     }
 
@@ -358,15 +381,12 @@
         font-size: 28px;
     }
 
-    .heroContent { padding: 60px 16px 24px; gap: 12px; }
-    .avatar { width: 80px; height: 80px; }
-    .name { font-size: 28px; }
-    .statsRow { flex-wrap: wrap; gap: 8px; }
-    .stat { max-width: 140px; padding: 14px 10px; }
-    .listHeaderTracks { grid-template-columns: 24px 30px 1fr auto; gap: 8px; padding: 8px 10px; }
-    .listHeaderPlaylists { grid-template-columns: 24px 30px 1fr auto; gap: 8px; padding: 8px 10px; }
-    .listRowTracks { grid-template-columns: 24px 30px 1fr auto; gap: 8px; padding: 8px 10px; }
-    .listRowPlaylists { grid-template-columns: 24px 30px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .listColCenter { display: none; }
+    .listColLeft { display: none; }
+    .listHeaderTracks { grid-template-columns: 24px 30px 1fr auto auto auto; gap: 8px; padding: 8px 10px; }
+    .listHeaderPlaylists { grid-template-columns: 24px 30px 1fr auto auto auto; gap: 8px; padding: 8px 10px; }
+    .listRowTracks { grid-template-columns: 24px 30px 1fr auto auto auto; gap: 8px; padding: 8px 10px; }
+    .listRowPlaylists { grid-template-columns: 24px 30px 1fr auto auto auto; gap: 8px; padding: 8px 10px; }
     .listRowIndex { width: 24px; font-size: 12px; }
     .listRowCover { width: 30px; height: 30px; }
     .listRowCoverFallback { width: 30px; height: 30px; }
@@ -374,8 +394,8 @@
     .listRowLikes { display: none; }
     .listRowActions { gap: 4px; }
     .listRowActionBtn { padding: 2px 6px; font-size: 10px; }
-    .listRowIconBtn { padding: 2px; }
-    .listRowIconPublic, .listRowIconPrivate, .listRowIconDanger { font-size: 16px !important; }
+    .listRowIconBtn { padding: 12px; }
+    .listRowIconPublic, .listRowIconPrivate, .listRowIconDanger { font-size: 20px !important; }
     .listRowTrackNames { max-width: 100px; }
     .listRowTrackNameLink { font-size: 11px; }
     .listRowTitle { font-size: 13px; }
@@ -681,7 +701,7 @@
     text-align: left;
 }
 
-@media (max-width: 300px) {
+@media (max-width: 375px) {
     .heroContent { padding: 40px 8px 16px; gap: 8px; }
     .avatar { width: 60px; height: 60px; border-width: 2px; }
     .name { font-size: 22px; }
@@ -693,17 +713,18 @@
     .statNum { font-size: 22px; }
     .statLabel { font-size: 10px; }
     .tabs { gap: 2px; padding: 2px; }
-    .tab { padding: 6px 10px; font-size: 11px; }
-    .listHeaderTracks { grid-template-columns: 18px 24px 1fr; gap: 4px; padding: 4px 6px; font-size: 9px; }
-    .listHeaderPlaylists { grid-template-columns: 18px 24px 1fr; gap: 4px; padding: 4px 6px; font-size: 9px; }
-    .listRowTracks { grid-template-columns: 18px 24px 1fr; gap: 4px; padding: 4px 6px; }
-    .listRowPlaylists { grid-template-columns: 18px 24px 1fr; gap: 4px; padding: 4px 6px; }
-    .listRowIndex { width: 18px; font-size: 10px; }
-    .listRowCover { width: 24px; height: 24px; }
-    .listRowCoverFallback { width: 24px; height: 24px; }
-    .listRowDuration { display: none; }
-    .listRowActions { display: none; }
+    .tab { padding: 10px 12px; font-size: 12px; min-height: 44px; }
+    .listHeader { display: none; }
+    .listRowTracks { grid-template-columns: 20px 26px 1fr auto auto auto; gap: 4px; padding: 8px; }
+    .listRowPlaylists { grid-template-columns: 20px 26px 1fr auto auto; gap: 4px; padding: 8px; }
+    .listRowIndex { width: 20px; font-size: 10px; }
+    .listRowCover { width: 26px; height: 26px; }
+    .listRowCoverFallback { width: 26px; height: 26px; }
+    .listRowDuration { font-size: 10px; min-width: 24px; }
     .listRowTrackNames { display: none; }
+    .listRowIconBtn { padding: 12px; min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .listRowIconPublic, .listRowIconPrivate, .listRowIconDanger { font-size: 16px !important; }
     .listRowTitle { font-size: 11px; }
     .listRowPlaylistName { font-size: 11px; }
+    .listRowActionBtn { padding: 6px 10px; font-size: 11px; min-height: 36px; }
 }
