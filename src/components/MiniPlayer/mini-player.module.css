@@ -202,12 +202,25 @@
     .artist { font-size: 10px; }
     .artistLink { font-size: 10px; }
     .controls { margin-top: 0; gap: 0; }
-    .playBtn { transform: scale(1); min-width: 36px; min-height: 36px; }
+    .playBtn { transform: scale(0.9); min-width: 36px; min-height: 36px; }
+    .playBtn svg { font-size: 24px; }
     .navBtn { min-width: 32px; min-height: 32px; }
-    .seekWrap { gap: 3px; }
+    .navBtn svg { font-size: 18px; }
+    .seekWrap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: none;
+        height: 16px;
+        padding: 0 8px;
+        gap: 4px;
+        box-sizing: border-box;
+    }
     .time { font-size: 8px; min-width: 20px; }
     .volumeWrap { min-width: 90px; max-width: 150px; gap: 2px; }
-    .volumeWrap svg { font-size: 16px; }
+    .volumeWrap svg { font-size: 14px; }
     .expandBtn { min-width: 44px; min-height: 44px; }
     .slider :global(.MuiSlider-thumb) { width: 10px; height: 10px; }
     .volumeSlider :global(.MuiSlider-thumb) { width: 8px; height: 8px; }
@@ -218,12 +231,14 @@
     .text { display: none; }
     .cover { width: 24px; height: 24px; }
     .controls { margin-top: 0; gap: 0; }
-    .playBtn { transform: scale(1); min-width: 34px; min-height: 34px; }
+    .playBtn { transform: scale(0.8); min-width: 34px; min-height: 34px; }
+    .playBtn svg { font-size: 22px; }
     .navBtn { min-width: 30px; min-height: 30px; }
-    .seekWrap { gap: 2px; }
+    .navBtn svg { font-size: 16px; }
+    .seekWrap { height: 16px; padding: 0 4px; gap: 2px; }
     .time { font-size: 8px; min-width: 18px; }
     .volumeWrap { min-width: 70px; max-width: 120px; gap: 2px; }
-    .volumeWrap svg { font-size: 14px; }
+    .volumeWrap svg { font-size: 12px; }
     .volumeSlider :global(.MuiSlider-thumb) { width: 8px; height: 8px; }
     .expandBtn { min-width: 44px; min-height: 44px; padding: 6px; }
 }

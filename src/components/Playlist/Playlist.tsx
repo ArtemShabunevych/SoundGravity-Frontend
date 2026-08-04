@@ -383,6 +383,12 @@ export default function Playlist() {
 
                 <div className={styles.gradientDivider} />
 
+                <div className={styles.playlistInfo}>
+                    <span className={styles.infoLabel}>{t("common.about")}</span>
+                    {playlist.description &&
+                        <p className={styles.description}>{playlist.description}</p>}
+                </div>
+
                 <div className={styles.tracksList}>
                     {playlist.tracks && playlist.tracks.length > 0 ? (
                         playlist.tracks.map((track, index) => (
