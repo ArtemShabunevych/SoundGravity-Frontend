@@ -392,7 +392,7 @@
     .badge { font-size: 0.65rem; }
     .meta { justify-content: center; flex-wrap: wrap; }
     .headerActions { justify-content: center; }
-    .likeBtn { margin-left: 0; }
+    .likeBtn { margin-left: 0; padding: 10px; min-width: 44px; min-height: 44px; }
     .gradientDivider { margin: 20px 0 16px; }
     .bigPlayBtn { width: 48px; height: 48px; }
     .likedIcon { font-size: 24px !important; }

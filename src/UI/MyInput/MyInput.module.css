@@ -54,6 +54,21 @@
     font-size: 20px;
 }
 
+@media (max-width: 700px) {
+    .inputBox input {
+        padding: 11px 46px 11px 16px;
+        font-size: 16px;
+    }
+
+    .iconWrap {
+        right: 16px;
+    }
+
+    .iconWrap svg {
+        font-size: 18px;
+    }
+}
+
 @media (max-width: 375px) {
     .inputBox input {
         padding: 11px 40px 11px 14px;

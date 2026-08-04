@@ -203,33 +203,36 @@
 
 @media (max-width: 700px) {
     .page { padding: 80px 12px 48px; }
-    .listHeader { grid-template-columns: 30px 40px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .listHeader { grid-template-columns: 30px 40px 1fr 100px 44px; gap: 8px; padding: 8px 10px; }
     .colIndex { width: 30px; font-size: 11px; }
-    .colLikes { display: none; }
-    .playlistItem { grid-template-columns: 30px 40px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .colLikes { min-width: 44px; font-size: 11px; }
+    .playlistItem { grid-template-columns: 30px 40px 1fr 100px 44px; gap: 8px; padding: 8px 10px; }
     .playlistIndex { width: 30px; font-size: 13px; }
     .playlistCover { width: 36px; height: 36px; }
     .playlistCoverFallback { width: 36px; height: 36px; }
     .playlistName { font-size: 13px; }
     .playlistAuthor { font-size: 11px; }
-    .trackNames { max-width: 120px; }
+    .trackNames { max-width: 100px; }
     .trackNameLink { font-size: 11px; }
-    .likeCell { display: none; }
+    .likeCell { display: flex; min-width: 44px; gap: 2px; }
+    .likeBtn { padding: 8px; min-width: 44px; min-height: 44px; }
+    .likesCount { font-size: 11px; }
     .empty { padding: 24px 16px; }
     .loader { padding: 24px; }
 }
 
 @media (max-width: 375px) {
     .page { padding: 70px 4px 48px; }
-    .listHeader { grid-template-columns: 20px 30px 1fr; gap: 4px; padding: 6px; font-size: 9px; }
+    .listHeader { grid-template-columns: 20px 30px 1fr 44px; gap: 4px; padding: 6px; font-size: 9px; }
     .colIndex { width: 20px; font-size: 9px; }
-    .playlistItem { grid-template-columns: 20px 30px 1fr; gap: 4px; padding: 8px; min-height: 44px; }
+    .playlistItem { grid-template-columns: 20px 30px 1fr 44px; gap: 4px; padding: 8px; min-height: 44px; }
     .playlistIndex { width: 20px; font-size: 11px; }
     .playlistCover { width: 30px; height: 30px; }
     .playlistCoverFallback { width: 30px; height: 30px; }
     .playlistName { font-size: 12px; }
     .playlistAuthor { font-size: 11px; }
     .trackNames { display: none; }
+    .likeCell { min-width: 44px; gap: 2px; }
     .empty { padding: 16px 8px; font-size: 12px; }
     .loader { padding: 16px; font-size: 12px; }
 }

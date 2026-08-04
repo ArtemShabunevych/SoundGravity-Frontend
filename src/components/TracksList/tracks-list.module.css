@@ -179,18 +179,20 @@
 
 @media (max-width: 700px) {
     .page { padding: 80px 12px 48px; }
-    .listHeader { grid-template-columns: 28px 36px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .listHeader { grid-template-columns: 28px 36px 1fr 30px 44px; gap: 8px; padding: 8px 10px; }
     .colIndex { width: 28px; font-size: 11px; }
     .colDuration { font-size: 11px; }
-    .colLikes { display: none; }
-    .trackItem { grid-template-columns: 28px 36px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .colLikes { min-width: 44px; font-size: 11px; }
+    .trackItem { grid-template-columns: 28px 36px 1fr 30px 44px; gap: 8px; padding: 8px 10px; }
     .trackIndex { width: 28px; font-size: 13px; }
     .trackCover { width: 32px; height: 32px; }
     .trackCoverFallback { width: 32px; height: 32px; }
     .trackTitle { font-size: 13px; }
     .trackArtist { font-size: 11px; }
     .trackDuration { font-size: 12px; min-width: 28px; }
-    .trackLikes { display: none; }
+    .trackLikes { display: flex; min-width: 44px; gap: 2px; }
+    .trackLikesCount { font-size: 11px; }
+    .likeBtn { padding: 8px; min-width: 44px; min-height: 44px; }
     .empty { padding: 24px 16px; }
     .loader { padding: 24px; }
 }
@@ -198,13 +200,14 @@
 @media (max-width: 375px) {
     .page { padding: 70px 4px 48px; }
     .listHeader { display: none; }
-    .trackItem { grid-template-columns: 24px 28px 1fr auto; gap: 4px; padding: 8px; min-height: 44px; }
+    .trackItem { grid-template-columns: 24px 28px 1fr 24px 44px; gap: 4px; padding: 8px; min-height: 44px; }
     .trackIndex { width: 24px; font-size: 11px; }
     .trackCover { width: 28px; height: 28px; }
     .trackCoverFallback { width: 28px; height: 28px; }
     .trackTitle { font-size: 12px; }
     .trackArtist { font-size: 11px; }
     .trackDuration { font-size: 10px; min-width: 24px; }
+    .trackLikes { min-width: 44px; gap: 2px; }
     .empty { padding: 16px 8px; font-size: 12px; }
     .loader { padding: 16px; font-size: 12px; }
 }

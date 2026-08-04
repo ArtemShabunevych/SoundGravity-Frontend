@@ -26,6 +26,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 2px;
   min-width: 0;
 }
@@ -97,7 +98,7 @@
   display: flex;
   align-items: center;
   gap: 2px;
-  margin-top: 32px;
+  margin-top: 0;
 }
 
 .playBtn {
@@ -164,9 +165,13 @@
 }
 
 .volumeSlider :global(.MuiSlider-thumb) {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   background-color: #fff;
+}
+
+.volumeSlider :global(.MuiSlider-thumb::before) {
+  box-shadow: none;
 }
 
 .volumeSlider :global(.MuiSlider-track) {
@@ -192,31 +197,33 @@
 @media (max-width: 700px) {
     .bar { padding: 0 8px; gap: 6px; height: var(--player-h); }
     .center { justify-content: center; }
-    .cover { width: 32px; height: 32px; }
+    .cover { width: 30px; height: 30px; }
     .title { font-size: 11px; }
     .artist { font-size: 10px; }
     .artistLink { font-size: 10px; }
-    .controls { margin-top: 0; }
-    .playBtn { transform: scale(1.1); }
-    .seekWrap { gap: 4px; }
-    .time { font-size: 9px; min-width: 24px; }
-    .volumeWrap { min-width: 80px; max-width: 110px; }
+    .controls { margin-top: 0; gap: 0; }
+    .playBtn { transform: scale(1); min-width: 36px; min-height: 36px; }
+    .navBtn { min-width: 32px; min-height: 32px; }
+    .seekWrap { gap: 3px; }
+    .time { font-size: 8px; min-width: 20px; }
+    .volumeWrap { min-width: 90px; max-width: 150px; gap: 2px; }
+    .volumeWrap svg { font-size: 16px; }
     .expandBtn { min-width: 44px; min-height: 44px; }
-    .slider :global(.MuiSlider-thumb) { width: 14px; height: 14px; }
-    .volumeSlider :global(.MuiSlider-thumb) { width: 14px; height: 14px; }
-    .navBtn { min-width: 44px; min-height: 44px; }
+    .slider :global(.MuiSlider-thumb) { width: 10px; height: 10px; }
+    .volumeSlider :global(.MuiSlider-thumb) { width: 8px; height: 8px; }
 }
 
 @media (max-width: 375px) {
     .bar { padding: 0 4px; gap: 4px; height: var(--player-h); }
     .text { display: none; }
-    .cover { width: 26px; height: 26px; }
+    .cover { width: 24px; height: 24px; }
     .controls { margin-top: 0; gap: 0; }
-    .playBtn { transform: scale(1); min-width: 44px; min-height: 44px; }
+    .playBtn { transform: scale(1); min-width: 34px; min-height: 34px; }
+    .navBtn { min-width: 30px; min-height: 30px; }
     .seekWrap { gap: 2px; }
     .time { font-size: 8px; min-width: 18px; }
-    .volumeWrap { min-width: 56px; max-width: 80px; }
-    .volumeSlider :global(.MuiSlider-thumb) { width: 14px; height: 14px; }
-    .navBtn { min-width: 44px; min-height: 44px; }
+    .volumeWrap { min-width: 70px; max-width: 120px; gap: 2px; }
+    .volumeWrap svg { font-size: 14px; }
+    .volumeSlider :global(.MuiSlider-thumb) { width: 8px; height: 8px; }
     .expandBtn { min-width: 44px; min-height: 44px; padding: 6px; }
 }

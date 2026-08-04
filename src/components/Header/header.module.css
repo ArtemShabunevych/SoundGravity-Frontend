@@ -202,6 +202,27 @@
     .burgerBtn { padding: 10px; min-width: 44px; min-height: 44px; }
 }
 
+@media (max-width: 600px) {
+    .mainHeader { padding: 12px 12px; padding-top: calc(12px + env(safe-area-inset-top)); gap: 6px; }
+    .logoImg { height: 32px; width: 56px; }
+    .logoText { display: none; }
+    .logo { gap: 4px; }
+    .leftGroup { gap: 6px; }
+    .rightGroup { gap: 6px; }
+    .navLink { padding: 8px 12px; font-size: 12px; }
+    .launchBtn { padding: 8px 12px; font-size: 12px; }
+}
+
+@media (max-width: 340px) {
+    .mainHeader { padding: 8px 6px; gap: 2px; }
+    .logoImg { height: 26px; width: 42px; }
+    .leftGroup { gap: 2px; }
+    .rightGroup { gap: 2px; }
+    .buttonToggle { min-width: 40px; padding: 0 4px; }
+    .navLink { padding: 8px 8px; font-size: 11px; }
+    .launchBtn { padding: 8px 8px; font-size: 11px; }
+}
+
 @media (max-width: 375px) {
     .mainHeader { padding: 10px 8px; gap: 4px; }
     .logoImg { height: 28px; width: 48px; }

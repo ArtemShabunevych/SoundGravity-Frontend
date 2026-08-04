@@ -224,43 +224,62 @@
     .bluePanel {
         width: 100%;
         flex-shrink: 0;
-        padding: 16px 20px;
-        gap: 6px;
+        padding: 10px 20px;
+        gap: 4px;
     }
 
     .bluePanelTitle {
-        font-size: 18px;
+        font-size: 16px;
+    }
+
+    .bluePanelSub {
+        font-size: 12px;
     }
 
     .formPanel {
         width: 100%;
         flex: 1;
-        padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
+        padding: 12px 16px calc(16px + env(safe-area-inset-bottom));
     }
 
     .form {
-        gap: 10px;
+        gap: 6px;
     }
 
     .formTitle {
-        font-size: 20px;
+        font-size: 18px;
+        margin-bottom: 4px;
+    }
+
+    .headingIcon {
+        font-size: 22px;
     }
 
     .btn {
-        height: 46px;
+        height: 42px;
+        font-size: 14px;
     }
 
     .googleBtn {
-        height: 46px;
+        height: 42px;
+        font-size: 13px;
     }
 
     .btnToggle {
-        height: 44px;
-        font-size: 13px;
+        height: 36px;
+        font-size: 12px;
+    }
+
+    .divider span {
+        font-size: 11px;
     }
 }
 
 @media (max-width: 375px) {
-    .bluePanel { padding: 12px 16px; }
-    .formPanel { padding: 16px 16px calc(16px + env(safe-area-inset-bottom)); }
+    .bluePanel { padding: 8px 16px; }
+    .bluePanelTitle { font-size: 15px; }
+    .formPanel { padding: 10px 12px calc(12px + env(safe-area-inset-bottom)); }
+    .form { gap: 5px; }
+    .btn { height: 40px; }
+    .googleBtn { height: 40px; }
 }

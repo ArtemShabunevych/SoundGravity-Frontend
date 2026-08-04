@@ -681,11 +681,12 @@
     .badge { font-size: 0.65rem; }
     .meta { justify-content: center; flex-wrap: wrap; }
     .headerActions { justify-content: center; }
+    .likeBtn { margin-left: 0; padding: 10px; min-width: 44px; min-height: 44px; }
     .gradientDivider { margin: 20px 0 16px; }
     .bigPlayBtn { width: 48px; height: 48px; }
     .trackListHeader { grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 10px; }
     .headerIndex { width: 30px; font-size: 11px; }
-    .trackItem { grid-template-columns: 28px 32px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .trackItem { grid-template-columns: 28px 32px 1fr auto auto; gap: 8px; padding: 8px 10px; }
     .trackIndex { width: 30px; font-size: 13px; }
     .trackCoverWrap { width: 32px; height: 32px; }
     .trackCoverFallback { width: 32px; height: 32px; }
@@ -695,7 +696,9 @@
     .trackDuration { font-size: 12px; min-width: 28px; }
     .likedIcon { font-size: 24px !important; }
     .notLikedIcon { font-size: 24px !important; }
-    .trackLikes { display: none; }
+    .trackLikes { display: flex; min-width: 40px; gap: 4px; }
+    .trackLikesCount { font-size: 11px; }
+    .trackLikeBtn { padding: 8px; min-width: 44px; min-height: 44px; }
     .trackActions { gap: 2px; }
     .trackDeleteBtn { padding: 6px; }
     .trackDeleteIcon { font-size: 16px !important; }

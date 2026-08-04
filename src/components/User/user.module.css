@@ -391,10 +391,12 @@
     .listRowCover { width: 30px; height: 30px; }
     .listRowCoverFallback { width: 30px; height: 30px; }
     .listRowDuration { font-size: 12px; min-width: 28px; }
-    .listRowLikes { display: none; }
+    .listRowLikes { display: flex; min-width: 40px; gap: 2px; }
+    .listRowLikesCount { font-size: 11px; }
+    .listRowLikeBtn { padding: 8px; min-width: 40px; min-height: 40px; }
     .listRowActions { gap: 4px; }
     .listRowActionBtn { padding: 2px 6px; font-size: 10px; }
-    .listRowIconBtn { padding: 12px; }
+    .listRowIconBtn { padding: 8px; min-width: 44px; min-height: 44px; }
     .listRowIconPublic, .listRowIconPrivate, .listRowIconDanger { font-size: 20px !important; }
     .listRowTrackNames { max-width: 100px; }
     .listRowTrackNameLink { font-size: 11px; }
