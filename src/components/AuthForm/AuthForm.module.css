@@ -197,6 +197,11 @@
     .authWrapper {
         padding: 0;
         padding-bottom: env(safe-area-inset-bottom);
+        scrollbar-width: none;
+    }
+
+    .authWrapper::-webkit-scrollbar {
+        display: none;
     }
 
     .scene {
@@ -220,6 +225,11 @@
         flex-direction: column;
         overflow-y: auto;
         border-radius: 0;
+        scrollbar-width: none;
+    }
+
+    .cardFace::-webkit-scrollbar {
+        display: none;
     }
 
     .bluePanel {
