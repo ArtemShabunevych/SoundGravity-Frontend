@@ -117,8 +117,10 @@
     border: none;
 }
 
-.fileButton:hover {
-    opacity: 0.85;
+@media (hover: hover) {
+    .fileButton:hover {
+        opacity: 0.85;
+    }
 }
 
 .submit {

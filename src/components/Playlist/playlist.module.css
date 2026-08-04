@@ -130,9 +130,11 @@
     font-size: 13px;
 }
 
-.authorLink:hover {
-    color: var(--main-color);
-    text-decoration: underline;
+@media (hover: hover) {
+    .authorLink:hover {
+        color: var(--main-color);
+        text-decoration: underline;
+    }
 }
 
 .authorAvatar {
@@ -177,7 +179,7 @@
 
 .trackListHeader {
     display: grid;
-    grid-template-columns: 40px 45px 1fr auto;
+    grid-template-columns: 40px 45px minmax(0,1fr) auto;
     align-items: center;
     gap: 14px;
     padding: 8px 20px;
@@ -201,7 +203,7 @@
 
 .trackItem {
     display: grid;
-    grid-template-columns: 40px 45px 1fr auto auto;
+    grid-template-columns: 40px 45px minmax(0,1fr) auto auto;
     align-items: center;
     gap: 14px;
     padding: 10px 20px;
@@ -210,8 +212,10 @@
     cursor: pointer;
 }
 
-.trackItem:hover {
-    background: var(--g-ld);
+@media (hover: hover) {
+    .trackItem:hover {
+        background: var(--g-ld);
+    }
 }
 
 .trackIndex {
@@ -259,8 +263,10 @@
     font-size: 20px;
 }
 
-.trackCoverWrap:hover .trackPlayOverlay {
-    opacity: 1;
+@media (hover: hover) {
+    .trackCoverWrap:hover .trackPlayOverlay {
+        opacity: 1;
+    }
 }
 
 .trackDetails {
@@ -308,8 +314,10 @@
     text-overflow: ellipsis;
 }
 
-.trackTitle:hover {
-    color: var(--main-color);
+@media (hover: hover) {
+    .trackTitle:hover {
+        color: var(--main-color);
+    }
 }
 
 .trackArtistLink {
@@ -320,9 +328,11 @@
     transition: color 0.2s;
 }
 
-.trackArtistLink:hover {
-    color: var(--main-color);
-    text-decoration: underline;
+@media (hover: hover) {
+    .trackArtistLink:hover {
+        color: var(--main-color);
+        text-decoration: underline;
+    }
 }
 
 .trackDuration {
@@ -373,8 +383,10 @@
     margin-left: auto;
 }
 
-.likeBtn:hover {
-    transform: scale(1.15);
+@media (hover: hover) {
+    .likeBtn:hover {
+        transform: scale(1.15);
+    }
 }
 
 .likedIcon {
@@ -387,8 +399,10 @@
     font-size: 28px !important;
 }
 
-.likeBtn:hover .notLikedIcon {
-    color: var(--text-main) !important;
+@media (hover: hover) {
+    .likeBtn:hover .notLikedIcon {
+        color: var(--text-main) !important;
+    }
 }
 
 .loader {
@@ -417,10 +431,12 @@
     transition: all 0.2s;
 }
 
-.addTrackBtn:hover {
-    background: var(--main-color);
-    color: #fff;
-    transform: translateY(-1px);
+@media (hover: hover) {
+    .addTrackBtn:hover {
+        background: var(--main-color);
+        color: #fff;
+        transform: translateY(-1px);
+    }
 }
 
 .trackLikeBtn {
@@ -433,8 +449,10 @@
     transition: all 0.2s;
 }
 
-.trackLikeBtn:hover {
-    transform: scale(1.15);
+@media (hover: hover) {
+    .trackLikeBtn:hover {
+        transform: scale(1.15);
+    }
 }
 
 .trackLikedIcon {
@@ -447,8 +465,10 @@
     font-size: 18px !important;
 }
 
-.trackLikeBtn:hover .trackNotLikedIcon {
-    color: var(--text-main) !important;
+@media (hover: hover) {
+    .trackLikeBtn:hover .trackNotLikedIcon {
+        color: var(--text-main) !important;
+    }
 }
 
 .trackDeleteBtn {
@@ -465,8 +485,10 @@
     justify-content: center;
 }
 
-.trackDeleteBtn:hover {
-    background: var(--g-ld);
+@media (hover: hover) {
+    .trackDeleteBtn:hover {
+        background: var(--g-ld);
+    }
 }
 
 .trackDeleteIcon {
@@ -484,8 +506,10 @@
     transition: all 0.2s;
 }
 
-.removeTrackBtn:hover {
-    transform: scale(1.15);
+@media (hover: hover) {
+    .removeTrackBtn:hover {
+        transform: scale(1.15);
+    }
 }
 
 .removeIcon {
@@ -581,8 +605,10 @@
     transition: background 0.2s;
 }
 
-.modalTrack:hover {
-    background: var(--g-ld);
+@media (hover: hover) {
+    .modalTrack:hover {
+        background: var(--g-ld);
+    }
 }
 
 .modalTrackInfo {
@@ -619,9 +645,11 @@
     transition: all 0.2s;
 }
 
-.modalAddBtn:hover {
-    background: var(--main-color);
-    color: #fff;
+@media (hover: hover) {
+    .modalAddBtn:hover {
+        background: var(--main-color);
+        color: #fff;
+    }
 }
 
 .modalAddBtn:disabled {
@@ -644,9 +672,11 @@
     box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
 }
 
-.bigPlayBtn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 32px rgba(108, 99, 255, 0.6);
+@media (hover: hover) {
+    .bigPlayBtn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 32px rgba(108, 99, 255, 0.6);
+    }
 }
 
 .bigPlayBtn:active {
@@ -686,9 +716,9 @@
     .likeBtn { margin-left: 0; padding: 10px; min-width: 44px; min-height: 44px; }
     .gradientDivider { margin: 20px 0 16px; }
     .bigPlayBtn { width: 48px; height: 48px; }
-    .trackListHeader { grid-template-columns: 30px 1fr auto; gap: 8px; padding: 8px 10px; }
+    .trackListHeader { grid-template-columns: 30px minmax(0,1fr) auto; gap: 8px; padding: 8px 10px; }
     .headerIndex { width: 30px; font-size: 11px; }
-    .trackItem { grid-template-columns: 28px 32px 1fr auto auto; gap: 8px; padding: 8px 10px; }
+    .trackItem { grid-template-columns: 28px 32px minmax(0,1fr) auto auto; gap: 8px; padding: 8px 10px; }
     .trackIndex { width: 30px; font-size: 13px; }
     .trackCoverWrap { width: 32px; height: 32px; }
     .trackCoverFallback { width: 32px; height: 32px; }
@@ -720,10 +750,10 @@
     .likeBtn { padding: 10px; min-width: 44px; min-height: 44px; }
     .likedIcon { font-size: 22px !important; }
     .notLikedIcon { font-size: 22px !important; }
-    .trackListHeader { grid-template-columns: 20px 1fr; gap: 4px; padding: 4px 6px; }
+    .trackListHeader { grid-template-columns: 20px minmax(0,1fr); gap: 4px; padding: 4px 6px; }
     .headerIndex { width: 20px; font-size: 9px; }
     .headerDuration { display: none; }
-    .trackItem { grid-template-columns: 20px 28px 1fr 44px auto; gap: 4px; padding: 8px; }
+    .trackItem { grid-template-columns: 20px 28px minmax(0,1fr) 44px auto; gap: 4px; padding: 8px; }
     .trackIndex { width: 20px; font-size: 11px; }
     .trackCoverWrap { width: 28px; height: 28px; }
     .trackCoverFallback { width: 28px; height: 28px; }

@@ -71,9 +71,11 @@
     transition: color 0.2s ease;
 }
 
-.container a:hover {
-    color: var(--text-main);
-    text-decoration: underline;
+@media (hover: hover) {
+    .container a:hover {
+        color: var(--text-main);
+        text-decoration: underline;
+    }
 }
 
 .container strong {

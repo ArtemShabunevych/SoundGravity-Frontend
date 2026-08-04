@@ -89,9 +89,11 @@
   transition: color 0.2s;
 }
 
-.artistLink:hover {
-  color: var(--text-main, #fff);
-  text-decoration: underline;
+@media (hover: hover) {
+    .artistLink:hover {
+      color: var(--text-main, #fff);
+      text-decoration: underline;
+    }
 }
 
 .controls {
@@ -112,8 +114,10 @@
   transition: color 0.2s;
 }
 
-.navBtn:hover {
-  color: var(--text-main, #fff) !important;
+@media (hover: hover) {
+    .navBtn:hover {
+      color: var(--text-main, #fff) !important;
+    }
 }
 
 .seekWrap {
@@ -190,8 +194,10 @@
   transition: color 0.2s;
 }
 
-.expandBtn:hover {
-  color: var(--text-main, #fff);
+@media (hover: hover) {
+    .expandBtn:hover {
+      color: var(--text-main, #fff);
+    }
 }
 
 @media (max-width: 700px) {

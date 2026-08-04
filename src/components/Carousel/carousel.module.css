@@ -32,8 +32,10 @@
     align-items: center;
 }
 
-.seeAll:hover {
-    color: var(--main-color);
+@media (hover: hover) {
+    .seeAll:hover {
+        color: var(--main-color);
+    }
 }
 
 .wrapper {
@@ -66,8 +68,10 @@
     overflow: hidden;
 }
 
-.card:hover {
-    transform: translateY(-4px);
+@media (hover: hover) {
+    .card:hover {
+        transform: translateY(-4px);
+    }
 }
 
 .cardCover {
@@ -132,14 +136,18 @@
     opacity: 0;
 }
 
-.wrapper:hover .arrow {
-    opacity: 1;
+@media (hover: hover) {
+    .wrapper:hover .arrow {
+        opacity: 1;
+    }
 }
 
-.arrow:hover {
-    background: var(--main-color);
-    color: #fff;
-    transform: translateY(-50%) scale(1.1);
+@media (hover: hover) {
+    .arrow:hover {
+        background: var(--main-color);
+        color: #fff;
+        transform: translateY(-50%) scale(1.1);
+    }
 }
 
 .arrowLeft {

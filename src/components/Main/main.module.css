@@ -163,8 +163,10 @@ CSS
     transition: color 0.2s ease;
 }
 
-.mainNav a:hover {
-    color: var(--text-main);
+@media (hover: hover) {
+    .mainNav a:hover {
+        color: var(--text-main);
+    }
 }
 
 .launchBtn {
@@ -182,9 +184,11 @@ CSS
     transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 
-.launchBtn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px var(--shadow);
+@media (hover: hover) {
+    .launchBtn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px var(--shadow);
+    }
 }
 
 .mainContent {
@@ -310,11 +314,13 @@ CSS
     backdrop-filter: blur(10px);
 }
 
-.ctaBtn:hover {
-    background: var(--text-main);
-    color: var(--bg-deep);
-    border-color: var(--text-main);
-    transform: scale(1.02);
+@media (hover: hover) {
+    .ctaBtn:hover {
+        background: var(--text-main);
+        color: var(--bg-deep);
+        border-color: var(--text-main);
+        transform: scale(1.02);
+    }
 }
 
 .mainFooter {
@@ -346,8 +352,10 @@ CSS
     transition: color 0.2s ease;
 }
 
-.footerLinks a:hover {
-    color: var(--text-main);
+@media (hover: hover) {
+    .footerLinks a:hover {
+        color: var(--text-main);
+    }
 }
 
 @media (max-width: 700px) {

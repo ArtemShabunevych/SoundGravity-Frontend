@@ -15,7 +15,7 @@
 
 .listHeader {
     display: grid;
-    grid-template-columns: 40px 40px 1fr 80px 60px;
+    grid-template-columns: 40px 40px minmax(0,1fr) 80px 60px;
     align-items: center;
     gap: 14px;
     padding: 8px 20px;
@@ -45,7 +45,7 @@
 
 .trackItem {
     display: grid;
-    grid-template-columns: 40px 40px 1fr 80px 60px;
+    grid-template-columns: 40px 40px minmax(0,1fr) 80px 60px;
     align-items: center;
     gap: 14px;
     padding: 10px 20px;
@@ -54,8 +54,10 @@
     cursor: pointer;
 }
 
-.trackItem:hover {
-    background: var(--g-ld);
+@media (hover: hover) {
+    .trackItem:hover {
+        background: var(--g-ld);
+    }
 }
 
 .trackIndex {
@@ -106,9 +108,11 @@
     transition: color 0.2s;
 }
 
-.trackArtist:hover {
-    color: var(--main-color);
-    text-decoration: underline;
+@media (hover: hover) {
+    .trackArtist:hover {
+        color: var(--main-color);
+        text-decoration: underline;
+    }
 }
 
 .trackDuration {
@@ -145,8 +149,10 @@
     transition: all 0.2s;
 }
 
-.likeBtn:hover {
-    transform: scale(1.15);
+@media (hover: hover) {
+    .likeBtn:hover {
+        transform: scale(1.15);
+    }
 }
 
 .notLikedIcon {
@@ -179,11 +185,11 @@
 
 @media (max-width: 700px) {
     .page { padding: 80px 12px 48px; }
-    .listHeader { grid-template-columns: 28px 36px 1fr 30px 44px; gap: 8px; padding: 8px 10px; }
+    .listHeader { grid-template-columns: 28px 36px minmax(0,1fr) 92px 66px; gap: 8px; padding: 8px 10px; }
     .colIndex { width: 28px; font-size: 11px; }
-    .colDuration { font-size: 11px; }
+    .colDuration { font-size: 10px; letter-spacing: 0.02em; }
     .colLikes { min-width: 44px; font-size: 11px; }
-    .trackItem { grid-template-columns: 28px 36px 1fr 30px 44px; gap: 8px; padding: 8px 10px; }
+    .trackItem { grid-template-columns: 28px 36px minmax(0,1fr) 92px 66px; gap: 8px; padding: 8px 10px; }
     .trackIndex { width: 28px; font-size: 13px; }
     .trackCover { width: 32px; height: 32px; }
     .trackCoverFallback { width: 32px; height: 32px; }
@@ -199,8 +205,11 @@
 
 @media (max-width: 375px) {
     .page { padding: 70px 4px 48px; }
-    .listHeader { display: none; }
-    .trackItem { grid-template-columns: 24px 28px 1fr 24px 44px; gap: 4px; padding: 8px; min-height: 44px; }
+    .listHeader { display: grid; grid-template-columns: 24px 28px minmax(0,1fr) 66px 66px; gap: 4px; padding: 6px; font-size: 8px; letter-spacing: 0; }
+    .colIndex { width: 24px; font-size: 8px; }
+    .colDuration { font-size: 8px; letter-spacing: 0; }
+    .colLikes { min-width: 44px; font-size: 8px; }
+    .trackItem { grid-template-columns: 24px 28px minmax(0,1fr) 66px 66px; gap: 4px; padding: 8px; min-height: 44px; }
     .trackIndex { width: 24px; font-size: 11px; }
     .trackCover { width: 28px; height: 28px; }
     .trackCoverFallback { width: 28px; height: 28px; }

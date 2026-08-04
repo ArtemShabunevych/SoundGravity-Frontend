@@ -35,8 +35,10 @@
     transition: color 0.2s ease;
 }
 
-.profileLink:hover {
-    color: var(--main-color);
+@media (hover: hover) {
+    .profileLink:hover {
+        color: var(--main-color);
+    }
 }
 
 .navLink {
@@ -52,8 +54,10 @@
     transition: color 0.2s ease;
 }
 
-.navLink:hover {
-    color: var(--text-muted);
+@media (hover: hover) {
+    .navLink:hover {
+        color: var(--text-muted);
+    }
 }
 
 .launchBtn {
@@ -72,10 +76,12 @@
     display: inline-block;
 }
 
-.launchBtn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px var(--shadow);
-    color: var(--text-main);
+@media (hover: hover) {
+    .launchBtn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px var(--shadow);
+        color: var(--text-main);
+    }
 }
 
 .buttonToggle {
@@ -92,9 +98,11 @@
     padding: 0 8px;
 }
 
-.buttonToggle:hover {
-    background-color: var(--g-ld);
-    border-color: var(--main-color);
+@media (hover: hover) {
+    .buttonToggle:hover {
+        background-color: var(--g-ld);
+        border-color: var(--main-color);
+    }
 }
 
 .buttonToggle:active {
@@ -118,8 +126,10 @@
     transition: color 0.2s;
 }
 
-.buttonToggle:hover .icon {
-    color: var(--main-color);
+@media (hover: hover) {
+    .buttonToggle:hover .icon {
+        color: var(--main-color);
+    }
 }
 
 .burgerBtn {
@@ -135,8 +145,10 @@
     transition: background 0.2s;
 }
 
-.burgerBtn:hover {
-    background: var(--input-bg);
+@media (hover: hover) {
+    .burgerBtn:hover {
+        background: var(--input-bg);
+    }
 }
 
 .navIcon {

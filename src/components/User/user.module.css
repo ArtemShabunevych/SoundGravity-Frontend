@@ -53,8 +53,10 @@
     transition: opacity 0.2s;
 }
 
-.avatarLabel:hover .avatar {
-    opacity: 0.4;
+@media (hover: hover) {
+    .avatarLabel:hover .avatar {
+        opacity: 0.4;
+    }
 }
 
 .avatarOverlay {
@@ -75,8 +77,10 @@
     backdrop-filter: blur(2px);
 }
 
-.avatarLabel:hover .avatarOverlay {
-    opacity: 1;
+@media (hover: hover) {
+    .avatarLabel:hover .avatarOverlay {
+        opacity: 1;
+    }
 }
 
 .heroInfo {
@@ -91,9 +95,9 @@
     margin: 0;
     font-size: 48px;
     font-weight: 800;
-    color: #fff;
+    color: var(--text-main);
     font-family: var(--title-font);
-    text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 16px var(--shadow);
     letter-spacing: -0.02em;
     line-height: 1.1;
 }
@@ -127,8 +131,10 @@
     cursor: pointer;
 }
 
-.descWrap:hover .description {
-    opacity: 0.3;
+@media (hover: hover) {
+    .descWrap:hover .description {
+        opacity: 0.3;
+    }
 }
 
 .descOverlay {
@@ -146,26 +152,32 @@
     letter-spacing: 0.02em;
 }
 
-.descWrap:hover .descOverlay {
-    opacity: 1;
+@media (hover: hover) {
+    .descWrap:hover .descOverlay {
+        opacity: 1;
+    }
 }
 
 @media (pointer: coarse) {
     .avatarOverlay {
         opacity: 1;
     }
+    @media (hover: hover) {
     .avatarLabel:hover .avatar {
-        opacity: 0.6;
-    }
+            opacity: 0.6;
+        }
+}
     .descOverlay {
         opacity: 1;
         background: rgba(0,0,0,0.4);
         backdrop-filter: blur(2px);
         border-radius: 8px;
     }
+    @media (hover: hover) {
     .descWrap:hover .description {
-        opacity: 0.3;
-    }
+            opacity: 0.3;
+        }
+}
 }
 
 .descAddBtn {
@@ -183,9 +195,11 @@
     min-height: 44px;
 }
 
-.descAddBtn:hover {
-    background: rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.9);
+@media (hover: hover) {
+    .descAddBtn:hover {
+        background: rgba(255,255,255,0.15);
+        color: rgba(255,255,255,0.9);
+    }
 }
 
 .descEditWrap {
@@ -246,9 +260,11 @@
     color: #fff;
 }
 
-.descSaveBtn:hover,
-.descCancelBtn:hover {
-    transform: translateY(-1px);
+@media (hover: hover) {
+    .descSaveBtn:hover,
+    .descCancelBtn:hover {
+        transform: translateY(-1px);
+    }
 }
 
 .body {
@@ -277,8 +293,10 @@
     transition: transform 0.2s ease;
 }
 
-.stat:hover {
-    transform: translateY(-2px);
+@media (hover: hover) {
+    .stat:hover {
+        transform: translateY(-2px);
+    }
 }
 
 .statNum {
@@ -325,9 +343,11 @@
     transition: all 0.25s ease;
 }
 
-.tab:hover {
-    color: var(--text-main);
-    background: color-mix(in srgb, var(--w-ld) 50%, transparent);
+@media (hover: hover) {
+    .tab:hover {
+        color: var(--text-main);
+        background: color-mix(in srgb, var(--w-ld) 50%, transparent);
+    }
 }
 
 .tabActive {
@@ -380,28 +400,6 @@
     .statNum {
         font-size: 28px;
     }
-
-    .listColCenter { display: none; }
-    .listColLeft { display: none; }
-    .listHeaderTracks { grid-template-columns: 24px 30px 1fr auto auto auto; gap: 8px; padding: 8px 10px; }
-    .listHeaderPlaylists { grid-template-columns: 24px 30px 1fr auto auto auto; gap: 8px; padding: 8px 10px; }
-    .listRowTracks { grid-template-columns: 24px 30px 1fr auto auto auto; gap: 8px; padding: 8px 10px; }
-    .listRowPlaylists { grid-template-columns: 24px 30px 1fr auto auto auto; gap: 8px; padding: 8px 10px; }
-    .listRowIndex { width: 24px; font-size: 12px; }
-    .listRowCover { width: 30px; height: 30px; }
-    .listRowCoverFallback { width: 30px; height: 30px; }
-    .listRowDuration { font-size: 12px; min-width: 28px; }
-    .listRowLikes { display: flex; min-width: 40px; gap: 2px; }
-    .listRowLikesCount { font-size: 11px; }
-    .listRowLikeBtn { padding: 8px; min-width: 40px; min-height: 40px; }
-    .listRowActions { gap: 4px; }
-    .listRowActionBtn { padding: 2px 6px; font-size: 10px; }
-    .listRowIconBtn { padding: 8px; min-width: 44px; min-height: 44px; }
-    .listRowIconPublic, .listRowIconPrivate, .listRowIconDanger { font-size: 20px !important; }
-    .listRowTrackNames { max-width: 100px; }
-    .listRowTrackNameLink { font-size: 11px; }
-    .listRowTitle { font-size: 13px; }
-    .listRowPlaylistName { font-size: 13px; }
 }
 
 /* Linear list styles (tracks & playlists) */
@@ -420,11 +418,11 @@
 }
 
 .listHeaderTracks {
-    grid-template-columns: 40px 45px 1fr 100px 100px 200px;
+    grid-template-columns: 40px 45px minmax(0,1fr) 100px 100px 200px;
 }
 
 .listHeaderPlaylists {
-    grid-template-columns: 40px 45px 1fr 200px 100px 200px;
+    grid-template-columns: 40px 45px minmax(0,1fr) 200px 100px 200px;
 }
 
 .listRow {
@@ -438,15 +436,17 @@
 }
 
 .listRowTracks {
-    grid-template-columns: 40px 45px 1fr 100px 100px 200px;
+    grid-template-columns: 40px 45px minmax(0,1fr) 100px 100px 200px;
 }
 
 .listRowPlaylists {
-    grid-template-columns: 40px 45px 1fr 200px 100px 200px;
+    grid-template-columns: 40px 45px minmax(0,1fr) 200px 100px 200px;
 }
 
-.listRow:hover {
-    background: var(--g-ld);
+@media (hover: hover) {
+    .listRow:hover {
+        background: var(--g-ld);
+    }
 }
 
 .listRowIndex {
@@ -491,9 +491,11 @@
     transition: color 0.2s;
 }
 
-.listRowTitle:hover {
-    color: var(--main-color);
-    text-decoration: underline;
+@media (hover: hover) {
+    .listRowTitle:hover {
+        color: var(--main-color);
+        text-decoration: underline;
+    }
 }
 
 .listRowArtist {
@@ -504,9 +506,11 @@
     transition: color 0.2s;
 }
 
-.listRowArtist:hover {
-    color: var(--main-color);
-    text-decoration: underline;
+@media (hover: hover) {
+    .listRowArtist:hover {
+        color: var(--main-color);
+        text-decoration: underline;
+    }
 }
 
 .listRowDuration {
@@ -543,8 +547,10 @@
     transition: all 0.2s;
 }
 
-.listRowLikeBtn:hover {
-    transform: scale(1.15);
+@media (hover: hover) {
+    .listRowLikeBtn:hover {
+        transform: scale(1.15);
+    }
 }
 
 .likedIcon {
@@ -578,9 +584,11 @@
     letter-spacing: 0.02em;
 }
 
-.listRowActionBtn:hover {
-    background: var(--input-bg);
-    border-color: color-mix(in srgb, var(--text-muted) 40%, transparent);
+@media (hover: hover) {
+    .listRowActionBtn:hover {
+        background: var(--input-bg);
+        border-color: color-mix(in srgb, var(--text-muted) 40%, transparent);
+    }
 }
 
 .listRowActionPublic {
@@ -588,9 +596,11 @@
     border-color: color-mix(in srgb, var(--color-public) 30%, transparent);
 }
 
-.listRowActionPublic:hover {
-    background: color-mix(in srgb, var(--color-public) 20%, transparent);
-    border-color: color-mix(in srgb, var(--color-public) 50%, transparent);
+@media (hover: hover) {
+    .listRowActionPublic:hover {
+        background: color-mix(in srgb, var(--color-public) 20%, transparent);
+        border-color: color-mix(in srgb, var(--color-public) 50%, transparent);
+    }
 }
 
 .listRowActionPrivate {
@@ -598,9 +608,11 @@
     border-color: color-mix(in srgb, var(--color-private) 30%, transparent);
 }
 
-.listRowActionPrivate:hover {
-    background: color-mix(in srgb, var(--color-private) 20%, transparent);
-    border-color: color-mix(in srgb, var(--color-private) 50%, transparent);
+@media (hover: hover) {
+    .listRowActionPrivate:hover {
+        background: color-mix(in srgb, var(--color-private) 20%, transparent);
+        border-color: color-mix(in srgb, var(--color-private) 50%, transparent);
+    }
 }
 
 .listRowActionDanger {
@@ -608,9 +620,11 @@
     border-color: color-mix(in srgb, var(--color-danger) 30%, transparent);
 }
 
-.listRowActionDanger:hover {
-    background: color-mix(in srgb, var(--color-danger) 20%, transparent);
-    border-color: color-mix(in srgb, var(--color-danger) 50%, transparent);
+@media (hover: hover) {
+    .listRowActionDanger:hover {
+        background: color-mix(in srgb, var(--color-danger) 20%, transparent);
+        border-color: color-mix(in srgb, var(--color-danger) 50%, transparent);
+    }
 }
 
 .listRowIconBtn {
@@ -624,8 +638,10 @@
     transition: all 0.2s;
 }
 
-.listRowIconBtn:hover {
-    background: var(--g-ld);
+@media (hover: hover) {
+    .listRowIconBtn:hover {
+        background: var(--g-ld);
+    }
 }
 
 .listRowIconPublic {
@@ -662,9 +678,11 @@
     transition: color 0.2s;
 }
 
-.listRowTrackNameLink:hover {
-    color: var(--main-color);
-    text-decoration: underline;
+@media (hover: hover) {
+    .listRowTrackNameLink:hover {
+        color: var(--main-color);
+        text-decoration: underline;
+    }
 }
 
 .listRowMoreTracks {
@@ -685,9 +703,11 @@
     text-decoration: none;
 }
 
-.listRowPlaylistName:hover {
-    color: var(--main-color);
-    text-decoration: underline;
+@media (hover: hover) {
+    .listRowPlaylistName:hover {
+        color: var(--main-color);
+        text-decoration: underline;
+    }
 }
 
 /* Header alignment utilities */
@@ -703,6 +723,28 @@
     text-align: left;
 }
 
+@media (max-width: 700px) {
+    .listHeaderTracks { grid-template-columns: 24px 30px minmax(0,1fr) auto auto auto; gap: 8px; padding: 8px 10px; }
+    .listHeaderPlaylists { grid-template-columns: 24px 30px minmax(0,1fr) auto auto auto; gap: 8px; padding: 8px 10px; }
+    .listRowTracks { grid-template-columns: 24px 30px minmax(0,1fr) auto auto auto; gap: 8px; padding: 8px 10px; }
+    .listRowPlaylists { grid-template-columns: 24px 30px minmax(0,1fr) auto auto auto; gap: 8px; padding: 8px 10px; }
+    .listRowIndex { width: 24px; font-size: 12px; }
+    .listRowCover { width: 30px; height: 30px; }
+    .listRowCoverFallback { width: 30px; height: 30px; }
+    .listRowDuration { font-size: 12px; min-width: 28px; }
+    .listRowLikes { display: flex; min-width: 40px; gap: 2px; }
+    .listRowLikesCount { font-size: 11px; }
+    .listRowLikeBtn { padding: 8px; min-width: 40px; min-height: 40px; }
+    .listRowActions { gap: 4px; }
+    .listRowActionBtn { padding: 2px 6px; font-size: 10px; }
+    .listRowIconBtn { padding: 8px; min-width: 44px; min-height: 44px; }
+    .listRowIconPublic, .listRowIconPrivate, .listRowIconDanger { font-size: 20px !important; }
+    .listRowTrackNames { max-width: 100px; }
+    .listRowTrackNameLink { font-size: 11px; }
+    .listRowTitle { font-size: 13px; }
+    .listRowPlaylistName { font-size: 13px; }
+}
+
 @media (max-width: 375px) {
     .heroContent { padding: 40px 8px 16px; gap: 8px; }
     .avatar { width: 60px; height: 60px; border-width: 2px; }
@@ -716,9 +758,14 @@
     .statLabel { font-size: 10px; }
     .tabs { gap: 2px; padding: 2px; }
     .tab { padding: 10px 12px; font-size: 12px; min-height: 44px; }
-    .listHeader { display: none; }
-    .listRowTracks { grid-template-columns: 20px 26px 1fr auto auto auto; gap: 4px; padding: 8px; }
-    .listRowPlaylists { grid-template-columns: 20px 26px 1fr auto auto; gap: 4px; padding: 8px; }
+    .listHeader { display: grid; gap: 4px; padding: 6px; font-size: 8px; letter-spacing: 0; }
+    .listHeaderTracks { grid-template-columns: 20px 26px minmax(0,1fr) auto auto auto; }
+    .listHeaderPlaylists { grid-template-columns: 20px 26px minmax(0,1fr) auto auto; }
+    .listColRight { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .listColCenter { display: inline; white-space: nowrap; }
+    .listColLeft { display: none; }
+    .listRowTracks { grid-template-columns: 20px 26px minmax(0,1fr) auto auto auto; gap: 4px; padding: 8px; }
+    .listRowPlaylists { grid-template-columns: 20px 26px minmax(0,1fr) auto auto; gap: 4px; padding: 8px; }
     .listRowIndex { width: 20px; font-size: 10px; }
     .listRowCover { width: 26px; height: 26px; }
     .listRowCoverFallback { width: 26px; height: 26px; }

@@ -116,9 +116,11 @@
     font-size: 13px;
 }
 
-.authorLink:hover {
-    color: var(--main-color);
-    text-decoration: underline;
+@media (hover: hover) {
+    .authorLink:hover {
+        color: var(--main-color);
+        text-decoration: underline;
+    }
 }
 
 .authorAvatar {
@@ -154,9 +156,11 @@
     box-shadow: 0 0 20px rgba(108, 99, 255, 0.5);
 }
 
-.bigPlayBtn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 40px rgba(108, 99, 255, 0.7);
+@media (hover: hover) {
+    .bigPlayBtn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 40px rgba(108, 99, 255, 0.7);
+    }
 }
 
 .bigPlayBtn:active {
@@ -174,8 +178,10 @@
     margin-left: auto;
 }
 
-.likeBtn:hover {
-    transform: scale(1.15);
+@media (hover: hover) {
+    .likeBtn:hover {
+        transform: scale(1.15);
+    }
 }
 
 .likedIcon {
@@ -188,8 +194,10 @@
     font-size: 28px !important;
 }
 
-.likeBtn:hover .notLikedIcon {
-    color: var(--text-main) !important;
+@media (hover: hover) {
+    .likeBtn:hover .notLikedIcon {
+        color: var(--text-main) !important;
+    }
 }
 
 .addTrackBtn {
@@ -205,10 +213,12 @@
     transition: all 0.2s;
 }
 
-.addTrackBtn:hover {
-    background: var(--main-color);
-    color: #fff;
-    transform: translateY(-1px);
+@media (hover: hover) {
+    .addTrackBtn:hover {
+        background: var(--main-color);
+        color: #fff;
+        transform: translateY(-1px);
+    }
 }
 
 .gradientDivider {
@@ -328,8 +338,10 @@
     transition: background 0.2s;
 }
 
-.modalTrack:hover {
-    background: var(--g-ld);
+@media (hover: hover) {
+    .modalTrack:hover {
+        background: var(--g-ld);
+    }
 }
 
 .modalTrackInfo {
@@ -366,9 +378,11 @@
     transition: all 0.2s;
 }
 
-.modalAddBtn:hover {
-    background: var(--main-color);
-    color: #fff;
+@media (hover: hover) {
+    .modalAddBtn:hover {
+        background: var(--main-color);
+        color: #fff;
+    }
 }
 
 .modalAddBtn:disabled {

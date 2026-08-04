@@ -42,8 +42,10 @@
     transition: color 0.2s ease;
 }
 
-.breadcrumbs a:hover {
-    color: var(--text-main);
+@media (hover: hover) {
+    .breadcrumbs a:hover {
+        color: var(--text-main);
+    }
 }
 
 .separator {
@@ -72,16 +74,20 @@
     transition: color 0.2s ease;
 }
 
-.footerLinks a:hover {
-    color: var(--text-main);
+@media (hover: hover) {
+    .footerLinks a:hover {
+        color: var(--text-main);
+    }
 }
 
 .donateLink {
     color: var(--main-color) !important;
     font-weight: 700;
 }
-.donateLink:hover {
-    color: var(--text-main) !important;
+@media (hover: hover) {
+    .donateLink:hover {
+        color: var(--text-main) !important;
+    }
 }
 
 @media (max-width: 700px) {

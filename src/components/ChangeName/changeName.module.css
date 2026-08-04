@@ -8,7 +8,7 @@
     margin: 0;
     font-size: 48px;
     font-weight: 800;
-    color: #fff;
+    color: var(--text-main);
     font-family: var(--title-font);
     text-shadow: 0 2px 16px var(--shadow);
     letter-spacing: -0.02em;
@@ -16,8 +16,10 @@
     transition: opacity 0.2s;
 }
 
-.nameWrap:hover .name {
-    opacity: 0.3;
+@media (hover: hover) {
+    .nameWrap:hover .name {
+        opacity: 0.3;
+    }
 }
 
 .nameOverlay {
@@ -35,8 +37,10 @@
     letter-spacing: 0.02em;
 }
 
-.nameWrap:hover .nameOverlay {
-    opacity: 1;
+@media (hover: hover) {
+    .nameWrap:hover .nameOverlay {
+        opacity: 1;
+    }
 }
 
 @media (pointer: coarse) {
@@ -46,9 +50,11 @@
         backdrop-filter: blur(2px);
         border-radius: 8px;
     }
+    @media (hover: hover) {
     .nameWrap:hover .name {
-        opacity: 0.3;
-    }
+            opacity: 0.3;
+        }
+}
 }
 
 .wrapper {
@@ -63,9 +69,9 @@
     max-width: 200px;
     padding: 10px 14px;
     border-radius: 12px;
-    border: 2px solid rgba(255,255,255,0.5);
-    background: rgba(255,255,255,0.12);
-    color: #fff;
+    border: 2px solid color-mix(in srgb, var(--text-muted) 30%, transparent);
+    background: var(--g-ld);
+    color: var(--text-main);
     font-size: 14px;
     font-family: var(--main-font);
     outline: none;
@@ -74,7 +80,7 @@
 }
 
 .input::placeholder {
-    color: rgba(255,255,255,0.5);
+    color: var(--text-muted);
 }
 
 .actions {
@@ -102,14 +108,16 @@
 }
 
 .cancelButton {
-    border: 2px solid rgba(255,255,255,0.5);
+    border: 2px solid color-mix(in srgb, var(--text-muted) 50%, transparent);
     background: transparent;
-    color: #fff;
+    color: var(--text-main);
 }
 
-.saveButton:hover,
-.cancelButton:hover {
-    transform: translateY(-1px);
+@media (hover: hover) {
+    .saveButton:hover,
+    .cancelButton:hover {
+        transform: translateY(-1px);
+    }
 }
 
 .error {

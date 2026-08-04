@@ -67,7 +67,7 @@
 
 .listHeader {
     display: grid;
-    grid-template-columns: 40px 40px 1fr 80px 60px;
+    grid-template-columns: 40px 40px minmax(0,1fr) 80px 60px;
     align-items: center;
     gap: 14px;
     padding: 8px 20px;
@@ -81,7 +81,7 @@
 }
 
 .playlistList .listHeader {
-    grid-template-columns: 44px 56px 1fr auto auto;
+    grid-template-columns: 44px 56px minmax(0,1fr) auto auto;
 }
 
 .colIndex {
@@ -118,7 +118,7 @@
 
 .trackItem {
     display: grid;
-    grid-template-columns: 40px 40px 1fr 80px 60px;
+    grid-template-columns: 40px 40px minmax(0,1fr) 80px 60px;
     align-items: center;
     gap: 14px;
     padding: 10px 20px;
@@ -127,13 +127,15 @@
     cursor: pointer;
 }
 
-.trackItem:hover {
-    background: var(--g-ld);
+@media (hover: hover) {
+    .trackItem:hover {
+        background: var(--g-ld);
+    }
 }
 
 .playlistItem {
     display: grid;
-    grid-template-columns: 44px 56px 1fr auto auto;
+    grid-template-columns: 44px 56px minmax(0,1fr) auto auto;
     align-items: center;
     gap: 14px;
     padding: 10px 20px;
@@ -142,8 +144,10 @@
     cursor: pointer;
 }
 
-.playlistItem:hover {
-    background: var(--g-ld);
+@media (hover: hover) {
+    .playlistItem:hover {
+        background: var(--g-ld);
+    }
 }
 
 .trackIndex {
@@ -211,10 +215,12 @@
     transition: color 0.2s;
 }
 
-.trackArtist:hover,
-.playlistAuthor:hover {
-    color: var(--main-color);
-    text-decoration: underline;
+@media (hover: hover) {
+    .trackArtist:hover,
+    .playlistAuthor:hover {
+        color: var(--main-color);
+        text-decoration: underline;
+    }
 }
 
 .trackDuration {
@@ -251,8 +257,10 @@
     transition: all 0.2s;
 }
 
-.likeBtn:hover {
-    transform: scale(1.15);
+@media (hover: hover) {
+    .likeBtn:hover {
+        transform: scale(1.15);
+    }
 }
 
 .notLikedIcon {
@@ -284,9 +292,11 @@
     text-overflow: ellipsis;
 }
 
-.trackNameLink:hover {
-    color: var(--main-color);
-    text-decoration: underline;
+@media (hover: hover) {
+    .trackNameLink:hover {
+        color: var(--main-color);
+        text-decoration: underline;
+    }
 }
 
 .moreTracks {
@@ -335,10 +345,10 @@
     .page { padding: 80px 12px 48px; }
     .tabs { gap: 4px; }
     .tab { padding: 8px 12px; font-size: 13px; }
-    .trackList .listHeader { grid-template-columns: 28px 36px 1fr 30px 44px; gap: 8px; padding: 8px 10px; }
-    .playlistList .listHeader { grid-template-columns: 30px 40px 1fr 100px 44px; gap: 8px; padding: 8px 10px; }
-    .trackItem { grid-template-columns: 28px 36px 1fr 30px 44px; gap: 8px; padding: 8px 10px; }
-    .playlistItem { grid-template-columns: 30px 40px 1fr 100px 44px; gap: 8px; padding: 8px 10px; }
+    .trackList .listHeader { grid-template-columns: 28px 36px minmax(0,1fr) 92px 66px; gap: 8px; padding: 8px 10px; }
+    .playlistList .listHeader { grid-template-columns: 30px 40px minmax(0,1fr) 100px 66px; gap: 8px; padding: 8px 10px; }
+    .trackItem { grid-template-columns: 28px 36px minmax(0,1fr) 92px 66px; gap: 8px; padding: 8px 10px; }
+    .playlistItem { grid-template-columns: 30px 40px minmax(0,1fr) 100px 66px; gap: 8px; padding: 8px 10px; }
     .trackIndex { width: 28px; font-size: 13px; }
     .playlistIndex { width: 30px; font-size: 13px; }
     .trackCover { width: 32px; height: 32px; }
@@ -365,11 +375,14 @@
     .page { padding: 70px 4px 48px; }
     .tabs { gap: 2px; }
     .tab { padding: 10px 10px; font-size: 12px; min-height: 44px; }
-    .trackList .listHeader { display: none; }
-    .playlistList .listHeader { grid-template-columns: 20px 30px 1fr 44px; gap: 4px; padding: 6px; font-size: 9px; }
+    .trackList .listHeader { display: grid; grid-template-columns: 24px 28px minmax(0,1fr) 66px 66px; gap: 4px; padding: 6px; font-size: 8px; letter-spacing: 0; }
+    .playlistList .listHeader { grid-template-columns: 20px 30px minmax(0,1fr) 66px; gap: 4px; padding: 6px; font-size: 9px; }
     .colTracks { display: none; }
-    .trackItem { grid-template-columns: 24px 28px 1fr 24px 44px; gap: 4px; padding: 8px; min-height: 44px; }
-    .playlistItem { grid-template-columns: 20px 30px 1fr 44px; gap: 4px; padding: 8px; min-height: 44px; }
+    .colIndex { width: 24px; font-size: 8px; }
+    .colDuration { font-size: 8px; letter-spacing: 0; }
+    .colLikes { min-width: 44px; font-size: 8px; }
+    .trackItem { grid-template-columns: 24px 28px minmax(0,1fr) 66px 66px; gap: 4px; padding: 8px; min-height: 44px; }
+    .playlistItem { grid-template-columns: 20px 30px minmax(0,1fr) 66px; gap: 4px; padding: 8px; min-height: 44px; }
     .trackIndex { width: 24px; font-size: 11px; }
     .playlistIndex { width: 20px; font-size: 11px; }
     .trackCover { width: 28px; height: 28px; }

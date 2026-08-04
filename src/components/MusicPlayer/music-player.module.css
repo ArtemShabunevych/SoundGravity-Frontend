@@ -42,8 +42,10 @@
   transition: color 0.2s;
 }
 
-.closeBtn:hover {
-  color: var(--text-main);
+@media (hover: hover) {
+    .closeBtn:hover {
+      color: var(--text-main);
+    }
 }
 
 .topRow {
@@ -171,10 +173,12 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
-.volumeSlider :global(.MuiSlider-thumb:hover),
-.volumeSlider :global(.MuiSlider-thumb.Mui-focusVisible),
-.volumeSlider :global(.MuiSlider-thumb.Mui-active) {
-  box-shadow: none;
+@media (hover: hover) {
+    .volumeSlider :global(.MuiSlider-thumb:hover),
+    .volumeSlider :global(.MuiSlider-thumb.Mui-focusVisible),
+    .volumeSlider :global(.MuiSlider-thumb.Mui-active) {
+      box-shadow: none;
+    }
 }
 
 @keyframes slideUpMobile {
