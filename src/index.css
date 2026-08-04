@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   font: 18px/145% var(--main-font, system-ui);
   letter-spacing: 0.18px;
