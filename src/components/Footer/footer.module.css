@@ -90,7 +90,7 @@
         padding: 4px 12px calc(4px + env(safe-area-inset-bottom));
         flex-direction: column;
         justify-content: center;
-        gap: 0;
+        gap: 2px;
         font-size: 11px;
     }
     .footerLeft {
@@ -102,8 +102,8 @@
         justify-content: center;
     }
     .footerLinks { gap: 12px; flex-wrap: nowrap; }
-    .footerLinks a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 4px; white-space: nowrap; }
-    .copyright { font-size: 10px; }
+    .footerLinks a { display: inline-flex; align-items: center; padding: 0 4px; white-space: nowrap; line-height: 1; }
+    .copyright { font-size: 10px; line-height: 1; }
 }
 
 @media (max-width: 520px) {

@@ -723,7 +723,7 @@
     .trackListHeader { grid-template-columns: 20px 1fr; gap: 4px; padding: 4px 6px; }
     .headerIndex { width: 20px; font-size: 9px; }
     .headerDuration { display: none; }
-    .trackItem { grid-template-columns: 20px 28px 1fr auto; gap: 4px; padding: 8px; }
+    .trackItem { grid-template-columns: 20px 28px 1fr 44px auto; gap: 4px; padding: 8px; }
     .trackIndex { width: 20px; font-size: 11px; }
     .trackCoverWrap { width: 28px; height: 28px; }
     .trackCoverFallback { width: 28px; height: 28px; }
@@ -731,7 +731,9 @@
     .trackArtistLink { font-size: 10px; }
     .trackAuthor { font-size: 10px; }
     .trackDuration { display: none; }
-    .trackLikes { display: none; }
+    .trackLikes { display: flex; min-width: 44px; gap: 2px; justify-content: center; }
+    .trackLikesCount { display: none; }
+    .trackLikeBtn { padding: 8px; min-width: 44px; min-height: 44px; }
     .trackDeleteBtn { padding: 8px; min-width: 44px; min-height: 44px; }
     .modal { padding: 12px; }
     .modalContent { max-height: 85dvh; }
