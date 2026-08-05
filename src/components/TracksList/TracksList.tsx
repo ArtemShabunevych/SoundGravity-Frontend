@@ -47,8 +47,7 @@ export default function TracksList() {
             try {
                 const data = await fetchWithAuth("tracks");
                 setAllTracks(Array.isArray(data) ? data : []);
-            } catch (err) {
-                console.error(err);
+            } catch {
             } finally {
                 setLoading(false);
             }

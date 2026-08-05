@@ -10,19 +10,12 @@ import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Helmet } from "react-helmet-async";
 
-const BASE_URL = 'https://sound-gravity-frontend.vercel.app';
-
 function App() {
     return (
         <div className="App">
             <Helmet>
                 <title>SoundGravity</title>
-                <meta name="description" content="SoundGravity — інтерактивна музична платформа. Стріми, плейлисти, візуалізації та музика з усього світу." />
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content="SoundGravity" />
-                <meta property="og:description" content="SoundGravity — інтерактивна музична платформа. Стріми, плейлисти, візуалізації та музика з усього світу." />
-                <meta property="og:image" content={`${BASE_URL}/favicon.png`} />
-                <meta property="og:url" content={BASE_URL} />
+                <meta name="description" content="SoundGravity — interactive music platform. Streams, playlists, visualizations and music from around the world." />
             </Helmet>
             <UserProvider>
                 <LanguageProvider>

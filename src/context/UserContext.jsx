@@ -16,14 +16,9 @@ export const UserProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
 
-    const [token, setToken] = useState(localStorage.getItem("JWT_TOKEN"));
-    const [refreshToken, setRefreshToken] = useState(localStorage.getItem("JWT_REFRESH_TOKEN"));
-
     const logout = () => {
         localStorage.removeItem("JWT_TOKEN");
         localStorage.removeItem("JWT_REFRESH_TOKEN");
-        setToken(null);
-        setRefreshToken(null);
         setUser(null);
         setIsAuth(false);
         navigate("/");
@@ -75,8 +70,6 @@ export const UserProvider = ({children}) => {
 
             if (!res.ok) throw new Error();
 
-            setToken(currentToken);
-            setRefreshToken(currentRefreshToken);
             setIsAuth(true);
             await fetchUser();
 
@@ -93,7 +86,6 @@ export const UserProvider = ({children}) => {
                 const data = await res.json();
 
                 localStorage.setItem("JWT_TOKEN", data.accessToken);
-                setToken(data.accessToken);
 
                 setIsAuth(true);
                 await fetchUser();
@@ -112,7 +104,7 @@ export const UserProvider = ({children}) => {
 
     return (
         <UserContext.Provider
-            value={{isAuth, setIsAuth, user, setUser, token, refreshToken, setToken, setRefreshToken, loading, logout, fetchUser}}
+            value={{isAuth, setIsAuth, user, setUser, loading, logout, fetchUser}}
         >
             {children}
         </UserContext.Provider>

@@ -20,12 +20,6 @@ interface PlaylistItem {
     user?: { username: string };
 }
 
-function trackCount(pl: PlaylistItem): number {
-    if (pl.tracksCount !== undefined) return pl.tracksCount;
-    if (Array.isArray(pl.tracks)) return pl.tracks.length;
-    return 0;
-}
-
 function truncate(text: string, max: number): string {
     return text.length > max ? text.slice(0, max) + "..." : text;
 }
@@ -53,11 +47,9 @@ export default function PlaylistsList() {
                 } else if (data && Array.isArray(data.playlists)) {
                     setAllPlaylists(data.playlists);
                 } else {
-                    console.warn("Unexpected playlists response format", data);
                     setAllPlaylists([]);
                 }
-            } catch (err) {
-                console.error(err);
+            } catch {
             } finally {
                 setLoading(false);
             }

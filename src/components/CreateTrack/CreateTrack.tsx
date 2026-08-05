@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FileUploadProgressBar, type UploadedFile } from "../FileUpload/FileUploadProgressBar";
@@ -52,18 +52,13 @@ export default function CreateTrack() {
     const [coverFiles, setCoverFiles] = useState<UploadedFile[]>([]);
     const [audioFiles, setAudioFiles] = useState<UploadedFile[]>([]);
     const [loading, setLoading] = useState(false);
+    const audioUpdateRef = useRef<((pct: number) => void) | null>(null);
 
     const audioReady = audioFiles.length > 0 && !!audioFiles[0]?.fileObject;
     const canSubmit = title.trim() && audioReady && genre;
 
-    const handleAudioUpload = (
-        file: UploadedFile,
-        updateProgress: (pct: number) => void,
-        markDone: (serverUrl: string) => void,
-        markFailed: () => void
-    ) => {
-        updateProgress(100);
-        markDone("");
+    const handleAudioUpload = (_file: UploadedFile, updateProgress: (pct: number) => void) => {
+        audioUpdateRef.current = updateProgress;
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -106,11 +101,18 @@ export default function CreateTrack() {
 
             const result = await new Promise<any>((resolve, reject) => {
                 const xhr = new XMLHttpRequest();
+                xhr.upload.onprogress = (e) => {
+                    if (e.lengthComputable) {
+                        audioUpdateRef.current?.(Math.round((e.loaded / e.total) * 100));
+                    }
+                };
                 xhr.onload = () => {
                     if (xhr.status >= 200 && xhr.status < 300) {
+                        audioUpdateRef.current = null;
                         try { resolve(JSON.parse(xhr.responseText)); }
                         catch { reject(new Error("Invalid response")); }
                     } else {
+                        audioUpdateRef.current?.(0);
                         try {
                             const err = JSON.parse(xhr.responseText);
                             reject(new Error(err.message || "Upload failed"));
@@ -119,7 +121,10 @@ export default function CreateTrack() {
                         }
                     }
                 };
-                xhr.onerror = () => reject(new Error("Network error"));
+                xhr.onerror = () => {
+                    audioUpdateRef.current?.(0);
+                    reject(new Error("Network error"));
+                };
                 xhr.open("POST", `${base}/tracks`);
                 xhr.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("JWT_TOKEN")}`);
                 xhr.setRequestHeader("x-refresh-token", localStorage.getItem("JWT_REFRESH_TOKEN") || "");
@@ -129,10 +134,6 @@ export default function CreateTrack() {
             toast.success(t("create.trackCreated"));
             navigate(`/track/${result.id}`);
         } catch (err: any) {
-            if (err.message === "Session expired") {
-                toast.error("Session expired");
-                return;
-            }
             toast.error(err.message || "Failed to create track");
         } finally {
             setLoading(false);

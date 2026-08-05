@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -51,7 +51,6 @@ export default function Liked() {
     const [loading, setLoading] = useState(true);
     const [likedTracks, setLikedTracks] = useState<Set<string>>(new Set());
     const [likedPlaylists, setLikedPlaylists] = useState<Set<string>>(new Set());
-    const sentinelRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const fetchLiked = async () => {
@@ -66,8 +65,6 @@ export default function Liked() {
                 if (playlistsData.status === "fulfilled") {
                     setPlaylists(Array.isArray(playlistsData.value) ? playlistsData.value : []);
                 }
-            } catch (err) {
-                console.error(err);
             } finally {
                 setLoading(false);
             }
@@ -280,8 +277,6 @@ export default function Liked() {
                         )}
                     </div>
                 )}
-
-                <div ref={sentinelRef} className={styles.sentinel} />
             </div>
         </div>
     );

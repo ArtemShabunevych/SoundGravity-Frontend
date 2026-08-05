@@ -15,7 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import defaultUserIcon from "../../photos/user_icon.png";
 import defaultPlaylistCover from "../../photos/playlist.png";
 import defaultTrackCover from "../../photos/track.png";
-import { hexToRgba, extractDominantColor } from "../../utils/color";
+import { hexToRgba } from "../../utils/color";
 
 interface TrackInPlaylist {
     id: string;
@@ -64,7 +64,6 @@ export default function Playlist() {
     const [liked, setLiked] = useState(false);
     const [likesCount, setLikesCount] = useState(0);
     const [showAddTrack, setShowAddTrack] = useState(false);
-    const [autoColor, setAutoColor] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState<SearchTrack[]>([]);
     const [searching, setSearching] = useState(false);
@@ -153,12 +152,6 @@ export default function Playlist() {
             } catch { /* ignore */ }
         })();
     }, [id]);
-
-    useEffect(() => {
-        if (playlist?.dominantColor) return;
-        if (!playlist?.coverUrl) return;
-        extractDominantColor(playlist.coverUrl).then(setAutoColor).catch(() => {});
-    }, [playlist?.dominantColor, playlist?.coverUrl]);
 
     useEffect(() => {
         if (!showAddTrack || !searchQuery.trim()) {

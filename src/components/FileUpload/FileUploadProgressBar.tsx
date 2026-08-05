@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { FileUpload, type UploadedFile } from "./file-upload-base";
 
 interface FileUploadProgressBarProps {
@@ -7,7 +7,7 @@ interface FileUploadProgressBarProps {
   multiple?: boolean;
   label?: string;
   files?: UploadedFile[];
-  onFilesChange?: (files: UploadedFile[]) => void;
+  onFilesChange?: Dispatch<SetStateAction<UploadedFile[]>>;
   onUpload?: (file: UploadedFile, updateProgress: (pct: number) => void, markDone: (serverUrl: string) => void, markFailed: () => void) => void;
 }
 
@@ -22,7 +22,7 @@ export const FileUploadProgressBar = ({
                                       }: FileUploadProgressBarProps) => {
   const [internalFiles, setInternalFiles] = useState<UploadedFile[]>([]);
   const files = externalFiles ?? internalFiles;
-  const setFiles = onFilesChange ?? setInternalFiles;
+  const setFiles: Dispatch<SetStateAction<UploadedFile[]>> = onFilesChange ?? setInternalFiles;
 
   const addFiles = (newFiles: FileList) => {
     const mapped: UploadedFile[] = Array.from(newFiles).map((f) => ({
@@ -42,18 +42,18 @@ export const FileUploadProgressBar = ({
         onUpload?.(
             file,
             (pct) => {
-              setFiles((prev: any) =>
-                  prev.map((f: any) => (f.id === file.id ? { ...f, progress: pct } : f))
+              setFiles((prev: UploadedFile[]) =>
+                  prev.map((f) => (f.id === file.id ? { ...f, progress: pct } : f))
               );
             },
             (serverUrl) => {
-              setFiles((prev: any) =>
-                  prev.map((f: any) => (f.id === file.id ? { ...f, progress: 100, serverUrl } : f))
+              setFiles((prev: UploadedFile[]) =>
+                  prev.map((f) => (f.id === file.id ? { ...f, progress: 100, serverUrl } : f))
               );
             },
             () => {
-              setFiles((prev: any) =>
-                  prev.map((f: any) => (f.id === file.id ? { ...f, failed: true } : f))
+              setFiles((prev: UploadedFile[]) =>
+                  prev.map((f) => (f.id === file.id ? { ...f, failed: true } : f))
               );
             }
         );

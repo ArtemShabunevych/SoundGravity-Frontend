@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import AuthForm from "../components/AuthForm/AuthForm.tsx";
+import AuthForm from "../components/AuthForm/AuthForm";
 
 function AuthPage() {
     return (

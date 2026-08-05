@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import style from "./AuthForm.module.css";
 import { useTranslation } from "react-i18next";
-import MyInput from "../../UI/MyInput/MyInput.tsx";
+import MyInput from "../../UI/MyInput/MyInput";
 import toast from "react-hot-toast";
 import { getApiUrl } from "../../API/apiClient";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate, useLocation } from "react-router-dom";
-import StarBackground from "../StarBackground/StarBackground.tsx";
+import StarBackground from "../StarBackground/StarBackground";
 import LoginIcon from '@mui/icons-material/Login';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
@@ -26,7 +26,7 @@ function AuthForm() {
     const [flipped, setFlipped] = useState(location.pathname === "/auth/register");
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const { setUser, setIsAuth } = useContext(UserContext);
+    const { setIsAuth, fetchUser } = useContext(UserContext);
 
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
@@ -44,34 +44,17 @@ function AuthForm() {
         };
     }, []);
 
-    const fetchUser = async () => {
-        try {
-            const token = localStorage.getItem("JWT_TOKEN");
-            const refreshToken = localStorage.getItem("JWT_REFRESH_TOKEN");
-
-            if (!token || !refreshToken) {
-                throw new Error(t("errors.mustBeLoggedIn"));
-            }
-
-            const response = await fetch(`${apiUrl}users/me`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "x-refresh-token": `${refreshToken}`,
-                },
-            });
-
-            const data = await response.json();
-            if (!response.ok) throw new Error(data.message || "User not found");
-            setUser(data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    // Ініціалізуємо суворий редірект на бекенд NestJS
     const handleGoogleLogin = () => {
         window.location.href = `${apiUrl}auth/google`;
+    };
+
+    const parseJson = async (res: Response) => {
+        const text = await res.text();
+        try {
+            return JSON.parse(text);
+        } catch {
+            return { message: res.statusText };
+        }
     };
 
     const loginRequest = async () => {
@@ -84,7 +67,7 @@ function AuthForm() {
             }),
         });
 
-        const data = await response.json();
+        const data = await parseJson(response);
         if (!response.ok) throw new Error(data.message || "Login failed");
 
         localStorage.setItem("JWT_TOKEN", data.accessToken);
@@ -119,14 +102,14 @@ function AuthForm() {
             }),
         });
 
-        const data = await response.json();
+        const data = await parseJson(response);
         if (!response.ok) throw new Error(data.message || "Registration failed");
 
         localStorage.setItem("JWT_TOKEN", data.accessToken);
         localStorage.setItem("JWT_REFRESH_TOKEN", data.refreshToken);
         setIsAuth(true);
         await fetchUser();
-        navigate("/tracks"); // Виправив на /tracks для консистентності з логіном
+        navigate("/tracks");
         return data;
     };
 
@@ -145,7 +128,7 @@ function AuthForm() {
 
     return (
         <div className={style.authWrapper}>
-            <StarBackground interactive zIndex={1} />
+            <StarBackground zIndex={1} />
             <div className={style.scene}>
                 <div className={`${style.card} ${flipped ? style.flipped : ""}`}>
 

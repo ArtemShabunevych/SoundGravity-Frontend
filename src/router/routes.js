@@ -1,13 +1,13 @@
-import MainPage from "../pages/MainPage.tsx";
+import MainPage from "../pages/MainPage";
 import UserPage from "../pages/UserPage";
-import TrackPage from "../pages/TrackPage.js";
-import PlaylistPage from "../pages/PlaylistPage.js";
-import TracksList from "../pages/TracksList.tsx";
-import PlaylistsList from "../pages/PlaylistsList.tsx";
-import CreateTrack from "../pages/CreateTrack.tsx";
-import CreatePlaylist from "../pages/CreatePlaylistPage.tsx";
-import LikedPage from "../pages/LikedPage.tsx";
-import SettingsPage from "../pages/SettingsPage.tsx";
+import TrackPage from "../pages/TrackPage";
+import PlaylistPage from "../pages/PlaylistPage";
+import TracksList from "../pages/TracksList";
+import PlaylistsList from "../pages/PlaylistsList";
+import CreateTrack from "../pages/CreateTrack";
+import CreatePlaylist from "../pages/CreatePlaylistPage";
+import LikedPage from "../pages/LikedPage";
+import SettingsPage from "../pages/SettingsPage";
 
 export const privateRoutes = [
     {path: '/tracks', component: TracksList },

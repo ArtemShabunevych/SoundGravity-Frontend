@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import styles from "./user.module.css";
 import icon from "../../photos/user_icon.png";
 
-import ChangeUsername from "../ChangeName/ChangeName.tsx";
+import ChangeUsername from "../ChangeName/ChangeName";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { fetchWithAuth, getApiUrl } from "../../API/apiClient";
@@ -60,15 +60,13 @@ export default function UserPage() {
 
     const isOwner = !username || currentUser?.username === username;
 
-    const getPublicApiUrl = getApiUrl;
-
     const fetchUser = async () => {
         try {
             let data;
             if (isOwner) {
                 data = await fetchWithAuth("users/me");
             } else {
-                const res = await fetch(`${getPublicApiUrl()}users/username/${username}`);
+                const res = await fetch(`${getApiUrl()}users/username/${username}`);
                 if (!res.ok) {
                     const errData = await res.json().catch(() => ({}));
                     throw new Error(errData.message || t("errors.UserNotFound"));
@@ -87,7 +85,7 @@ export default function UserPage() {
             if (isOwner) {
                 data = await fetchWithAuth("tracks/my-tracks");
             } else {
-                const res = await fetch(`${getPublicApiUrl()}tracks/user/${username}`);
+                const res = await fetch(`${getApiUrl()}tracks/user/${username}`);
                 if (!res.ok) {
                     const errData = await res.json().catch(() => ({}));
                     throw new Error(errData.message || t("errors.TracksNotFound"));
@@ -96,8 +94,7 @@ export default function UserPage() {
             }
             const tracksArray = Array.isArray(data) ? data : data.tracks || [];
             setTracks(tracksArray);
-        } catch (error: any) {
-            console.error(error);
+        } catch {
         }
     };
 
@@ -107,7 +104,7 @@ export default function UserPage() {
             if (isOwner) {
                 data = await fetchWithAuth("playlists/my-playlists");
             } else {
-                const res = await fetch(`${getPublicApiUrl()}playlists/user/${username}`);
+                const res = await fetch(`${getApiUrl()}playlists/user/${username}`);
                 if (!res.ok) {
                     const errData = await res.json().catch(() => ({}));
                     throw new Error(errData.message || t("errors.PlaylistsNotFound"));
@@ -116,8 +113,7 @@ export default function UserPage() {
             }
             const playlistsArray = Array.isArray(data) ? data : data.playlists || [];
             setPlaylists(playlistsArray);
-        } catch (error: any) {
-            console.error(error);
+        } catch {
         }
     };
 
@@ -197,11 +193,6 @@ export default function UserPage() {
     useEffect(() => {
         if (playlists.length > 0) fetchLikeStatuses(playlists, "playlists");
     }, [playlists.length]);
-
-    useEffect(() => {
-        if (!isOwner) return;
-        if (!user) return;
-    }, [user, isOwner]);
 
     const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];

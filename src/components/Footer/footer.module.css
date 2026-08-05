@@ -28,31 +28,6 @@
     gap: 16px;
 }
 
-.breadcrumbs {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-transform: lowercase;
-    font-size: 15px;
-}
-
-.breadcrumbs a {
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-@media (hover: hover) {
-    .breadcrumbs a:hover {
-        color: var(--text-main);
-    }
-}
-
-.separator {
-    color: var(--main-color);
-    font-weight: 600;
-}
-
 .copyright {
     color: var(--text-muted);
     font-size: 13px;

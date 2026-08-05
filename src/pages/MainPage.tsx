@@ -6,7 +6,7 @@ function MainPage() {
         <div>
             <Helmet>
                 <title>SoundGravity</title>
-                <meta name="description" content="SoundGravity — інтерактивна музична платформа. Стріми, плейлисти, візуалізації та музика з усього світу." />
+                <meta name="description" content="SoundGravity — interactive music platform. Streams, playlists, visualizations and music from around the world." />
             </Helmet>
             <Main/>
         </div>

@@ -7,10 +7,6 @@ export default function Footer() {
     return (
         <footer className={styles.mainFooter}>
             <div className={styles.footerLeft}>
-                <div className={styles.breadcrumbs}>
-
-
-                </div>
                 <div className={styles.copyright}>
                     &copy; {new Date().getFullYear()}{t("footer.orbits")}
                 </div>

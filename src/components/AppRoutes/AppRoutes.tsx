@@ -6,7 +6,7 @@ import AuthPage from "../../pages/AuthPage";
 import AuthCallback from "../AuthCallback/AuthCallback";
 import PrivacyPolicyPage from "../../pages/PrivacyPolicyPage";
 import TermsOfServicePage from "../../pages/TermsOfServicePage";
-import MainLayout from "../../layouts/MainLayout.js";
+import MainLayout from "../../layouts/MainLayout";
 
 function OAuthRedirect() {
     const searchParams = new URLSearchParams(window.location.search);

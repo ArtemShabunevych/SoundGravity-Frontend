@@ -161,31 +161,9 @@ export function PlayerProvider({ children }) {
     setCurrentTime(time);
   }, []);
 
-  const skip = useCallback((seconds) => {
-    const audio = audioRef.current;
-    if (!audio || !currentTrack) return;
-    const newTime = Math.min(Math.max(audio.currentTime + seconds, 0), duration);
-    audio.currentTime = newTime;
-    setCurrentTime(newTime);
-  }, [currentTrack, duration]);
-
   const changeVolume = useCallback((value) => {
     setVolume(value);
   }, []);
-
-  const selectTrack = useCallback((track) => {
-    const audio = audioRef.current;
-    if (!audio || !track.audioUrl) return;
-    if (currentTrack?.audioUrl === track.audioUrl) return;
-    audio.src = track.audioUrl;
-    audio.currentTime = 0;
-    setCurrentTrack(track);
-    setCurrentTime(0);
-    setDuration(0);
-    setPaused(true);
-    const idx = queue.findIndex(t => t.audioUrl === track.audioUrl);
-    if (idx >= 0) setQueueIndex(idx);
-  }, [currentTrack, queue]);
 
   const setQueue = useCallback((tracks, currentAudioUrl) => {
     setQueueState(tracks);
@@ -220,16 +198,12 @@ export function PlayerProvider({ children }) {
         duration,
         volume,
         playTrack,
-        selectTrack,
         togglePlay,
         seek,
-        skip,
         setVolume: changeVolume,
         setQueue,
         playNextTrack,
         playPrevTrack,
-        queue,
-        queueIndex,
       }}
     >
       {children}

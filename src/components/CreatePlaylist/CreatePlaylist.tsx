@@ -71,6 +71,7 @@ export default function CreatePlaylist() {
                     name: name.trim(),
                     description: description.trim(),
                     genre,
+                    visibility,
                 }),
             });
 
@@ -87,10 +88,6 @@ export default function CreatePlaylist() {
             toast.success(t("create.playlistCreated"));
             navigate(`/playlist/${playlistId}`);
         } catch (err: any) {
-            if (err.message === "Session expired") {
-                toast.error("Session expired");
-                return;
-            }
             toast.error(err.message || "Failed to create playlist");
         } finally {
             setLoading(false);
