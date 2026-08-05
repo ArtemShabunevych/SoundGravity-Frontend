@@ -81,12 +81,14 @@ function AuthForm() {
     const handleLoginSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!loginEmail.trim() || !loginPassword.trim()) {
-            toast.error("All fields are required");
+            toast.error(t("toast.allFieldsRequired"));
             return;
         }
         toast.promise(loginRequest(), {
-            loading: "Logging in...",
-            success: (data) => `Welcome ${data.user?.username || "back"}!`,
+            loading: t("toast.loggingIn"),
+            success: (data) => data.user?.username
+                ? t("toast.welcomeBack", { username: data.user.username })
+                : t("toast.welcomeBackSimple"),
             error: (err) => err.message,
         });
     };
@@ -116,12 +118,14 @@ function AuthForm() {
     const handleRegisterSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!registerUsername.trim() || !registerEmail.trim() || !registerPassword.trim()) {
-            toast.error("All fields are required");
+            toast.error(t("toast.allFieldsRequired"));
             return;
         }
         toast.promise(registerRequest(), {
-            loading: "Creating account...",
-            success: (data) => `Account created for ${data.user?.username || "you"}!`,
+            loading: t("toast.registering"),
+            success: (data) => data.user?.username
+                ? t("toast.accountCreated", { username: data.user.username })
+                : t("toast.accountCreatedSimple"),
             error: (err) => err.message,
         });
     };
