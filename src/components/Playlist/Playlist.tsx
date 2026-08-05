@@ -149,7 +149,7 @@ export default function Playlist() {
                 const res = await fetchWithAuth(`playlists/${id}/like-status`);
                 setLiked(res.liked);
                 if (res.likesCount !== undefined) setLikesCount(res.likesCount);
-            } catch { /* ignore */ }
+            } catch {}
         })();
     }, [id]);
 

@@ -3,17 +3,11 @@ import * as THREE from "three";
 import styles from "./starbackground.module.css";
 
 export interface StarFieldProps {
-  /** Total number of star particles. Default: 12 000 on desktop, 5 000 on mobile. */
   count?: number;
-  /** How fast stars gently drift. 0 = frozen. Default: 0.012 */
   driftSpeed?: number;
-  /** Enable gravitational cursor pull. Default: true */
   gravityEnabled?: boolean;
-  /** Background colour (hex). Default: '#05060d' */
   bgColor?: string;
-  /** z-index of the canvas. Default: 0 */
   zIndex?: number;
-  /** If true, canvas is absolute inside parent instead of fixed fullscreen. Default: false */
   contained?: boolean;
 }
 
@@ -42,19 +36,16 @@ const VERT =  `
   void main() {
     vBrightness = brightness;
 
-    // Slow ambient drift — each star moves on its own sine/cos path
     float t = uTime * uDrift;
     vec3 pos = position;
     pos.x += sin(t * 0.7 + seed.x) * 0.18;
     pos.y += cos(t * 0.5 + seed.y) * 0.14;
     pos.z += sin(t * 0.4 + seed.z) * 0.22;
 
-    // Subtle mouse parallax (closer stars move more — simulate depth)
-    float depth = (pos.z + 120.0) / 240.0; // 0..1 front..back
+    float depth = (pos.z + 120.0) / 240.0;
     pos.x += uMouse.x * (1.2 - depth * 0.9);
     pos.y += uMouse.y * (0.8 - depth * 0.6);
 
-    // Gravitational cursor pull
     vec3 toMouse = uMouseWorld - pos;
     float dist    = length(toMouse) + 0.5;
     float force   = uGravity * 22.0 / (dist * dist);
@@ -76,7 +67,7 @@ const VERT =  `
   }
 `;
 
-const FRAG = /* glsl */ `
+const FRAG = `
   precision mediump float;
 
   varying float vBrightness;
@@ -90,14 +81,11 @@ const FRAG = /* glsl */ `
     float d  = length(uv);
     if (d > 0.5) discard;
 
-    // Soft circular point — sharp bright core, soft glow halo
     float core = smoothstep(0.5, 0.0, d);
     core = pow(core, 1.4);
 
-    // Colour: cold white-blue core → warmer rim on brighter stars
     vec3 col = mix(uColorCore, uColorRim, (1.0 - core) * 0.6);
 
-    // Gravity pull brightens + warms the star
     col += vPull * vec3(0.85, 0.78, 0.55) * 1.1;
 
     float alpha = core * vBrightness;
@@ -107,9 +95,6 @@ const FRAG = /* glsl */ `
   }
 `;
 
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
 export default function StarField({
                                     count,
                                     driftSpeed = 0.012,
@@ -132,9 +117,6 @@ export default function StarField({
     const COUNT     = count ?? (mobile ? 5000 : 12000);
     const BG        = parseInt(resolvedBg.replace("#", ""), 16);
 
-    // ------------------------------------------------------------------
-    // Renderer / Scene / Camera
-    // ------------------------------------------------------------------
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
     renderer.setClearColor(BG, 1);
 
@@ -152,35 +134,26 @@ export default function StarField({
       (uniforms.uPixelRatio as { value: number }).value = pr;
     }
 
-    // ------------------------------------------------------------------
-    // Star positions — pure random scatter in a deep box volume
-    // Stars are distributed in 3 depth layers so closer ones are fewer
-    // but larger, matching how a real star field reads.
-    // ------------------------------------------------------------------
     const positions   = new Float32Array(COUNT * 3);
     const seeds       = new Float32Array(COUNT * 3);
     const pSizes      = new Float32Array(COUNT);
     const brightnesses = new Float32Array(COUNT);
 
     for (let i = 0; i < COUNT; i++) {
-      // Depth layer: 60% background, 30% mid, 10% foreground
       const layer = Math.random();
       let zSpread: number, xySpread: number, baseSize: number, baseBright: number;
 
       if (layer < 0.60) {
-        // Background — tiny, dim, densely packed
         zSpread   = rand(-120, -20);
         xySpread  = rand(60, 120);
         baseSize  = rand(0.3, 0.65);
         baseBright = rand(0.25, 0.55);
       } else if (layer < 0.90) {
-        // Mid-field
         zSpread   = rand(-20, 20);
         xySpread  = rand(45, 90);
         baseSize  = rand(0.55, 1.0);
         baseBright = rand(0.45, 0.80);
       } else {
-        // Foreground — few, large, bright
         zSpread   = rand(20, 50);
         xySpread  = rand(35, 75);
         baseSize  = rand(0.9, 1.6);
@@ -207,9 +180,6 @@ export default function StarField({
     geo.setAttribute("pSize",      new THREE.BufferAttribute(pSizes,       1));
     geo.setAttribute("brightness", new THREE.BufferAttribute(brightnesses, 1));
 
-    // ------------------------------------------------------------------
-    // Uniforms
-    // ------------------------------------------------------------------
     const uniforms = {
       uTime:        { value: 0 },
       uDrift:       { value: driftSpeed },
@@ -236,9 +206,6 @@ export default function StarField({
     resize();
     window.addEventListener("resize", resize);
 
-    // ------------------------------------------------------------------
-    // Mouse / gravity
-    // ------------------------------------------------------------------
     const mouseTarget  = new THREE.Vector2(0, 0);
     const mouseCurrent = new THREE.Vector2(0, 0);
     const raycaster    = new THREE.Raycaster();
@@ -287,7 +254,6 @@ export default function StarField({
       const t = now / 1000;
       (uniforms.uTime as { value: number }).value = t;
 
-      // Smooth mouse
       mouseCurrent.x = lerp(mouseCurrent.x, mouseTarget.x, 0.05);
       mouseCurrent.y = lerp(mouseCurrent.y, mouseTarget.y, 0.05);
       (uniforms.uMouse.value as THREE.Vector2).set(mouseCurrent.x, mouseCurrent.y);
@@ -295,7 +261,6 @@ export default function StarField({
       const gc = (uniforms.uGravity as { value: number }).value;
       (uniforms.uGravity as { value: number }).value = lerp(gc, gravTarget, gravTarget > gc ? 0.10 : 0.022);
 
-      // Extremely slow camera breathing — gives the scene life
       camera.position.x = Math.sin(t * 0.018) * 1.2;
       camera.position.y = Math.cos(t * 0.013) * 0.8;
 

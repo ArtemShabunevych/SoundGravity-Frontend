@@ -81,7 +81,7 @@ export default function Track() {
                 const res = await fetchWithAuth(`tracks/${id}/like-status`);
                 setLiked(res.liked);
                 if (res.likesCount !== undefined) setLikesCount(res.likesCount);
-            } catch { /* ignore */ }
+            } catch {}
         })();
     }, [id]);
 

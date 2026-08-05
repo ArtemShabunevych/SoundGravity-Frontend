@@ -36,11 +36,10 @@ function useFileUpload() {
 function Root({ children, externalFiles }: { children: ReactNode, externalFiles?: UploadedFile[] }) {
     const [internalFiles, setFiles] = useState<UploadedFile[]>([]);
 
-    // Якщо передали зовнішні файли — беремо їх, якщо ні — внутрішній стейт
     const files = externalFiles ?? internalFiles;
 
     const addFiles = useCallback((newFiles: File[]) => {
-        if (externalFiles) return; // Якщо керування ззовні, додаванням займається батько
+        if (externalFiles) return;
         const mapped: UploadedFile[] = newFiles.map((f) => ({
             id: Math.random().toString(36).slice(2),
             name: f.name,

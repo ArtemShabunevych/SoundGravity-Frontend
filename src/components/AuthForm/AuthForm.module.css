@@ -15,7 +15,6 @@
     z-index: 2;
 }
 
-/* 3D scene */
 .scene {
     perspective: 1200px;
     width: 780px;

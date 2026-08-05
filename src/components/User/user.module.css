@@ -402,8 +402,6 @@
     }
 }
 
-/* Linear list styles (tracks & playlists) */
-
 .listHeader {
     display: grid;
     gap: 14px;
@@ -710,7 +708,6 @@
     }
 }
 
-/* Header alignment utilities */
 .listColRight {
     text-align: right;
 }
