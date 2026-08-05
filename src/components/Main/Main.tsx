@@ -1,12 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useContext } from 'react';
 import * as THREE from 'three';
+import { useNavigate } from "react-router-dom";
 import styles from './main.module.css';
 import {useTranslation} from "react-i18next";
+import { UserContext } from "../../context/UserContext";
 
 export default function Main() {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const loaderRef = useRef<HTMLDivElement | null>(null);
     const { t } = useTranslation();
+    const { isAuth } = useContext(UserContext);
+    const navigate = useNavigate();
+    const handleStartListening = () => {
+        navigate(isAuth ? "/tracks" : "/auth/register");
+    };
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
@@ -485,7 +492,7 @@ export default function Main() {
                     <section className={styles.scene} data-align="center">
                         <div className={styles.sceneInner}>
                             <h2 className={styles.sceneTitle}>{t("main.part")}<br/>{t("main.gravity")}</h2>
-                            <button className={styles.ctaBtn}>{t("main.free")}</button>
+                            <button className={styles.ctaBtn} onClick={handleStartListening}>{t("main.free")}</button>
                         </div>
                     </section>
                 </div>
