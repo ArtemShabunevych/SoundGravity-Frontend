@@ -64,24 +64,24 @@ export default function CreateTrack() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!title.trim()) {
-            toast.error("Title is required");
+            toast.error(t("toast.titleRequired"));
             return;
         }
         if (!audioFiles[0]?.fileObject) {
-            toast.error("Please select an audio file");
+            toast.error(t("toast.audioRequired"));
             return;
         }
         if (!genre) {
-            toast.error("Genre is required");
+            toast.error(t("toast.genreRequired"));
             return;
         }
         if (description.trim().length < 20) {
-            toast.error("Description must be at least 20 characters");
+            toast.error(t("toast.descriptionMinLength"));
             return;
         }
         const userId = getUserIdFromToken();
         if (!userId) {
-            toast.error("User not authenticated");
+            toast.error(t("toast.notAuthenticated"));
             return;
         }
 
@@ -110,20 +110,20 @@ export default function CreateTrack() {
                     if (xhr.status >= 200 && xhr.status < 300) {
                         audioUpdateRef.current = null;
                         try { resolve(JSON.parse(xhr.responseText)); }
-                        catch { reject(new Error("Invalid response")); }
+                        catch { reject(new Error(t("toast.invalidResponse"))); }
                     } else {
                         audioUpdateRef.current?.(0);
                         try {
                             const err = JSON.parse(xhr.responseText);
-                            reject(new Error(err.message || "Upload failed"));
+                            reject(new Error(err.message || t("toast.uploadFailed")));
                         } catch {
-                            reject(new Error(`Upload failed: ${xhr.statusText}`));
+                            reject(new Error(t("toast.uploadFailed")));
                         }
                     }
                 };
                 xhr.onerror = () => {
                     audioUpdateRef.current?.(0);
-                    reject(new Error("Network error"));
+                    reject(new Error(t("toast.networkError")));
                 };
                 xhr.open("POST", `${base}/tracks`);
                 xhr.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("JWT_TOKEN")}`);
@@ -134,7 +134,7 @@ export default function CreateTrack() {
             toast.success(t("create.trackCreated"));
             navigate(`/track/${result.id}`);
         } catch (err: any) {
-            toast.error(err.message || "Failed to create track");
+            toast.error(err.message || t("toast.failedToCreateTrack"));
         } finally {
             setLoading(false);
         }

@@ -132,7 +132,7 @@ export default function Playlist() {
                 }
             }
         } catch (error: any) {
-            toast.error(error.message || t("errors.PlaylistNotFound") || "Playlist not found");
+            toast.error(error.message || t("errors.PlaylistNotFound"));
         }
     }, [id, t]);
 

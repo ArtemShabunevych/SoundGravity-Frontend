@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from 'react';
 import styles from "./header.module.css";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 import { ThemeContext } from "../../context/ThemeContext";
 import { LanguageContext } from "../../context/LanguageContext";
 import { UserContext } from "../../context/UserContext";
@@ -130,7 +131,7 @@ export default function Header() {
                                 <ListItemIcon><SettingsIcon fontSize="small" /></ListItemIcon>
                                 {t("header.settings")}
                             </MenuItem>
-                            <MenuItem onClick={() => { setAnchorEl(null); logout(); }}>
+                            <MenuItem onClick={() => { setAnchorEl(null); toast.success(t("toast.loggedOut")); logout(); }}>
                                 <ListItemIcon><LogoutIcon fontSize="small" /></ListItemIcon>
                                 {t("header.logout")}
                             </MenuItem>

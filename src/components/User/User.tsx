@@ -144,6 +144,7 @@ export default function UserPage() {
         try {
             await fetchWithAuth(`tracks/${trackId}/like`, { method: "POST" });
         } catch {
+            toast.error(t("common.failedToLike"));
             setLikedTracks(likedTracks);
             setTracks(prev => prev.map((t: any) =>
                 t.id === trackId ? { ...t, likesCount: t.likesCount + (wasLiked ? 1 : -1) } : t
@@ -163,6 +164,7 @@ export default function UserPage() {
         try {
             await fetchWithAuth(`playlists/${playlistId}/like`, { method: "POST" });
         } catch {
+            toast.error(t("common.failedToLike"));
             setLikedPlaylists(likedPlaylists);
             setPlaylists(prev => prev.map((p: any) =>
                 p.id === playlistId ? { ...p, likesCount: p.likesCount + (wasLiked ? 1 : -1) } : p
@@ -209,9 +211,9 @@ export default function UserPage() {
             });
 
             await fetchUserContext();
-            toast.success("Avatar updated");
+            toast.success(t("toast.avatarUpdated"));
         } catch (err: any) {
-            toast.error(err.message || "Failed to update avatar");
+            toast.error(err.message || t("toast.failedToUpdateAvatar"));
         } finally {
             setUploadingAvatar(false);
         }
@@ -219,11 +221,11 @@ export default function UserPage() {
 
     const handleSaveDescription = async () => {
         if (!descriptionText.trim()) {
-            toast.error("Description cannot be empty");
+            toast.error(t("toast.descriptionEmpty"));
             return;
         }
         if (descriptionText.trim().length < 20) {
-            toast.error("Description must be at least 20 characters");
+            toast.error(t("toast.descriptionMinLength"));
             return;
         }
         try {
@@ -235,9 +237,9 @@ export default function UserPage() {
             });
             setUser((prev: any) => ({ ...prev, description: data.description }));
             setEditingDescription(false);
-            toast.success("Description updated");
+            toast.success(t("toast.descriptionUpdated"));
         } catch (err: any) {
-            toast.error(err.message || "Failed to update description");
+            toast.error(err.message || t("toast.failedToUpdateDescription"));
         } finally {
             setSavingDescription(false);
         }
@@ -247,9 +249,9 @@ export default function UserPage() {
         try {
             await fetchWithAuth(`tracks/${trackId}`, { method: "DELETE" });
             setTracks(prev => prev.filter((t: any) => t.id !== trackId));
-            toast.success("Track deleted");
+            toast.success(t("toast.trackDeleted"));
         } catch (err: any) {
-            toast.error(err.message || "Failed to delete track");
+            toast.error(err.message || t("toast.failedToDeleteTrack"));
         }
     };
 
@@ -264,9 +266,9 @@ export default function UserPage() {
             setTracks(prev => prev.map((t: any) =>
                 t.id === trackId ? { ...t, visibility: newVisibility } : t
             ));
-            toast.success(`Track is now ${newVisibility}`);
+            toast.success(newVisibility === "public" ? t("toast.trackMadePublic") : t("toast.trackMadePrivate"));
         } catch (err: any) {
-            toast.error(err.message || "Failed to update visibility");
+            toast.error(err.message || t("toast.failedToUpdateVisibility"));
         }
     };
 
@@ -274,9 +276,9 @@ export default function UserPage() {
         try {
             await fetchWithAuth(`playlists/${playlistId}`, { method: "DELETE" });
             setPlaylists(prev => prev.filter((p: any) => p.id !== playlistId));
-            toast.success("Playlist deleted");
+            toast.success(t("toast.playlistDeleted"));
         } catch (err: any) {
-            toast.error(err.message || "Failed to delete playlist");
+            toast.error(err.message || t("toast.failedToDeletePlaylist"));
         }
     };
 
@@ -291,9 +293,9 @@ export default function UserPage() {
             setPlaylists(prev => prev.map((p: any) =>
                 p.id === playlistId ? { ...p, visibility: newVisibility } : p
             ));
-            toast.success(`Playlist is now ${newVisibility}`);
+            toast.success(newVisibility === "public" ? t("toast.playlistMadePublic") : t("toast.playlistMadePrivate"));
         } catch (err: any) {
-            toast.error(err.message || "Failed to update visibility");
+            toast.error(err.message || t("toast.failedToUpdateVisibility"));
         }
     };
 

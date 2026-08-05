@@ -35,9 +35,9 @@ export default function CreatePlaylist() {
             };
             xhr.onload = () => {
                 if (xhr.status >= 200 && xhr.status < 300) resolve();
-                else reject(new Error(`Upload failed: ${xhr.statusText}`));
+                else reject(new Error(t("toast.uploadFailed")));
             };
-            xhr.onerror = () => reject(new Error("Upload failed"));
+            xhr.onerror = () => reject(new Error(t("toast.uploadFailed")));
             xhr.open("PATCH", `${base}/playlists/${playlistId}/cover`);
             xhr.setRequestHeader("Authorization", `Bearer ${localStorage.getItem("JWT_TOKEN")}`);
             xhr.setRequestHeader("x-refresh-token", localStorage.getItem("JWT_REFRESH_TOKEN") || "");
@@ -48,15 +48,15 @@ export default function CreatePlaylist() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!name.trim()) {
-            toast.error("Name is required");
+            toast.error(t("toast.nameRequired"));
             return;
         }
         if (!genre) {
-            toast.error("Genre is required");
+            toast.error(t("toast.genreRequired"));
             return;
         }
         if (description.trim().length < 20) {
-            toast.error("Description must be at least 20 characters");
+            toast.error(t("toast.descriptionMinLength"));
             return;
         }
 
@@ -81,14 +81,14 @@ export default function CreatePlaylist() {
                 try {
                     await uploadCover(coverFiles[0].fileObject, playlistId);
                 } catch {
-                    toast.error("Failed to upload cover image");
+                    toast.error(t("toast.failedToUploadCover"));
                 }
             }
 
             toast.success(t("create.playlistCreated"));
             navigate(`/playlist/${playlistId}`);
         } catch (err: any) {
-            toast.error(err.message || "Failed to create playlist");
+            toast.error(err.message || t("toast.failedToCreatePlaylist"));
         } finally {
             setLoading(false);
         }
