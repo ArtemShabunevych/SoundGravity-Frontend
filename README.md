@@ -54,9 +54,14 @@ SoundGravity — інтерактивна музична платформа, щ�
 
 Живе демо: [https://sound-gravity-frontend.vercel.app](https://sound-gravity-frontend.vercel.app)
 
-![Демо або скріншот](docs/images/demo.png)
+<img width="1920" height="945" alt="screencapture-sound-gravity-frontend-vercel-app-auth-login-2026-08-05-21_28_25" src="https://github.com/user-attachments/assets/f5f12cbf-154f-495a-bebf-fc0a46508c4c" />
+<img width="1920" height="5800" alt="screencapture-sound-gravity-frontend-vercel-app-2026-08-05-21_28_36" src="https://github.com/user-attachments/assets/7463bafe-5b15-4cf2-bdc9-63b10e321b0e" />
+<img width="1920" height="945" alt="screencapture-sound-gravity-frontend-vercel-app-tracks-2026-08-05-21_29_55" src="https://github.com/user-attachments/assets/73e92faf-7299-424b-aa31-d52a64260021" />
+<img width="1920" height="1073" alt="screencapture-sound-gravity-frontend-vercel-app-user-2026-08-05-21_30_06" src="https://github.com/user-attachments/assets/4aa7a46d-90d7-49a4-b560-841654ffe901" />
+<img width="1920" height="1075" alt="screencapture-sound-gravity-frontend-vercel-app-track-fa3cfba3-3dbd-41af-941e-b9848b8ccc89-2026-08-05-21_30_41" src="https://github.com/user-attachments/assets/110c6cef-aea3-4495-a823-d3ee49d6fa91" />
+<img width="1920" height="1075" alt="screencapture-sound-gravity-frontend-vercel-app-track-fa3cfba3-3dbd-41af-941e-b9848b8ccc89-2026-08-05-21_30_51" src="https://github.com/user-attachments/assets/904a66e9-7917-4626-991e-18bfb9a588e8" />
+<img width="1920" height="1152" alt="screencapture-sound-gravity-frontend-vercel-app-tracks-create-2026-08-05-21_31_11" src="https://github.com/user-attachments/assets/780a00ac-fb06-4740-9b07-41304ea881a1" />
 
----
 
 ## ⚙️ Вимоги
 
