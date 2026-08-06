@@ -167,5 +167,8 @@ src/
 ---
 
 ## 📬 Контакти
-
+Автори:
+- **Artem Shabunevych** - Github @ArtemShabunevych
+- **Oleksiy Roschin** - Github @Qefor
+  
 SoundGravity — [https://sound-gravity-frontend.vercel.app](https://sound-gravity-frontend.vercel.app)
